@@ -14,6 +14,10 @@ export const navBarStyles = {
     theme.palette.mode === "dark" ? "#1A2027" : "#fff",
 };
 
+export const navbarLinkStyles ={
+    textDecoration:"none",
+    color:"inherit"
+}
 export const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -25,3 +29,5 @@ export const lightTheme = createTheme({
     mode: "light",
   },
 });
+
+

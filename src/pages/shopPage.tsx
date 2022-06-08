@@ -22,7 +22,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     <Grid sx={{ flexGrow: 2 }} container spacing={2}>
       <Grid item xs={12}>
         <Grid container justifyContent="start" spacing={2}>
-          {isLoading && items.map((item, index) => (
+          { items.map((item, index) => (
             <Grid key={index} item>
               <Paper
                 sx={{

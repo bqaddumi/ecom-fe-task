@@ -2,7 +2,7 @@ import { Box, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import { isMobile } from "react-device-detect";
-import { navBarStyles } from "../styles";
+import { navBarStyles, navbarLinkStyles } from "../styles";
 import { NAVBAR_ITEMS, HEADER_TITLE } from "../consts";
 import { Link } from "react-router-dom";
 
@@ -10,8 +10,8 @@ type NavbarProps = {};
 
 const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
   return (
-    <Box sx={{ flexGrow: 1}}>
-      <AppBar position="static" sx={{...navBarStyles }}>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ ...navBarStyles }}>
         <Toolbar>
           {isMobile ? (
             <>
@@ -31,10 +31,14 @@ const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
           ) : (
             <>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/home">{NAVBAR_ITEMS.HOME}</Link>
+                <Link to="/home" style={navbarLinkStyles}>
+                  {NAVBAR_ITEMS.HOME}
+                </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/products">{NAVBAR_ITEMS.SHOP}</Link>
+                <Link to="/products" style={navbarLinkStyles}>
+                  {NAVBAR_ITEMS.SHOP}
+                </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
                 {NAVBAR_ITEMS.PAGES}
