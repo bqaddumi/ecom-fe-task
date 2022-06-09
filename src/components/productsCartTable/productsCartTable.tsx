@@ -12,18 +12,32 @@ import {
 } from "@mui/material";
 import { CartItemType, ProductsImagesType } from "../../types";
 import { CART_TABLE_ROWS } from "../../consts";
-import { tableStyle, deleteButtonStyle } from "./productsCartTableStyle";
+import {
+  tableStyle,
+  deleteButtonStyle,
+  quantityContainerStyle,
+  quantitytitleStyle,
+  quantityButtonStyle,
+} from "./productsCartTableStyle";
 
 type ProductsCartTableProps = {
   products: CartItemType[];
   onXClicked: (productId: number) => void;
+  onIncreaseclicked: (productId: number, price: number, name: string) => void;
+  onDecreaseclicked: (productId: number) => void;
   productsImages: ProductsImagesType;
 };
 
 const ProductsCartTable: React.FC<ProductsCartTableProps> = (
   props: ProductsCartTableProps
 ) => {
-  const { products = [], onXClicked, productsImages = [] } = props;
+  const {
+    products = [],
+    onXClicked,
+    productsImages = [],
+    onIncreaseclicked,
+    onDecreaseclicked,
+  } = props;
 
   const { PRODUCT_NAME, PRICE, QUANTITY, TOTAL } = CART_TABLE_ROWS;
 
@@ -79,8 +93,27 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
                   </Box>
                 </Box>
               </TableCell>
+
               <TableCell align="center"> ${product.price}</TableCell>
-              <TableCell align="center">{product.quantity}</TableCell>
+              <TableCell align="center">
+                <Box sx={quantityContainerStyle}>
+                  <Box
+                    sx={quantityButtonStyle}
+                    onClick={() => onDecreaseclicked(product.id)}
+                  >
+                    -
+                  </Box>
+                  <Box sx={quantitytitleStyle}>{product.quantity}</Box>
+                  <Box
+                    sx={quantityButtonStyle}
+                    onClick={() =>
+                      onIncreaseclicked(product.id, product.price, product.name)
+                    }
+                  >
+                    +
+                  </Box>
+                </Box>
+              </TableCell>
               <TableCell align="center">${product.totalPrice}</TableCell>
               <TableCell align="center">
                 <Box

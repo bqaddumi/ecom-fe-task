@@ -1,5 +1,10 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { CartItemType, CartType, ProductsImagesType, ProductType } from "../../types";
+import {
+  CartItemType,
+  CartType,
+  ProductsImagesType,
+  ProductType,
+} from "../../types";
 import { getCart, getProducts, sendDataToCart } from "../../axios";
 import { styled } from "@mui/material/styles";
 import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
@@ -53,6 +58,66 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
     sendDataToCart(cart);
   };
 
+  const onIncreaseclicked = (
+    productId: number,
+    price: number,
+    name: string
+  ) => {
+    const existingItem = products.find((item) => item.id === productId);
+    const newTotal = total + 1;
+    setTotal(newTotal);
+    let newProducts = products;
+    if (!existingItem) {
+      newProducts.push({
+        id: productId,
+        price,
+        quantity: 1,
+        name,
+        totalPrice: price,
+      });
+      setProducts(newProducts);
+    } else {
+      existingItem.quantity++;
+      existingItem.totalPrice = existingItem.price + existingItem.totalPrice;
+      const cart = {
+        changed: true,
+        items: products,
+        totalQuantity: newTotal,
+      };
+
+      sendDataToCart(cart);
+    }
+  };
+  const onDecreaseclicked = (productId: number) => {
+    let newProducts = products;
+
+    const existingItem = products.find((item) => item.id === productId);
+    const newTotal = total - 1;
+    setTotal(newTotal);
+    if (existingItem?.quantity === 1) {
+      newProducts = products.filter((item) => item.id !== existingItem.id);
+      setProducts(newProducts);
+      const cart = {
+        changed: true,
+        items: newProducts,
+        totalQuantity: newTotal,
+      };
+      sendDataToCart(cart);
+    } else {
+      if (existingItem) {
+        existingItem.quantity--;
+        existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
+        const cart = {
+          changed: true,
+          items: products,
+          totalQuantity: newTotal,
+        };
+
+        sendDataToCart(cart);
+      }
+    }
+  };
+
   return (
     <Box sx={boxStyle}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -68,6 +133,8 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
             products={products}
             onXClicked={onXClicked}
             productsImages={productsImages}
+            onIncreaseclicked={onIncreaseclicked}
+            onDecreaseclicked={onDecreaseclicked}
           />
         </Grid>
         <Grid item xs={4}>

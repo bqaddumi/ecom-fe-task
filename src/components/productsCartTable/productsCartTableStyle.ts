@@ -9,5 +9,20 @@ export const tableStyle = {
 
 export const deleteButtonStyle = {
   cursor: "pointer",
-  
+};
+
+export const quantityContainerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  border: "1px solid #f1f1f1",
+  padding: "15px 0px",
+};
+
+export const quantitytitleStyle = {
+  marginRight: "20px",
+  marginLeft: "20px",
+};
+
+export const quantityButtonStyle = {
+  cursor: "pointer",
 };
