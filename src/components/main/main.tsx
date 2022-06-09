@@ -1,11 +1,12 @@
 import { Box, Stack, ListItem, Typography, Button } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "../pages/homePage";
-import ProductPage from "../pages/productPage";
-import ShopPage from "../pages/shopPage";
-import Navbar from "./navbar";
-import { styles } from "../styles";
-import { HEADER_TITLE } from "../consts";
+import HomePage from "../../pages/homePage";
+import Header from "../header/header";
+import ProductPage from "../../pages/productPage";
+import ShopPage from "../../pages/shopPage";
+import Navbar from "../navbar/navbar";
+import { styles } from "./main-style";
+import { HEADER_TITLE } from "../../consts";
 
 type MainProps = {
   isDark: boolean;
@@ -24,14 +25,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
       }}
     >
       <Stack spacing={2}>
-        <ListItem>
-          <Button onClick={onToggleDarkClicked}>
-            {isDark ? "Light" : "Dark"}
-          </Button>
-          <Typography variant="h3" component="div" sx={{ mr: 2 }}>
-            {HEADER_TITLE}
-          </Typography>
-        </ListItem>
+        <Header onToggleDarkClicked={onToggleDarkClicked} isDark={isDark} />
         <ListItem>
           <Navbar />
         </ListItem>

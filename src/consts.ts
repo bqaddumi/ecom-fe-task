@@ -7,5 +7,6 @@ const NAVBAR_ITEMS = {
 };
 
 const HEADER_TITLE = "CAMARO";
-
-export { NAVBAR_ITEMS, HEADER_TITLE };
+const DARK = "Dark";
+const LIGHT = "light";
+export { NAVBAR_ITEMS, HEADER_TITLE, DARK, LIGHT };

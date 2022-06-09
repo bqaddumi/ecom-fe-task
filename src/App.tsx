@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "./styles";
-import Main from "./components/main";
+import Main from "./components/main/main";
 import { useState } from "react";
 
 function App() {
