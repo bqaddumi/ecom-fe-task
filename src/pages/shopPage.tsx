@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Itemtype from "../types";
 import { getProducts } from "../axios";
+import { Grid, Paper } from "@mui/material";
 
 type ShopPageProps = {};
 
@@ -9,22 +10,35 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getProducts().then((res) => {
       const items = res.data;
-      console.log(res);
       setItems(items);
       setIsLoading(false);
     });
   }, []);
-  console.log("state", items);
+
   return (
-    <div>
-      <ul>
-        {items.map((item) => (
-          <div>{item.name}</div>
-        ))}
-      </ul>
-    </div>
+    <Grid sx={{ flexGrow: 2 }} container spacing={2}>
+      <Grid item xs={12}>
+        <Grid container justifyContent="start" spacing={2}>
+          { items.map((item, index) => (
+            <Grid key={index} item>
+              <Paper
+                sx={{
+                  height: 140,
+                  width: 100,
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+                }}
+              >
+                {item.name}
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
