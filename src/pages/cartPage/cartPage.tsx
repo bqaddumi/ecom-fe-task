@@ -1,8 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
+import { CartItemType, CartType } from "../../types";
+import { getCart } from "../../axios";
 import { styled } from "@mui/material/styles";
-
-import { titleStyle } from "./cartPageStyle";
+import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
+import { titleStyle, boxStyle } from "./cartPageStyle";
 import { SHOPPING_CART } from "../../consts";
+import { useEffect, useState } from "react";
 
 type CartPageProps = {};
 
@@ -14,8 +17,16 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
+  const [products, setProducts] = useState<CartItemType[]>([]);
+  useEffect(() => {
+    getCart().then((res: { data: CartType }) => {
+      const { items } =res.data;
+      setProducts(items)
+    });
+  },[]);
+
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={boxStyle}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
           <Item>
@@ -25,7 +36,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
           </Item>
         </Grid>
         <Grid item xs={8}>
-          <Item>2</Item>
+          <ProductsCartTable products={products}/>
         </Grid>
         <Grid item xs={4}>
           <Item>3</Item>

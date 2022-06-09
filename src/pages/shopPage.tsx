@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Itemtype from "../types";
+import { ProductType } from "../types";
 import { getProducts } from "../axios";
 import { Grid, Paper } from "@mui/material";
 
 type ShopPageProps = {};
 
 const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
-  const [items, setItems] = useState<Itemtype[]>([]);
+  const [items, setItems] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     <Grid sx={{ flexGrow: 2 }} container spacing={2}>
       <Grid item xs={12}>
         <Grid container justifyContent="start" spacing={2}>
-          { items.map((item, index) => (
+          {items.map((item, index) => (
             <Grid key={index} item>
               <Paper
                 sx={{
