@@ -9,4 +9,6 @@ const NAVBAR_ITEMS = {
 const HEADER_TITLE = "CAMARO";
 const DARK = "Dark";
 const LIGHT = "light";
-export { NAVBAR_ITEMS, HEADER_TITLE, DARK, LIGHT };
+const SHOPPING_CART = "Shopping Cart";
+
+export { NAVBAR_ITEMS, HEADER_TITLE, DARK, LIGHT, SHOPPING_CART };
