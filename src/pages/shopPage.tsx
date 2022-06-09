@@ -7,14 +7,14 @@ type ShopPageProps = {};
 
 const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const [items, setItems] = useState<ProductType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+//   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     getProducts().then((res) => {
       const items = res.data;
       setItems(items);
-      setIsLoading(false);
+    //   setIsLoading(false);
     });
   }, []);
 

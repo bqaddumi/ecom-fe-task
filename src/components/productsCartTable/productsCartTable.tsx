@@ -9,24 +9,34 @@ import {
   CardMedia,
   Typography,
   CardContent,
-  Button,
 } from "@mui/material";
-import { CartItemType } from "../../types";
+import { CartItemType, ProductsImagesType } from "../../types";
 import { CART_TABLE_ROWS } from "../../consts";
 import { tableStyle, deleteButtonStyle } from "./productsCartTableStyle";
 
 type ProductsCartTableProps = {
   products: CartItemType[];
+  onXClicked: (productId: number) => void;
+  productsImages: ProductsImagesType;
 };
 
-const ProductsCartTable = (props: ProductsCartTableProps) => {
-  const { products } = props;
+const ProductsCartTable: React.FC<ProductsCartTableProps> = (
+  props: ProductsCartTableProps
+) => {
+  const { products = [], onXClicked, productsImages = [] } = props;
+
   const { PRODUCT_NAME, PRICE, QUANTITY, TOTAL } = CART_TABLE_ROWS;
 
-  const onXClicked = (productId: number) => {
-    console.log("delete", productId);
+  const getProductImage = (productId: number) => {
+    const product = productsImages.find(
+      (product: { id: number; imgUrl: string }) => product.id === productId
+    );
+
+    const imageUrl = product?.imgUrl || "";
+
+    return imageUrl;
   };
-  
+
   return (
     <TableContainer component={Box}>
       <Table sx={tableStyle} aria-label="simple table">
@@ -50,7 +60,7 @@ const ProductsCartTable = (props: ProductsCartTableProps) => {
                   <CardMedia
                     component="img"
                     sx={{ width: 100 }}
-                    image="https://phoneslab.net/palestine/wp-content/uploads/sites/15/2021/09/max4-600x600.jpg"
+                    image={getProductImage(product.id)}
                     alt="Product name"
                   />
                   <Box sx={{ display: "flex", flexDirection: "column" }}>

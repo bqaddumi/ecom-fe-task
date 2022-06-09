@@ -19,3 +19,8 @@ export type CartType = {
   items: CartItemType[];
   totalQuantity: number;
 };
+
+export type ProductsImagesType = {
+  id: number;
+  imgUrl: string;
+}[];

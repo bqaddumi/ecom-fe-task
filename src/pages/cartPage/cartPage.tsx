@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { CartItemType, CartType } from "../../types";
-import { getCart } from "../../axios";
+import { CartItemType, CartType, ProductsImagesType, ProductType } from "../../types";
+import { getCart, getProducts, sendDataToCart } from "../../axios";
 import { styled } from "@mui/material/styles";
 import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
 import { titleStyle, boxStyle } from "./cartPageStyle";
@@ -18,12 +18,40 @@ const Item = styled(Box)(({ theme }) => ({
 
 const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   const [products, setProducts] = useState<CartItemType[]>([]);
+  const [productsImages, setProductsImages] = useState<ProductsImagesType>([]);
+  const [total, setTotal] = useState<number>(0);
+
   useEffect(() => {
     getCart().then((res: { data: CartType }) => {
-      const { items } =res.data;
-      setProducts(items)
+      const { items, totalQuantity } = res.data;
+      setTotal(totalQuantity);
+      setProducts(items);
     });
-  },[]);
+
+    getProducts().then((res) => {
+      const { data } = res;
+      const productsImages = data.map((product: ProductType) => ({
+        id: product.id,
+        imgUrl: product.imgUrl,
+      }));
+      setProductsImages(productsImages);
+    });
+  }, []);
+
+  const onXClicked = (productId: number) => {
+    let existingItem = products.find((item) => item.id === productId);
+    const newProducts = products.filter((item) => item.id !== existingItem?.id);
+    const quantity = existingItem?.quantity || 0;
+    const newTotalQuantity = total - quantity;
+    const cart = {
+      changed: true,
+      items: newProducts,
+      totalQuantity: newTotalQuantity,
+    };
+    setTotal(newTotalQuantity);
+    setProducts(newProducts);
+    sendDataToCart(cart);
+  };
 
   return (
     <Box sx={boxStyle}>
@@ -36,10 +64,14 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
           </Item>
         </Grid>
         <Grid item xs={8}>
-          <ProductsCartTable products={products}/>
+          <ProductsCartTable
+            products={products}
+            onXClicked={onXClicked}
+            productsImages={productsImages}
+          />
         </Grid>
         <Grid item xs={4}>
-          <Item>3</Item>
+          <Item>{total}</Item>
         </Grid>
       </Grid>
     </Box>
