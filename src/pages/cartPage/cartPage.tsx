@@ -9,7 +9,7 @@ import { getCart, getProducts, sendDataToCart } from "../../axios";
 import { styled } from "@mui/material/styles";
 import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
 import CartSummary from "../../components/cartSummary/cartSummary";
-import { titleStyle, boxStyle, summaryStyle } from "./cartPageStyle";
+import { titleStyle, boxStyle } from "./cartPageStyle";
 import { SHOPPING_CART } from "../../consts";
 import { useEffect, useState } from "react";
 
