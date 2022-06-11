@@ -11,12 +11,21 @@ const DARK = "Dark";
 const LIGHT = "light";
 const SHOPPING_CART = "Shopping Cart";
 
-const CART_TABLE_ROWS = {
+const CART_TABLE_COLS = {
   PRODUCT_NAME: "Product Name",
   PRICE: "Price",
   QUANTITY: "Quantity",
   TOTAL: "Total",
 };
+
+const CART_SUMMARY_TABLE_COLS = {
+  SUMMARY: "Summary",
+  SUBTOTAL: "Subtotal",
+  SHIPPING: "Shipping (Flat Rate - Fixed)",
+  ORDER_TOTAL: "Order Total",
+};
+
+const CHECKOUT_BUTTON = "GO TO CHECKOUT";
 
 export {
   NAVBAR_ITEMS,
@@ -24,5 +33,7 @@ export {
   DARK,
   LIGHT,
   SHOPPING_CART,
-  CART_TABLE_ROWS,
+  CART_TABLE_COLS,
+  CART_SUMMARY_TABLE_COLS,
+  CHECKOUT_BUTTON
 };

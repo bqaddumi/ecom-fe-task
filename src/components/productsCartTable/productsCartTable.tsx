@@ -11,7 +11,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { CartItemType, ProductsImagesType } from "../../types";
-import { CART_TABLE_ROWS } from "../../consts";
+import { CART_TABLE_COLS } from "../../consts";
 import {
   tableStyle,
   deleteButtonStyle,
@@ -39,7 +39,7 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
     onDecreaseclicked,
   } = props;
 
-  const { PRODUCT_NAME, PRICE, QUANTITY, TOTAL } = CART_TABLE_ROWS;
+  const { PRODUCT_NAME, PRICE, QUANTITY, TOTAL } = CART_TABLE_COLS;
 
   const getProductImage = (productId: number) => {
     const product = productsImages.find(

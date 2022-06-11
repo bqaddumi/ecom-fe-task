@@ -2,7 +2,8 @@ export const tableStyle = {
   minWidth: 650,
   borderLeft: "none",
   borderRight: "none",
-  borderTop: "1px solid red",
+  borderTop: "1px solid",
+  borderBottom: "1px solid",
   borderColor: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#515151" : "#E0E0E0",
 };

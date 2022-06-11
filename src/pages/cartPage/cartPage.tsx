@@ -8,7 +8,8 @@ import {
 import { getCart, getProducts, sendDataToCart } from "../../axios";
 import { styled } from "@mui/material/styles";
 import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
-import { titleStyle, boxStyle } from "./cartPageStyle";
+import CartSummary from "../../components/cartSummary/cartSummary";
+import { titleStyle, boxStyle, summaryStyle } from "./cartPageStyle";
 import { SHOPPING_CART } from "../../consts";
 import { useEffect, useState } from "react";
 
@@ -25,12 +26,31 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   const [products, setProducts] = useState<CartItemType[]>([]);
   const [productsImages, setProductsImages] = useState<ProductsImagesType>([]);
   const [total, setTotal] = useState<number>(0);
+  const [orderTotalPrice, setOrderTotalPrice] = useState<number>(0);
+
+  const getOrderTotalPrice = (items: CartItemType[]) => {
+    let totalPrice = 0;
+
+    for (let i = 0; i < items.length; i++) {
+      totalPrice += items[i].totalPrice;
+    }
+
+    setOrderTotalPrice(totalPrice);
+  };
 
   useEffect(() => {
     getCart().then((res: { data: CartType }) => {
       const { items, totalQuantity } = res.data;
       setTotal(totalQuantity);
       setProducts(items);
+
+      let totalPrice = 0;
+
+      for (let i = 0; i < items.length; i++) {
+        totalPrice += items[i].totalPrice;
+      }
+
+      setOrderTotalPrice(totalPrice);
     });
 
     getProducts().then((res) => {
@@ -56,6 +76,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
     setTotal(newTotalQuantity);
     setProducts(newProducts);
     sendDataToCart(cart);
+    getOrderTotalPrice(newProducts);
   };
 
   const onIncreaseclicked = (
@@ -87,6 +108,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
 
       sendDataToCart(cart);
     }
+    getOrderTotalPrice(products);
   };
   const onDecreaseclicked = (productId: number) => {
     let newProducts = products;
@@ -116,11 +138,12 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
         sendDataToCart(cart);
       }
     }
+    getOrderTotalPrice(products);
   };
 
   return (
     <Box sx={boxStyle}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
         <Grid item xs={12}>
           <Item>
             <Typography variant="h3" sx={titleStyle}>
@@ -138,7 +161,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
           />
         </Grid>
         <Grid item xs={4}>
-          <Item>{total}</Item>
+          <CartSummary totalPrice={orderTotalPrice} />
         </Grid>
       </Grid>
     </Box>
