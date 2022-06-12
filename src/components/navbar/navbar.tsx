@@ -50,10 +50,14 @@ const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
                 </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                {NAVBAR_ITEMS.LOOKBOOK}
+                <Link to="/cart" style={navbarLinkStyles}>
+                  {NAVBAR_ITEMS.LOOKBOOK}
+                </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                {NAVBAR_ITEMS.BRANDS}
+                <Link to="/cart" style={navbarLinkStyles}>
+                  {NAVBAR_ITEMS.BRANDS}
+                </Link>
               </Typography>
             </>
           )}

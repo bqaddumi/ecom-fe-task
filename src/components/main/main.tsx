@@ -1,6 +1,5 @@
 import { Box, Stack, ListItem } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "../../pages/homePage";
 import Header from "../header/header";
 import ProductPage from "../../pages/productPage";
 import ShopPage from "../../pages/shopPage";
@@ -31,9 +30,9 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
         </ListItem>
         <ListItem>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="*" element={<HomePage />} />
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/" element={<CartPage />} />
+            <Route path="*" element={<CartPage />} />
+            {/* <Route path="/home" element={<CartPage />} /> */}
             <Route path="/cart" element={<CartPage />} />
             <Route path="/products" element={<ShopPage />} />
             <Route path="/products/:productId/" element={<ProductPage />} />
