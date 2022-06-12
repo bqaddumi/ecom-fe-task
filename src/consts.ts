@@ -28,6 +28,14 @@ const CART_SUMMARY_TABLE_COLS = {
 const CHECKOUT_BUTTON = "GO TO CHECKOUT";
 const CHECKOUT_MULTIPLE_ADDRESS = "Check Out with Multiple Addresses";
 
+const FOOTER = {
+  TITLE: "Newsletter",
+  SUBTITLE: "Subscribe to recieve coupons and gift cards",
+  EMAIL_PLACEHOLDER: "Email address",
+  SUBSCRIBE_BTN: "SUBSCRIBE",
+  SUBSCRIBED: "SUBSCRIBED!"
+};
+
 export {
   NAVBAR_ITEMS,
   HEADER_TITLE,
@@ -37,5 +45,6 @@ export {
   CART_TABLE_COLS,
   CART_SUMMARY_TABLE_COLS,
   CHECKOUT_BUTTON,
-  CHECKOUT_MULTIPLE_ADDRESS
+  CHECKOUT_MULTIPLE_ADDRESS,
+  FOOTER,
 };
