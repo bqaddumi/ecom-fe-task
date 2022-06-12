@@ -6,12 +6,22 @@ import {
   TableCell,
   TableBody,
   Table,
+  Button,
+  Link,
 } from "@mui/material";
-import { CART_SUMMARY_TABLE_COLS } from "../../consts";
+import {
+  CART_SUMMARY_TABLE_COLS,
+  CHECKOUT_BUTTON,
+  CHECKOUT_MULTIPLE_ADDRESS,
+} from "../../consts";
 import {
   summaryContainerStyle,
-  cellStyle,
+  cellTitleStyle,
   summaryCellStyle,
+  checkoutButtonStyle,
+  checkoutButtonContainerStyle,
+  noBorderStyle,
+  multipleAddressStyle,
 } from "./cartSummaryStyle";
 
 type CartSummaryProps = {
@@ -36,32 +46,44 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell sx={cellStyle} align="left">
+              <TableCell sx={cellTitleStyle} align="left">
                 {SUBTOTAL}
               </TableCell>
-              <TableCell sx={cellStyle} align="right">
-                {totalPrice}
+              <TableCell sx={summaryCellStyle} align="right">
+                ${totalPrice}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell sx={cellStyle} align="left">
+              <TableCell sx={cellTitleStyle} align="left">
                 {SHIPPING}
               </TableCell>
-              <TableCell sx={cellStyle} align="right">
+              <TableCell sx={summaryCellStyle} align="right">
                 {"$5.00"}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell sx={cellStyle} align="left">
+              <TableCell
+                sx={{ ...cellTitleStyle, ...noBorderStyle }}
+                align="left"
+              >
                 {ORDER_TOTAL}
               </TableCell>
-              <TableCell sx={cellStyle} align="right">
-                {orderTotal}
+              <TableCell
+                sx={{ ...summaryCellStyle, ...noBorderStyle }}
+                align="right"
+              >
+                ${orderTotal}
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
+      <Box sx={checkoutButtonContainerStyle}>
+        <Button sx={checkoutButtonStyle}>{CHECKOUT_BUTTON}</Button>
+      </Box>
+      <Box sx={{ ...multipleAddressStyle }}>
+        <Link sx={cellTitleStyle}>{CHECKOUT_MULTIPLE_ADDRESS}</Link>
+      </Box>
     </Box>
   );
 };

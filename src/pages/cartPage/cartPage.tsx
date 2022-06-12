@@ -151,7 +151,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
             </Typography>
           </Item>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <ProductsCartTable
             products={products}
             onXClicked={onXClicked}
@@ -160,7 +160,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
             onDecreaseclicked={onDecreaseclicked}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <CartSummary totalPrice={orderTotalPrice} />
         </Grid>
       </Grid>
