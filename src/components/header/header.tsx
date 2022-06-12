@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { isMobile, isBrowser } from "react-device-detect";
 
 import { Button, Typography, Box } from "@mui/material";
 import {
@@ -31,22 +32,26 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       <Typography variant="h4" component="div" sx={titleStyle}>
         {HEADER_TITLE}
       </Typography>
-      <Box sx={rightSideStyle}>
-        <Box sx={cartIconsContainerStyle}>
-          <Button onClick={onToggleDarkClicked}>{isDark ? LIGHT : DARK}</Button>
-          <KeyboardReturnOutlined sx={iconStyle} />
-          <FavoriteBorderOutlined sx={iconStyle} />
-          <ShoppingCartOutlined sx={iconStyle} />
+      {isBrowser && (
+        <Box sx={rightSideStyle}>
+          <Box sx={cartIconsContainerStyle}>
+            <Button onClick={onToggleDarkClicked}>
+              {isDark ? LIGHT : DARK}
+            </Button>
+            <KeyboardReturnOutlined sx={iconStyle} />
+            <FavoriteBorderOutlined sx={iconStyle} />
+            <ShoppingCartOutlined sx={iconStyle} />
+          </Box>
+          <Box sx={cartLinkContainerStyle} onClick={() => navigate("/cart")}>
+            <Typography component="div" sx={titleStyle}>
+              {CART_LINK}
+            </Typography>
+            <Typography component="div" sx={balanceStyle}>
+              {"$0.00"}
+            </Typography>
+          </Box>
         </Box>
-        <Box sx={cartLinkContainerStyle} onClick={() => navigate("/cart")}>
-          <Typography component="div" sx={titleStyle}>
-            {CART_LINK}
-          </Typography>
-          <Typography component="div" sx={balanceStyle}>
-            {"$0.00"}
-          </Typography>
-        </Box>
-      </Box>
+      )}
     </Box>
   );
 };
