@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../header/header";
 import ShopPage from "../../pages/shopPage";
 import Navbar from "../navbar/navbar";
-import { styles } from "./main-style";
+import Footer from "../footer/footer";
+import { mainContainer } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
 
 type MainProps = {
@@ -13,20 +14,11 @@ type MainProps = {
 
 const Main: React.FC<MainProps> = (props: MainProps) => {
   const { isDark, onToggleDarkClicked } = props;
-  const { backgroundColor, color } = styles;
   return (
-    <Box
-      sx={{
-        backgroundColor,
-        color,
-        height: "100vh",
-      }}
-    >
+    <Box sx={mainContainer}>
       <Stack>
         <Header onToggleDarkClicked={onToggleDarkClicked} isDark={isDark} />
-       
-          <Navbar />
-        
+        <Navbar />
         <ListItem>
           <Routes>
             <Route path="/" element={<CartPage />} />
@@ -39,6 +31,9 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
             {/* <Route path="/products/:productId/" element={<ProductPage />} /> */}
           </Routes>
         </ListItem>
+      
+          <Footer />
+       
       </Stack>
     </Box>
   );

@@ -1,4 +1,4 @@
-export const styles = {
+export const mainContainer = {
     backgroundColor: (theme: { palette: { mode: string } }) =>
       theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     color: (theme: { palette: { mode: string } }) =>
