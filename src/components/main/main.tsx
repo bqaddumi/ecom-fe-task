@@ -1,7 +1,6 @@
 import { Box, Stack, ListItem } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import Header from "../header/header";
-import ProductPage from "../../pages/productPage";
 import ShopPage from "../../pages/shopPage";
 import Navbar from "../navbar/navbar";
 import { styles } from "./main-style";
@@ -23,19 +22,21 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
         height: "100vh",
       }}
     >
-      <Stack spacing={2}>
+      <Stack>
         <Header onToggleDarkClicked={onToggleDarkClicked} isDark={isDark} />
-        <ListItem>
+       
           <Navbar />
-        </ListItem>
+        
         <ListItem>
           <Routes>
             <Route path="/" element={<CartPage />} />
             <Route path="*" element={<CartPage />} />
-            {/* <Route path="/home" element={<CartPage />} /> */}
+            {/* TODO: add product page */}
+            {/* <Route path="/home" element={<HomePage />} /> */}
             <Route path="/cart" element={<CartPage />} />
             <Route path="/products" element={<ShopPage />} />
-            <Route path="/products/:productId/" element={<ProductPage />} />
+            {/* TODO: add product page */}
+            {/* <Route path="/products/:productId/" element={<ProductPage />} /> */}
           </Routes>
         </ListItem>
       </Stack>

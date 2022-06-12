@@ -1,15 +1,17 @@
 export const summaryContainerStyle = {
-  // padding: "17px",
   color: "#B07474",
-  backgroundColor: "#f5f5f5",
+  backgroundColor: (theme: { palette: { mode: string } }) =>
+    theme.palette.mode === "dark" ? "#282e36" : "#f5f5f5",
 };
 
 export const cellTitleStyle = {
-  color: "#666666",
   textDecoration: "none",
+  color: (theme: { palette: { mode: string } }) =>
+    theme.palette.mode === "dark" ? "rgba(255, 255, 255, 0.7)" : "#666666",
 };
 export const summaryCellStyle = {
-  color: "#737373",
+  color: (theme: { palette: { mode: string } }) =>
+    theme.palette.mode === "dark" ? "rgba(255, 255, 255, 0.7)" : "#737373",
   fontWeight: "bold",
   fontSize: "1rem",
 };

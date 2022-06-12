@@ -1,22 +1,55 @@
 import { useEffect, useState } from "react";
-import { ProductType } from "../types";
-import { getProducts } from "../axios";
-import { Grid, Paper } from "@mui/material";
+import { ProductType, CartType } from "../types";
+import { getProducts, getCart, sendDataToCart } from "../axios";
+import { Grid, Paper, Button, CardMedia, Box } from "@mui/material";
 
 type ShopPageProps = {};
 
 const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const [items, setItems] = useState<ProductType[]>([]);
-//   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [cart, setCart] = useState<CartType>({
+    changed: false,
+    items: [],
+    totalQuantity: 0,
+  });
 
   useEffect(() => {
-    // setIsLoading(true);
     getProducts().then((res) => {
       const items = res.data;
       setItems(items);
-    //   setIsLoading(false);
     });
+
+    getCart().then((res) => {
+      const nCart = res.data;
+
+      setCart({ ...nCart, items: nCart.items || [] });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const addToCart = (productId: number, price: number, name: string) => {
+    const { totalQuantity, items } = cart;
+    const existingItem = items.find((item) => item.id === productId);
+    const newTotal = totalQuantity + 1;
+    let newItems = items;
+
+    if (!existingItem) {
+      newItems.push({
+        id: productId,
+        price,
+        quantity: 1,
+        name,
+        totalPrice: price,
+      });
+    } else {
+      existingItem.quantity++;
+      existingItem.totalPrice = existingItem.price + existingItem.totalPrice;
+      const itemIndex = items.findIndex((item) => item.id === existingItem.id);
+      newItems[itemIndex] = existingItem;
+    }
+    setCart({ ...cart, items: newItems, totalQuantity: newTotal });
+    sendDataToCart({ ...cart, items: newItems, totalQuantity: newTotal });
+  };
 
   return (
     <Grid sx={{ flexGrow: 2 }} container spacing={2}>
@@ -26,14 +59,27 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
             <Grid key={index} item>
               <Paper
                 sx={{
-                  height: 140,
+                  height: "200px",
                   width: 100,
                   backgroundColor: (theme) =>
                     theme.palette.mode === "dark" ? "#1A2027" : "#fff",
                 }}
               >
-                {item.name}
+                <Box>{item.name}</Box>
+                <CardMedia
+                  component="img"
+                  sx={{ width: 100 }}
+                  image={item.imgUrl}
+                  alt="Product name"
+                />
               </Paper>
+              <Box>
+                <Button
+                  onClick={() => addToCart(item.id, item.price, item.name)}
+                >
+                  Add to cart
+                </Button>
+              </Box>
             </Grid>
           ))}
         </Grid>
