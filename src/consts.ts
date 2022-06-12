@@ -36,7 +36,10 @@ const FOOTER = {
   SUBSCRIBED: "SUBSCRIBED!"
 };
 
+const CART_LINK = "Your cart";
+
 export {
+  CART_LINK,
   NAVBAR_ITEMS,
   HEADER_TITLE,
   DARK,

@@ -4,7 +4,7 @@ import Header from "../header/header";
 import ShopPage from "../../pages/shopPage";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
-import { mainContainer } from "./main-style";
+import { mainContainer,bodyScollableBoxstyle } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
 
 type MainProps = {
@@ -16,9 +16,11 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
   const { isDark, onToggleDarkClicked } = props;
   return (
     <Box sx={mainContainer}>
-      <Stack>
-        <Header onToggleDarkClicked={onToggleDarkClicked} isDark={isDark} />
+       <Header onToggleDarkClicked={onToggleDarkClicked} isDark={isDark} />
         <Navbar />
+        <Box sx={bodyScollableBoxstyle}>
+      <Stack>
+       
         <ListItem>
           <Routes>
             <Route path="/" element={<CartPage />} />
@@ -35,6 +37,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
           <Footer />
        
       </Stack>
+      </Box>
     </Box>
   );
 };
