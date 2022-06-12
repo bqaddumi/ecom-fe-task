@@ -22,11 +22,11 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
         height: "100vh",
       }}
     >
-      <Stack spacing={2}>
+      <Stack>
         <Header onToggleDarkClicked={onToggleDarkClicked} isDark={isDark} />
-        <ListItem>
+       
           <Navbar />
-        </ListItem>
+        
         <ListItem>
           <Routes>
             <Route path="/" element={<CartPage />} />
