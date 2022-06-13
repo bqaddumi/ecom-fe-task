@@ -1,3 +1,4 @@
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -16,3 +17,16 @@ Production Demo: [http://ecommerce-bashar-fe-task.surge.sh](http://ecommerce-bas
 Desktop Dark:
 
 ![Desktop Dark](https://i.postimg.cc/RFnRTgV0/desktop-Dark.jpg)
+
+
+Desktop Light:
+
+![Desktop Light](https://i.postimg.cc/VvQFZXdW/desktop-Light.jpg)
+
+Mobile Dark:
+
+![Mobile Dark](https://i.postimg.cc/vTrtJDnF/Mobile-Dark.jpg)
+
+Mobile Light:
+
+![Mobile Light](https://i.postimg.cc/3rm14fcS/Mobile-Light.jpg)
