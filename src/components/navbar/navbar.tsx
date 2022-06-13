@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import { Box, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import { isMobile } from "react-device-detect";
 import {
   navBarStyles,
   navbarLinkStyles,
   boxContainerStyle,
 } from "./navbar-style";
-import { NAVBAR_ITEMS, HEADER_TITLE } from "../../consts";
+import { NAVBAR_ITEMS } from "../../consts";
 
 import MobileNavbar from "./mobileNavbar";
 

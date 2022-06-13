@@ -1,28 +1,45 @@
-import {
-  Box,
-  IconButton,
-  Typography,
-  MenuItem,
-  Menu,
-  Button,
-} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { Box, IconButton, Typography, MenuItem, Menu } from "@mui/material";
+import { ShoppingCartOutlined } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NAVBAR_ITEMS, HEADER_TITLE } from "../../consts";
+import { navbarLinkStyles } from "./navbar-style";
+import {
+  NAVBAR_ITEMS,
+  HEADER_TITLE,
+  CART_LINK,
+  DARK,
+  LIGHT,
+} from "../../consts";
 import React from "react";
+import {
+  cartLinkContainerStyle,
+  titleStyle,
+  balanceStyle,
+} from "../header/header-style";
+import { useDarkTheme } from "../../shared/context";
 
 type MobileNavbarProps = {};
 
 const MobileNavbar: React.FC<MobileNavbarProps> = (
   props: MobileNavbarProps
 ) => {
+  const {
+    state: { isDark },
+    dispatch,
+  } = useDarkTheme();
+
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const navItems = Object.values(NAVBAR_ITEMS);
 
   return (
     <Box>
@@ -60,9 +77,35 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
           horizontal: "right",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        {navItems.map((item) => {
+          return (
+            <Link
+              to={item === "SHOP" ? "/products" : "/cart"}
+              style={navbarLinkStyles}
+            >
+              <MenuItem onClick={handleClose}>{item}</MenuItem>
+            </Link>
+          );
+        })}
+        <MenuItem onClick={handleClose}>
+          <Box sx={cartLinkContainerStyle} onClick={() => navigate("/cart")}>
+            <ShoppingCartOutlined />
+            <Typography component="span" sx={titleStyle}>
+              {CART_LINK}
+            </Typography>
+            <Typography component="div" sx={balanceStyle}>
+              {"$0.00"}
+            </Typography>
+          </Box>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            dispatch("toggle");
+            setTimeout(() => handleClose(), 500);
+          }}
+        >
+          {isDark ? LIGHT : DARK}
+        </MenuItem>
       </Menu>
     </Box>
   );

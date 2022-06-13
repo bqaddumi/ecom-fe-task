@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { isMobile, isBrowser } from "react-device-detect";
+import { isBrowser } from "react-device-detect";
 
 import { Button, Typography, Box } from "@mui/material";
 import {
@@ -18,15 +18,17 @@ import {
   rightSideStyle,
 } from "./header-style";
 import { HEADER_TITLE, DARK, LIGHT, CART_LINK } from "../../consts";
+import { useDarkTheme } from "../../shared/context";
 
-type HeaderProps = {
-  isDark: boolean;
-  onToggleDarkClicked: () => void;
-};
+type HeaderProps = {};
 
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const navigate = useNavigate();
-  const { isDark, onToggleDarkClicked } = props;
+  const {
+    state: { isDark },
+    dispatch,
+  } = useDarkTheme();
+
   return (
     <Box sx={containerStyle}>
       <Typography variant="h4" component="div" sx={titleStyle}>
@@ -35,7 +37,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       {isBrowser && (
         <Box sx={rightSideStyle}>
           <Box sx={cartIconsContainerStyle}>
-            <Button onClick={onToggleDarkClicked}>
+            <Button onClick={() => dispatch("toggle")}>
               {isDark ? LIGHT : DARK}
             </Button>
             <KeyboardReturnOutlined sx={iconStyle} />

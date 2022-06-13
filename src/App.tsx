@@ -1,17 +1,17 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "./styles";
 import Main from "./components/main/main";
-import { useState } from "react";
+
+import { useDarkTheme } from "./shared/context";
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const toggleTheme = () => {
-    setIsDark((prev) => !prev);
-  };
+  const {
+    state: { isDark },
+  } = useDarkTheme();
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <Main isDark={isDark} onToggleDarkClicked={toggleTheme} />
+      <Main />
     </ThemeProvider>
   );
 }
