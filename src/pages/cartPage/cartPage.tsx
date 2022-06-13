@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
+import { isMobile } from "react-device-detect";
 import {
   CartItemType,
   CartType,
@@ -9,9 +11,8 @@ import { getCart, getProducts, sendDataToCart } from "../../axios";
 import { styled } from "@mui/material/styles";
 import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
 import CartSummary from "../../components/cartSummary/cartSummary";
-import { titleStyle, boxStyle } from "./cartPageStyle";
+import { titleStyle, boxStyle, boxMobileStyle } from "./cartPageStyle";
 import { SHOPPING_CART } from "../../consts";
-import { useEffect, useState } from "react";
 
 type CartPageProps = {};
 
@@ -142,7 +143,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   };
 
   return (
-    <Box sx={boxStyle}>
+    <Box sx={isMobile ? boxMobileStyle : boxStyle}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
         <Grid item xs={12}>
           <Item>
@@ -151,7 +152,8 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
             </Typography>
           </Item>
         </Grid>
-        <Grid item xs={7}>
+
+        <Grid item xs={isMobile ? 12 : 7}>
           <ProductsCartTable
             products={products}
             onXClicked={onXClicked}
@@ -160,7 +162,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
             onDecreaseclicked={onDecreaseclicked}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={isMobile ? 12 : 5}>
           <CartSummary totalPrice={orderTotalPrice} />
         </Grid>
       </Grid>

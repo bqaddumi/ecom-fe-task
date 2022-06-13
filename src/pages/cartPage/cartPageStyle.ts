@@ -12,6 +12,10 @@ export const boxStyle = {
   paddingRight: "10%",
 };
 
+export const boxMobileStyle = {
+  width: "100%",
+  padding: "0",
+};
 export const summaryStyle = {
   padding: "17px",
   backgroundColor: (theme: { palette: { mode: string } }) =>

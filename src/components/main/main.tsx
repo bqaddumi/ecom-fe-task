@@ -4,39 +4,33 @@ import Header from "../header/header";
 import ShopPage from "../../pages/shopPage";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
-import { mainContainer,bodyScollableBoxstyle } from "./main-style";
+import { mainContainer, bodyScollableBoxstyle } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
 
-type MainProps = {
-  isDark: boolean;
-  onToggleDarkClicked: () => void;
-};
+type MainProps = {};
 
 const Main: React.FC<MainProps> = (props: MainProps) => {
-  const { isDark, onToggleDarkClicked } = props;
   return (
     <Box sx={mainContainer}>
-       <Header onToggleDarkClicked={onToggleDarkClicked} isDark={isDark} />
-        <Navbar />
-        <Box sx={bodyScollableBoxstyle}>
-      <Stack>
-       
-        <ListItem>
-          <Routes>
-            <Route path="/" element={<CartPage />} />
-            <Route path="*" element={<CartPage />} />
-            {/* TODO: add product page */}
-            {/* <Route path="/home" element={<HomePage />} /> */}
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/products" element={<ShopPage />} />
-            {/* TODO: add product page */}
-            {/* <Route path="/products/:productId/" element={<ProductPage />} /> */}
-          </Routes>
-        </ListItem>
-      
+      <Header />
+      <Navbar />
+      <Box sx={bodyScollableBoxstyle}>
+        <Stack>
+          <ListItem>
+            <Routes>
+              <Route path="/" element={<CartPage />} />
+              <Route path="*" element={<CartPage />} />
+              {/* TODO: add product page */}
+              {/* <Route path="/home" element={<HomePage />} /> */}
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/products" element={<ShopPage />} />
+              {/* TODO: add product page */}
+              {/* <Route path="/products/:productId/" element={<ProductPage />} /> */}
+            </Routes>
+          </ListItem>
+
           <Footer />
-       
-      </Stack>
+        </Stack>
       </Box>
     </Box>
   );

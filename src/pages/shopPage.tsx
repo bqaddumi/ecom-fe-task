@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import { ProductType, CartType } from "../types";
 import { getProducts, getCart, sendDataToCart } from "../axios";
 import { Grid, Paper, Button, CardMedia, Box } from "@mui/material";
+import { AlertColor } from "@mui/material/Alert";
+import CustomizedSnackbars from "../components/snackbar/snackbar";
 
 type ShopPageProps = {};
 
@@ -11,6 +13,14 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     changed: false,
     items: [],
     totalQuantity: 0,
+  });
+
+  const [snackbar, setSnackbar] = useState<{
+    message: string;
+    severity: AlertColor;
+  }>({
+    message: "",
+    severity: "success",
   });
 
   useEffect(() => {
@@ -48,7 +58,11 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
       newItems[itemIndex] = existingItem;
     }
     setCart({ ...cart, items: newItems, totalQuantity: newTotal });
-    sendDataToCart({ ...cart, items: newItems, totalQuantity: newTotal });
+    sendDataToCart({ ...cart, items: newItems, totalQuantity: newTotal }).then(
+      () => {
+        setSnackbar({ message: "Product added!", severity: "success" });
+      }
+    );
   };
 
   return (
@@ -84,6 +98,10 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
           ))}
         </Grid>
       </Grid>
+      <CustomizedSnackbars
+        message={snackbar.message}
+        severity={snackbar.severity}
+      />
     </Grid>
   );
 };
