@@ -1,5 +1,4 @@
 export const footerContainerStyle = {
- 
   backgroundColor: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#282E36" : "#EBEBEB",
   color: (theme: { palette: { mode: string } }) =>
@@ -7,6 +6,7 @@ export const footerContainerStyle = {
   textAlign: "center",
   paddingTop: "40px",
   paddingBottom: "45px",
+  marginTop: "50px",
 };
 
 export const titleStyle = {
@@ -32,8 +32,8 @@ export const subscribeButtonStyle = {
 };
 
 export const emailInputStyle = {
-    width:'50%',
-    backgroundColor: (theme: { palette: { mode: string } }) =>
+  width: "50%",
+  backgroundColor: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#282E36" : "#fff",
   color: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#fff" : "#1A2027",

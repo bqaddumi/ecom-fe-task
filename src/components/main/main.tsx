@@ -6,6 +6,7 @@ import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
 import { mainContainer, bodyScollableBoxstyle } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
+import FooterLinks from "../footer/footerLinks";
 
 type MainProps = {};
 
@@ -30,6 +31,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
           </ListItem>
 
           <Footer />
+          <FooterLinks/>
         </Stack>
       </Box>
     </Box>
