@@ -1,8 +1,9 @@
-import { useEffect, useState, forwardRef } from "react";
+import { useEffect, useState } from "react";
 import { ProductType, CartType } from "../types";
 import { getProducts, getCart, sendDataToCart } from "../axios";
 import { Grid, Paper, Button, CardMedia, Box } from "@mui/material";
 import { AlertColor } from "@mui/material/Alert";
+import { useTotalQuantity } from "../shared/totalQuantityContext";
 import CustomizedSnackbars from "../components/snackbar/snackbar";
 
 type ShopPageProps = {};
@@ -22,6 +23,8 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     message: "",
     severity: "success",
   });
+
+  const { dispatch } = useTotalQuantity();
 
   useEffect(() => {
     getProducts().then((res) => {
@@ -57,6 +60,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
       const itemIndex = items.findIndex((item) => item.id === existingItem.id);
       newItems[itemIndex] = existingItem;
     }
+    dispatch({ type: "set", totalQuantity: newTotal });
     setCart({ ...cart, items: newItems, totalQuantity: newTotal });
     sendDataToCart({ ...cart, items: newItems, totalQuantity: newTotal }).then(
       () => {
