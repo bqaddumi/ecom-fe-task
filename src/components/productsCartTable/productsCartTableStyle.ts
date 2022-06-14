@@ -1,5 +1,6 @@
 export const tableStyle = {
   minWidth: 650,
+  overflowX: "scroll",
   borderLeft: "none",
   borderRight: "none",
   borderTop: "1px solid",

@@ -16,7 +16,7 @@ import {
   titleStyle,
   balanceStyle,
 } from "../header/header-style";
-import { useDarkTheme } from "../../shared/context";
+import { useDarkTheme } from "../../shared/darkThemeContext";
 
 type MobileNavbarProps = {};
 

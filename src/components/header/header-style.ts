@@ -29,6 +29,7 @@ export const cartIconsContainerStyle = {
 };
 export const iconStyle = {
   marginRight: "30px",
+  cursor: "pointer",
 };
 
 export const balanceStyle = {
