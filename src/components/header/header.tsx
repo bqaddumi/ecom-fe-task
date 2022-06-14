@@ -47,12 +47,12 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             </Button>
             <Box sx={iconStyle}>
               <Badge badgeContent={"0"} color="error">
-                <FavoriteBorderOutlined />
+                <KeyboardReturnOutlined />
               </Badge>
             </Box>
             <Box sx={iconStyle}>
               <Badge badgeContent={"0"} color="error">
-                <KeyboardReturnOutlined />
+                <FavoriteBorderOutlined />
               </Badge>
             </Box>
             <Box onClick={() => navigate("/cart")} sx={iconStyle}>
