@@ -19,11 +19,11 @@ const FooterLinks: React.FC<FooterLinksProps> = (props: FooterLinksProps) => {
   return (
     <Box sx={containerStyle}>
       <Grid container spacing={2} sx={firstSection}>
-        <Grid xs={gridLayout(3)} sx={alignTextLeft}>
+        <Grid item xs={gridLayout(3)} sx={alignTextLeft}>
           <Typography sx={grayColor}> Our Office Address</Typography>
           <Typography> 169 Florida Ave, L.A City </Typography>
         </Grid>
-        <Grid xs={gridLayout(3)} sx={alignTextLeft}>
+        <Grid item xs={gridLayout(3)} sx={alignTextLeft}>
           <Typography sx={grayColor}> Please call us</Typography>
           <Typography> (+84) 12346869669 </Typography>
         </Grid>
@@ -37,11 +37,11 @@ const FooterLinks: React.FC<FooterLinksProps> = (props: FooterLinksProps) => {
       </Grid>
       <Box sx={secondSection}>
         <Grid container sx={{}}>
-          <Grid xs={gridLayout(3)} sx={alignTextLeft}>
+          <Grid item xs={gridLayout(3)} sx={alignTextLeft}>
             <Typography sx={secondSectionTitle}> Our Stores </Typography>
             <Typography sx={grayColor}> Liverpool City</Typography>
           </Grid>
-          <Grid xs={gridLayout(3)} sx={alignTextLeft}>
+          <Grid item xs={gridLayout(3)} sx={alignTextLeft}>
             <Typography sx={secondSectionTitle}> My Account </Typography>
             <Typography sx={grayColor}> My Cart</Typography>
             <Typography sx={grayColor}> Check Out</Typography>

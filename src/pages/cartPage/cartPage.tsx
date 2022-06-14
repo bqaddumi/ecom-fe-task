@@ -8,6 +8,7 @@ import {
   ProductType,
 } from "../../types";
 import { getCart, getProducts, sendDataToCart } from "../../axios";
+import { useTotalQuantity } from "../../shared/totalQuantityContext";
 import { styled } from "@mui/material/styles";
 import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
 import CartSummary from "../../components/cartSummary/cartSummary";
@@ -28,6 +29,8 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   const [productsImages, setProductsImages] = useState<ProductsImagesType>([]);
   const [total, setTotal] = useState<number>(0);
   const [orderTotalPrice, setOrderTotalPrice] = useState<number>(0);
+
+  const { dispatch } = useTotalQuantity();
 
   const getOrderTotalPrice = (items: CartItemType[]) => {
     let totalPrice = 0;
@@ -74,6 +77,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
       items: newProducts,
       totalQuantity: newTotalQuantity,
     };
+    dispatch({ type: "set", totalQuantity: newTotalQuantity });
     setTotal(newTotalQuantity);
     setProducts(newProducts);
     sendDataToCart(cart);
@@ -109,6 +113,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
 
       sendDataToCart(cart);
     }
+    dispatch({ type: "set", totalQuantity: newTotal });
     getOrderTotalPrice(products);
   };
   const onDecreaseclicked = (productId: number) => {
@@ -139,6 +144,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
         sendDataToCart(cart);
       }
     }
+    dispatch({ type: "set", totalQuantity: newTotal });
     getOrderTotalPrice(products);
   };
 

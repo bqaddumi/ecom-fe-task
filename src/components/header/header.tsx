@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { isBrowser } from "react-device-detect";
 
-import { Button, Typography, Box } from "@mui/material";
+import { Button, Typography, Box, Badge } from "@mui/material";
 import {
   ShoppingCartOutlined,
   FavoriteBorderOutlined,
@@ -18,7 +18,8 @@ import {
   rightSideStyle,
 } from "./header-style";
 import { HEADER_TITLE, DARK, LIGHT, CART_LINK } from "../../consts";
-import { useDarkTheme } from "../../shared/context";
+import { useDarkTheme } from "../../shared/darkThemeContext";
+import { useTotalQuantity } from "../../shared/totalQuantityContext";
 
 type HeaderProps = {};
 
@@ -28,6 +29,10 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
     state: { isDark },
     dispatch,
   } = useDarkTheme();
+
+  const {
+    state: { totalQuantity },
+  } = useTotalQuantity();
 
   return (
     <Box sx={containerStyle}>
@@ -40,9 +45,21 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             <Button onClick={() => dispatch("toggle")}>
               {isDark ? LIGHT : DARK}
             </Button>
-            <KeyboardReturnOutlined sx={iconStyle} />
-            <FavoriteBorderOutlined sx={iconStyle} />
-            <ShoppingCartOutlined sx={iconStyle} />
+            <Box sx={iconStyle}>
+              <Badge badgeContent={"0"} color="error">
+                <FavoriteBorderOutlined />
+              </Badge>
+            </Box>
+            <Box sx={iconStyle}>
+              <Badge badgeContent={"0"} color="error">
+                <KeyboardReturnOutlined />
+              </Badge>
+            </Box>
+            <Box onClick={() => navigate("/cart")} sx={iconStyle}>
+              <Badge badgeContent={totalQuantity} color="error">
+                <ShoppingCartOutlined />
+              </Badge>
+            </Box>
           </Box>
           <Box sx={cartLinkContainerStyle} onClick={() => navigate("/cart")}>
             <Typography component="div" sx={titleStyle}>
