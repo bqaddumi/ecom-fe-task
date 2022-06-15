@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CartType } from "./types";
+import { CartType, CheckoutType } from "./types";
 
 const axiosClient = axios.create();
 
@@ -15,4 +15,12 @@ export const getProducts = () => {
 
 export const sendDataToCart = (cart: CartType) => {
   return axiosClient.put(`/cart.json`, cart).then((response) => response);
+};
+
+export const sendDataToCheckout = (checkout: CheckoutType) => {
+  return axiosClient.put(`/checkout.json`, checkout).then((response) => response);
+};
+
+export const getCheckout = () => {
+  return axiosClient.get(`/checkout.json`).then((response) => response);
 };
