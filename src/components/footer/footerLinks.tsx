@@ -39,7 +39,13 @@ const FooterLinks: React.FC<FooterLinksProps> = (props: FooterLinksProps) => {
         <Grid container sx={{}}>
           <Grid item xs={gridLayout(3)} sx={alignTextLeft}>
             <Typography sx={secondSectionTitle}> Our Stores </Typography>
-            <Typography sx={grayColor}> Liverpool City</Typography>
+            <Typography variant="body1" sx={grayColor}> 501 Floor, Nguyen Ngoc Vu, Cau Giay, Ha Noi  </Typography>
+            <Typography variant="body1" sx={grayColor}> 741 - 11A Sandiago, L.A City, USA </Typography>
+            <Typography variant="body1" sx={grayColor}> 5thFloor, 169 Green Lakes, WestBrown, Liverpool City  </Typography>
+            <Typography variant="body1" sx={grayColor}> 628 Brooklyn Street, Fulham District, Wales  </Typography>
+            <Typography variant="body1" sx={grayColor}> 10001 Street, WinLow District, Mexico  </Typography>
+            <Typography variant="body1" sx={grayColor}> 1st Floor BrickHouse, 250 Wall Street, C.A City UK  </Typography>
+            
           </Grid>
           <Grid item xs={gridLayout(3)} sx={alignTextLeft}>
             <Typography sx={secondSectionTitle}> My Account </Typography>
