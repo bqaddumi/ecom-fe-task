@@ -58,7 +58,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
       .catch((e) => {
         console.error("Can't get checkout", e);
       });
-  });
+  },[]);
 
   const onCheckoutClicked = () => {
     sendDataToCheckout([
