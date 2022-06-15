@@ -22,27 +22,27 @@ const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
           ) : (
             <>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/home" style={navbarLinkStyles}>
+                <Link to="/" style={navbarLinkStyles}>
                   {NAVBAR_ITEMS.HOME}
                 </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/products" style={navbarLinkStyles}>
+                <Link to="/" style={navbarLinkStyles}>
                   {NAVBAR_ITEMS.SHOP}
                 </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/cart" style={navbarLinkStyles}>
+                <Link to="/" style={navbarLinkStyles}>
                   {NAVBAR_ITEMS.PAGES}
                 </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/cart" style={navbarLinkStyles}>
+                <Link to="/" style={navbarLinkStyles}>
                   {NAVBAR_ITEMS.LOOKBOOK}
                 </Link>
               </Typography>
               <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/cart" style={navbarLinkStyles}>
+                <Link to="/" style={navbarLinkStyles}>
                   {NAVBAR_ITEMS.BRANDS}
                 </Link>
               </Typography>

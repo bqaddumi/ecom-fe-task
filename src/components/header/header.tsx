@@ -55,13 +55,13 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
                 <FavoriteBorderOutlined />
               </Badge>
             </Box>
-            <Box onClick={() => navigate("/cart")} sx={iconStyle}>
+            <Box onClick={() => navigate("/")} sx={iconStyle}>
               <Badge badgeContent={totalQuantity} color="error">
                 <ShoppingCartOutlined />
               </Badge>
             </Box>
           </Box>
-          <Box sx={cartLinkContainerStyle} onClick={() => navigate("/cart")}>
+          <Box sx={cartLinkContainerStyle} onClick={() => navigate("/")}>
             <Typography component="div" sx={titleStyle}>
               {CART_LINK}
             </Typography>
