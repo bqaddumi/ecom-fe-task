@@ -8,6 +8,7 @@ export const containerStyle = {
 export const grayColor = {
   color: "#848484",
   fontSize: "13px",
+  marginBottom: '10px'
 };
 
 export const firstSection = {
