@@ -2,7 +2,11 @@
 
 This project is only one page which is cart page.
 
-Demo: [https://ecom-bashar.surge.sh](https://ecom-bashar.surge.sh)
+Demo: [https://ecom-bashar.surge.sh](https://ecom-bashar.surge.sh).
+
+To test cart page and add new product, this dummy products page is created for test porpose. This page is not ready, and used only for testing
+
+[https://products-page-bashar.surge.sh/](https://products-page-bashar.surge.sh/).
 
 ## Available Scripts
 
@@ -20,7 +24,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Desktop Dark:
 
 ![Desktop Dark](https://i.postimg.cc/RFnRTgV0/desktop-Dark.jpg)
-
 
 Desktop Light:
 
