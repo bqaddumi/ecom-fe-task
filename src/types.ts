@@ -24,3 +24,9 @@ export type ProductsImagesType = {
   id: number;
   imgUrl: string;
 }[];
+
+export type CheckoutType = {
+  items: CartItemType[];
+  totalQuantity: number;
+  totalOrderPrice: number;
+}[];

@@ -64,9 +64,17 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     setCart({ ...cart, items: newItems, totalQuantity: newTotal });
     sendDataToCart({ ...cart, items: newItems, totalQuantity: newTotal }).then(
       () => {
-        setSnackbar({ message: "Product added!", severity: "success" });
+        setSnackbar({
+          message: `Product added! ${totalQuantity}`,
+          severity: "success",
+        });
       }
-    );
+    ).catch(e => {
+      setSnackbar({
+        message: `Proplem in add to cart, please try again later!`,
+        severity: "error",
+      });
+    });
   };
 
   return (

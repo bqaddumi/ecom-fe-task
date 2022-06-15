@@ -169,7 +169,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
           />
         </Grid>
         <Grid item xs={isMobile ? 12 : 5}>
-          <CartSummary totalPrice={orderTotalPrice} />
+          <CartSummary totalPrice={orderTotalPrice} products={products} totalQuantity={total} />
         </Grid>
       </Grid>
     </Box>
