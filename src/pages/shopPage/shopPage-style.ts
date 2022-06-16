@@ -29,13 +29,11 @@ export const boxMobileStyle = {
 
 export const firstSectionStyle = {
   margin: "30px 10% 0px",
-  height: "500px",
   background: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
 };
 
 export const firstSectionMobileStyle = {
-  height: "500px",
   background: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
 };
@@ -43,4 +41,10 @@ export const firstSectionMobileStyle = {
 export const secondSectionStyle = {
   background: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
+};
+
+export const productsContainer = {
+  margin: "20px 20px",
+  display: "flex",
+  marginTop: "70px",
 };

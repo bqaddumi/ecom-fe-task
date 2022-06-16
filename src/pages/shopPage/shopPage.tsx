@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { isMobile } from "react-device-detect";
+import ProductCard from "../../components/productCard/productCard";
 
 import {
   titleStyle,
@@ -9,8 +11,9 @@ import {
   secondSectionStyle,
   titleContainer,
   firstSectionMobileStyle,
+  productsContainer,
 } from "./shopPage-style";
-import { useEffect, useState } from "react";
+
 import {
   removeCategoryById,
   getCategoryProductsByCategoryId,
@@ -45,11 +48,12 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
             {getCategoryById("c1", categories)?.name}
           </Typography>
         </Box>
-        {getCategoryProductsByCategoryId("c1", products).map((product) => (
-          <Typography variant="body1" sx={{ color: "red" }}>
-            {product.name}
-          </Typography>
-        ))}
+        <Box sx={productsContainer}>
+          {getCategoryProductsByCategoryId("c1", products).map((product) => {
+            const { name, imgUrl, price } = product;
+            return <ProductCard name={name} imgUrl={imgUrl} price={price} />;
+          })}
+        </Box>
       </Box>
       <Box sx={secondSectionStyle}>
         {removeCategoryById("c1", categories).map((category: CategoryType) => {
@@ -60,13 +64,19 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                   <Typography variant="body1" sx={titleStyle}>
                     {category.name}
                   </Typography>
-
+                </Box>
+                <Box sx={productsContainer}>
                   {getCategoryProductsByCategoryId(category.id, products).map(
-                    (product) => (
-                      <Typography variant="body1" sx={{ color: "red" }}>
-                        {product.name}
-                      </Typography>
-                    )
+                    (product) => {
+                      const { name, imgUrl, price } = product;
+                      return (
+                        <ProductCard
+                          name={name}
+                          imgUrl={imgUrl}
+                          price={price}
+                        />
+                      );
+                    }
                   )}
                 </Box>
               </Box>
