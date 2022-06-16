@@ -24,7 +24,12 @@ const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
             <>
               {navItems.map((item) => {
                 return (
-                  <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
+                  <Typography
+                    key={item.name}
+                    variant="inherit"
+                    component="div"
+                    sx={{ mr: 2 }}
+                  >
                     <Link to={item.link} style={navbarLinkStyles}>
                       {item.name}
                     </Link>

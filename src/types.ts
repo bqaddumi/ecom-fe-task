@@ -4,6 +4,7 @@ export type ProductType = {
   imgUrl: string;
   name: string;
   price: number;
+  categoryId: string;
 };
 
 export type CartItemType = {
@@ -30,3 +31,8 @@ export type CheckoutType = {
   totalQuantity: number;
   totalOrderPrice: number;
 }[];
+
+export type CategoryType = {
+  id: string;
+  name: string;
+};

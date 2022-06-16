@@ -24,3 +24,7 @@ export const sendDataToCheckout = (checkout: CheckoutType) => {
 export const getCheckout = () => {
   return axiosClient.get(`/checkout.json`).then((response) => response);
 };
+
+export const getCategories = () => {
+  return axiosClient.get(`/categories.json`).then((response) => response);
+}

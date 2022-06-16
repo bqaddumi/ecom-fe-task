@@ -34,8 +34,13 @@ export const firstSectionStyle = {
     theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
 };
 
-export const secondSectionStyle = {
+export const firstSectionMobileStyle = {
+  height: "500px",
   background: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
 };
 
+export const secondSectionStyle = {
+  background: (theme: { palette: { mode: string } }) =>
+    theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
+};
