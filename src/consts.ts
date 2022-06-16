@@ -1,9 +1,9 @@
 const NAVBAR_ITEMS = {
-  HOME: "HOME",
-  SHOP: "SHOP",
-  PAGES: "PAGES",
-  LOOKBOOK: "LOOKBOOK",
-  BRANDS: "BRANDS",
+  HOME: { name: "HOME", link: "/" },
+  SHOP: { name: "SHOP", link: "/shop" },
+  PAGES: { name: "PAGES", link: "/" },
+  LOOKBOOK: { name: "LOOKBOOK", link: "/" },
+  BRANDS: { name: "BRANDS", link: "/" },
 };
 
 const HEADER_TITLE = "CAMARO";
@@ -33,10 +33,16 @@ const FOOTER = {
   SUBTITLE: "Subscribe to recieve coupons and gift cards",
   EMAIL_PLACEHOLDER: "Email address",
   SUBSCRIBE_BTN: "SUBSCRIBE",
-  SUBSCRIBED: "SUBSCRIBED!"
+  SUBSCRIBED: "SUBSCRIBED!",
 };
 
 const CART_LINK = "Your cart";
+
+const CATEGORIES = {
+  SMART: "Smartphone, Laptop & Tablet",
+  AUDIO: "Audio & Sound",
+  CAMERA: "Camera & Lens"
+}
 
 export {
   CART_LINK,
@@ -50,4 +56,5 @@ export {
   CHECKOUT_BUTTON,
   CHECKOUT_MULTIPLE_ADDRESS,
   FOOTER,
+  CATEGORIES
 };

@@ -5,6 +5,7 @@ import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
 import { mainContainer, bodyScollableBoxstyle } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
+import ShopPage from "../../pages/shopPage/shopPage";
 import FooterLinks from "../footer/footerLinks";
 
 type MainProps = {};
@@ -24,14 +25,14 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
               {/* <Route path="/home" element={<HomePage />} /> */}
               <Route path="/cart" element={<CartPage />} />
               {/* TODO: Implement products page */}
-              {/* <Route path="/products" element={<ShopPage />} /> */}
+              <Route path="/shop" element={<ShopPage />} />
               {/* TODO: add product page */}
               {/* <Route path="/products/:productId/" element={<ProductPage />} /> */}
             </Routes>
           </ListItem>
 
           <Footer />
-          <FooterLinks/>
+          <FooterLinks />
         </Stack>
       </Box>
     </Box>

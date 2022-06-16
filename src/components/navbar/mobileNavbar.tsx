@@ -79,11 +79,8 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
       >
         {navItems.map((item) => {
           return (
-            <Link
-              to="/"
-              style={navbarLinkStyles}
-            >
-              <MenuItem onClick={handleClose}>{item}</MenuItem>
+            <Link to={item.link} style={navbarLinkStyles}>
+              <MenuItem onClick={handleClose}>{item.name}</MenuItem>
             </Link>
           );
         })}
