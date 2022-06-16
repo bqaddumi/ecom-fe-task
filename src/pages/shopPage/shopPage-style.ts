@@ -28,7 +28,7 @@ export const boxMobileStyle = {
 };
 
 export const firstSectionStyle = {
-  margin: "30px 10%",
+  margin: "30px 10% 0px",
   height: "500px",
   background: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",

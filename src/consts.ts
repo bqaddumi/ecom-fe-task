@@ -38,12 +38,6 @@ const FOOTER = {
 
 const CART_LINK = "Your cart";
 
-const CATEGORIES = {
-  SMART: "Smartphone, Laptop & Tablet",
-  AUDIO: "Audio & Sound",
-  CAMERA: "Camera & Lens"
-}
-
 export {
   CART_LINK,
   NAVBAR_ITEMS,
@@ -56,5 +50,4 @@ export {
   CHECKOUT_BUTTON,
   CHECKOUT_MULTIPLE_ADDRESS,
   FOOTER,
-  CATEGORIES
 };

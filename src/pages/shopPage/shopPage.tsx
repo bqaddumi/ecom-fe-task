@@ -10,8 +10,12 @@ import {
   titleContainer,
   firstSectionMobileStyle,
 } from "./shopPage-style";
-import { CATEGORIES } from "../../consts";
 import { useEffect, useState } from "react";
+import {
+  removeCategoryById,
+  getCategoryProductsByCategoryId,
+  getCategoryById,
+} from "./helpers";
 import { CategoryType, ProductType } from "../../types";
 import { getCategories, getProducts } from "../../axios";
 type ShopPageProps = {};
@@ -20,7 +24,6 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
 
-  const { SMART, AUDIO, CAMERA } = CATEGORIES;
   const sectionStyle = isMobile ? firstSectionMobileStyle : firstSectionStyle;
 
   useEffect(() => {
@@ -39,29 +42,37 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
       <Box sx={sectionStyle}>
         <Box sx={titleContainer}>
           <Typography variant="body1" sx={titleStyle}>
-            {SMART}
+            {getCategoryById("c1", categories)?.name}
           </Typography>
         </Box>
+        {getCategoryProductsByCategoryId("c1", products).map((product) => (
+          <Typography variant="body1" sx={{ color: "red" }}>
+            {product.name}
+          </Typography>
+        ))}
       </Box>
       <Box sx={secondSectionStyle}>
-        <Box sx={secondSectionStyle}>
-          <Box sx={sectionStyle}>
-            <Box sx={titleContainer}>
-              <Typography variant="body1" sx={titleStyle}>
-                {AUDIO}
-              </Typography>
+        {removeCategoryById("c1", categories).map((category: CategoryType) => {
+          return (
+            <Box key={category.id} sx={secondSectionStyle}>
+              <Box sx={sectionStyle}>
+                <Box sx={titleContainer}>
+                  <Typography variant="body1" sx={titleStyle}>
+                    {category.name}
+                  </Typography>
+
+                  {getCategoryProductsByCategoryId(category.id, products).map(
+                    (product) => (
+                      <Typography variant="body1" sx={{ color: "red" }}>
+                        {product.name}
+                      </Typography>
+                    )
+                  )}
+                </Box>
+              </Box>
             </Box>
-          </Box>
-        </Box>
-        <Box sx={secondSectionStyle}>
-          <Box sx={sectionStyle}>
-            <Box sx={titleContainer}>
-              <Typography variant="body1" sx={titleStyle}>
-                {CAMERA}
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
+          );
+        })}
       </Box>
     </Box>
   );
