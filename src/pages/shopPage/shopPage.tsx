@@ -28,6 +28,7 @@ type ShopPageProps = {};
 const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const sectionStyle = isMobile ? firstSectionMobileStyle : firstSectionStyle;
 
@@ -47,6 +48,9 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const chunkedProducts = getProductsChunked(c1Products, 6);
 
   console.log(chunkedProducts);
+  const onTabClicked = (index: number) => {
+    setActiveIndex(index);
+  };
 
   return (
     <Box sx={isMobile ? boxMobileStyle : boxStyle}>
@@ -57,14 +61,17 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
           </Typography>
         </Box>
         <Box sx={productsContainer}>
-          {chunkedProducts[0]?.map((product) => {
+          {chunkedProducts[activeIndex]?.map((product) => {
             const { name, imgUrl, price } = product;
             return <ProductCard name={name} imgUrl={imgUrl} price={price} />;
           })}
         </Box>
         <Box sx={pageButtonContainer}>
           {chunkedProducts.map((item, index) => (
-            <PaginationButton isActive={index === 0} />
+            <PaginationButton
+              onTabClicked={() => onTabClicked(index)}
+              isActive={activeIndex === index}
+            />
           ))}
         </Box>
       </Box>

@@ -47,6 +47,7 @@ export const secondSectionStyle = {
 
 export const productsContainer = {
   width: "calc(100% - 40px)",
+  minHeight: '400px',
   overflowX: "auto",
   margin: "20px 20px",
   display: "flex",

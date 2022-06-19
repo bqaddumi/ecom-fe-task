@@ -7,21 +7,20 @@ import {
   hoverEffect,
 } from "./paginationButton-style";
 
-type PaginationProps = { isActive?: boolean };
+type PaginationProps = { isActive?: boolean; onTabClicked: () => void };
 
 const PaginationButton: React.FC<PaginationProps> = (
   props: PaginationProps
 ) => {
   const [isHover, setIsHover] = useState<boolean>(false);
-  const { isActive } = props;
-
+  const { isActive, onTabClicked } = props;
   useEffect(() => {});
 
   const buttonStyle =
     isActive || isHover ? { ...pageStyle, ...hoverEffect } : { ...pageStyle };
 
   return (
-    <Box sx={paginationContainer}>
+    <Box onClick={onTabClicked} sx={paginationContainer}>
       <Box
         onMouseEnter={() => setIsHover(true)}
         onMouseOut={() => setIsHover(false)}
