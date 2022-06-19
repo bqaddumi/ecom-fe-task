@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { isMobile } from "react-device-detect";
 import ProductCard from "../../components/productCard/productCard";
-
+import PaginationButton from "../../components/paginationButton/paginationButton";
 import {
   titleStyle,
   boxStyle,
@@ -12,12 +12,14 @@ import {
   titleContainer,
   firstSectionMobileStyle,
   productsContainer,
+  pageButtonContainer,
 } from "./shopPage-style";
 
 import {
   removeCategoryById,
   getCategoryProductsByCategoryId,
   getCategoryById,
+  getProductsChunked,
 } from "./helpers";
 import { CategoryType, ProductType } from "../../types";
 import { getCategories, getProducts } from "../../axios";
@@ -40,6 +42,12 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     });
   }, []);
 
+  const c1Products = getCategoryProductsByCategoryId("c1", products);
+
+  const chunkedProducts = getProductsChunked(c1Products, 6);
+
+  console.log(chunkedProducts);
+
   return (
     <Box sx={isMobile ? boxMobileStyle : boxStyle}>
       <Box sx={sectionStyle}>
@@ -49,10 +57,15 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
           </Typography>
         </Box>
         <Box sx={productsContainer}>
-          {getCategoryProductsByCategoryId("c1", products).map((product) => {
+          {chunkedProducts[0]?.map((product) => {
             const { name, imgUrl, price } = product;
             return <ProductCard name={name} imgUrl={imgUrl} price={price} />;
           })}
+        </Box>
+        <Box sx={pageButtonContainer}>
+          {chunkedProducts.map((item, index) => (
+            <PaginationButton isActive={index === 0} />
+          ))}
         </Box>
       </Box>
       <Box sx={secondSectionStyle}>

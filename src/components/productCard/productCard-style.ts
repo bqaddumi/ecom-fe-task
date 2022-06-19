@@ -1,24 +1,25 @@
 export const containerStyle = {
-  borderRight: "1px solid",
-  borderColor: (theme: { palette: { mode: string } }) =>
-    theme.palette.mode === "dark" ? "#515151" : "#E0E0E0",
   padding: "20px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   maxWidth: "195px",
   width: "195px",
-  cursor:'pointer',
+  cursor: "pointer",
 };
 
 export const productImage = {
   width: "195px",
   height: "135px",
   marginBottom: "30px",
+  borderRight: "1px solid",
+  padding: "0px 20px",
+  borderColor: (theme: { palette: { mode: string } }) =>
+    theme.palette.mode === "dark" ? "#515151" : "#E0E0E0",
 };
 
 export const nameStyle = {
-  fontWeight: "400",
+  fontWeight: "500",
 };
 
 export const priceStyle = {

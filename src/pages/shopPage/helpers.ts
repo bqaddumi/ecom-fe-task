@@ -15,4 +15,20 @@ const getCategoryById = (id: string, categories: CategoryType[]) => {
   return categories.find((category: CategoryType) => category.id === id);
 };
 
-export { removeCategoryById, getCategoryProductsByCategoryId, getCategoryById };
+const getProductsChunked = (products: ProductType[], chunkSize: number) => {
+  let productChnked = [];
+
+  for (let i = 0; i < products.length; i += chunkSize) {
+    const chunk = products.slice(i, i + chunkSize);
+    productChnked.push(chunk);
+  }
+
+  return productChnked;
+};
+
+export {
+  removeCategoryById,
+  getCategoryProductsByCategoryId,
+  getCategoryById,
+  getProductsChunked,
+};

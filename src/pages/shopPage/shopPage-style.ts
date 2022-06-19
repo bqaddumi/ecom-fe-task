@@ -1,3 +1,5 @@
+import { isMobile } from "react-device-detect";
+
 export const titleStyle = {
   margin: "0",
   fontWeight: "600",
@@ -44,7 +46,15 @@ export const secondSectionStyle = {
 };
 
 export const productsContainer = {
+  width: "calc(100% - 40px)",
+  overflowX: "auto",
   margin: "20px 20px",
   display: "flex",
+  flexDirection: isMobile ? "column" : "row",
   marginTop: "70px",
+};
+
+export const pageButtonContainer = {
+  display: "flex",
+  justifyContent: "center",
 };
