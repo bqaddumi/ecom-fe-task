@@ -3,6 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { isMobile } from "react-device-detect";
 import ProductCard from "../../components/productCard/productCard";
 import PaginationButton from "../../components/paginationButton/paginationButton";
+import ProductsChunk from "../../components/productsChunk/productsChunk";
+
 import {
   titleStyle,
   boxStyle,
@@ -12,14 +14,12 @@ import {
   titleContainer,
   firstSectionMobileStyle,
   productsContainer,
-  pageButtonContainer,
 } from "./shopPage-style";
 
 import {
   removeCategoryById,
   getCategoryProductsByCategoryId,
   getCategoryById,
-  getProductsChunked,
 } from "./helpers";
 import { CategoryType, ProductType } from "../../types";
 import { getCategories, getProducts } from "../../axios";
@@ -28,7 +28,6 @@ type ShopPageProps = {};
 const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const sectionStyle = isMobile ? firstSectionMobileStyle : firstSectionStyle;
 
@@ -45,13 +44,6 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
 
   const c1Products = getCategoryProductsByCategoryId("c1", products);
 
-  const chunkedProducts = getProductsChunked(c1Products, 6);
-
-  console.log(chunkedProducts);
-  const onTabClicked = (index: number) => {
-    setActiveIndex(index);
-  };
-
   return (
     <Box sx={isMobile ? boxMobileStyle : boxStyle}>
       <Box sx={sectionStyle}>
@@ -60,20 +52,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
             {getCategoryById("c1", categories)?.name}
           </Typography>
         </Box>
-        <Box sx={productsContainer}>
-          {chunkedProducts[activeIndex]?.map((product) => {
-            const { name, imgUrl, price } = product;
-            return <ProductCard name={name} imgUrl={imgUrl} price={price} />;
-          })}
-        </Box>
-        <Box sx={pageButtonContainer}>
-          {chunkedProducts.map((item, index) => (
-            <PaginationButton
-              onTabClicked={() => onTabClicked(index)}
-              isActive={activeIndex === index}
-            />
-          ))}
-        </Box>
+        <ProductsChunk products={c1Products} />
       </Box>
       <Box sx={secondSectionStyle}>
         {removeCategoryById("c1", categories).map((category: CategoryType) => {
