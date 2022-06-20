@@ -35,4 +35,5 @@ export type CheckoutType = {
 export type CategoryType = {
   id: string;
   name: string;
+  image: string;
 };

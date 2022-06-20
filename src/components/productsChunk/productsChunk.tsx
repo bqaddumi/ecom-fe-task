@@ -8,10 +8,12 @@ import { getProductsChunked } from "../../pages/shopPage/helpers";
 
 type ProductsChunkProps = {
   products: ProductType[];
+  chunkLimit?: number;
 };
 
 const ProductsChunk: React.FC<ProductsChunkProps> = ({
   products,
+  chunkLimit=6
 }: ProductsChunkProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -19,7 +21,7 @@ const ProductsChunk: React.FC<ProductsChunkProps> = ({
     setActiveIndex(index);
   };
 
-  const chunkedProducts = getProductsChunked(products, 6);
+  const chunkedProducts = getProductsChunked(products, chunkLimit);
 
   return (
     <Box width={"100%"}>

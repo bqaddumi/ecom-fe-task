@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid, CardMedia } from "@mui/material";
 import { isMobile } from "react-device-detect";
-import ProductCard from "../../components/productCard/productCard";
-import PaginationButton from "../../components/paginationButton/paginationButton";
 import ProductsChunk from "../../components/productsChunk/productsChunk";
 
 import {
@@ -13,7 +11,6 @@ import {
   secondSectionStyle,
   titleContainer,
   firstSectionMobileStyle,
-  productsContainer,
 } from "./shopPage-style";
 
 import {
@@ -43,6 +40,8 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   }, []);
 
   const c1Products = getCategoryProductsByCategoryId("c1", products);
+  const categoryProducts = (id: string) =>
+    getCategoryProductsByCategoryId(id, products);
 
   return (
     <Box sx={isMobile ? boxMobileStyle : boxStyle}>
@@ -56,28 +55,40 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
       </Box>
       <Box sx={secondSectionStyle}>
         {removeCategoryById("c1", categories).map((category: CategoryType) => {
+          const cProducts = categoryProducts(category.id);
           return (
             <Box key={category.id} sx={secondSectionStyle}>
               <Box sx={sectionStyle}>
-                <Box sx={titleContainer}>
-                  <Typography variant="body1" sx={titleStyle}>
-                    {category.name}
-                  </Typography>
-                </Box>
-                <Box sx={productsContainer}>
-                  {getCategoryProductsByCategoryId(category.id, products).map(
-                    (product) => {
-                      const { name, imgUrl, price } = product;
-                      return (
-                        <ProductCard
-                          name={name}
-                          imgUrl={imgUrl}
-                          price={price}
-                        />
-                      );
-                    }
-                  )}
-                </Box>
+                {category.image ? (
+                  <Grid container spacing={2}>
+                    <Grid item xs={isMobile ? 12 : 8}>
+                      <Box sx={titleContainer}>
+                        <Typography variant="body1" sx={titleStyle}>
+                          {category.name}
+                        </Typography>
+                      </Box>
+                      <ProductsChunk products={cProducts} chunkLimit={4} />
+                    </Grid>
+                    <Grid item xs={isMobile ? 12 : 4}>
+                      <CardMedia
+                        component="img"
+                        image={category.image}
+                        alt="JBL speaker"
+                      />
+                    </Grid>
+                  </Grid>
+                ) : (
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <Box sx={titleContainer}>
+                        <Typography variant="body1" sx={titleStyle}>
+                          {category.name}
+                        </Typography>
+                      </Box>
+                      <ProductsChunk products={cProducts} chunkLimit={6} />
+                    </Grid>
+                  </Grid>
+                )}
               </Box>
             </Box>
           );
