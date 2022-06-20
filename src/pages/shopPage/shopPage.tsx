@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Box, Typography, Grid, CardMedia } from "@mui/material";
-import { isMobile } from "react-device-detect";
+import { isMobile, isBrowser } from "react-device-detect";
 import ProductsChunk from "../../components/productsChunk/productsChunk";
-
+import CategoryFooter from "../../components/categoryFooter/categoryFooter";
 import {
   titleStyle,
   boxStyle,
@@ -76,6 +76,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                         alt="JBL speaker"
                       />
                     </Grid>
+                    {isBrowser && <CategoryFooter />}
                   </Grid>
                 ) : (
                   <Grid container spacing={2}>

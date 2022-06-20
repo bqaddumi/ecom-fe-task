@@ -38,6 +38,9 @@ const FOOTER = {
 
 const CART_LINK = "Your cart";
 
+const SECTION_FOOTER = "Save your moneys with super promotion, available every Sunday in the weekend!";
+const LEARN_MORE = "LEARN MORE"
+
 export {
   CART_LINK,
   NAVBAR_ITEMS,
@@ -50,4 +53,6 @@ export {
   CHECKOUT_BUTTON,
   CHECKOUT_MULTIPLE_ADDRESS,
   FOOTER,
+  SECTION_FOOTER,
+  LEARN_MORE
 };
