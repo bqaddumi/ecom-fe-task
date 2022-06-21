@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Typography, Grid, CardMedia } from "@mui/material";
 import { isMobile, isBrowser } from "react-device-detect";
 import ProductsChunk from "../../components/productsChunk/productsChunk";
+import ProductCardHorizantal from "../../components/productCardHorizontal/productCardHorizontal";
 import CategoryFooter from "../../components/categoryFooter/categoryFooter";
 import {
   titleStyle,
@@ -52,7 +53,23 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
             {getCategoryById("c1", categories)?.name}
           </Typography>
         </Box>
-        <ProductsChunk products={c1Products} />
+        {isMobile ? (
+          <Box
+            sx={{
+              marginTop: "40px",
+              display: "flex",
+              width: "100%",
+              flexWrap: "wrap",
+            }}
+          >
+            {c1Products.map((product: ProductType) => {
+              return <ProductCardHorizantal product={product} />;
+            })}
+          </Box>
+        ) : (
+          <ProductsChunk products={c1Products} chunkLimit={6} />
+        )}
+        {/* <ProductsChunk products={c1Products} /> */}
       </Box>
       <Box sx={secondSectionStyle}>
         {removeCategoryById("c1", categories).map((category: CategoryType) => {
@@ -68,7 +85,22 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                           {category.name}
                         </Typography>
                       </Box>
-                      <ProductsChunk products={cProducts} chunkLimit={4} />
+                      {isMobile ? (
+                        <Box
+                          sx={{
+                            marginTop: "40px",
+                            display: "flex",
+                            width: "100%",
+                            flexWrap: "wrap",
+                          }}
+                        >
+                          {cProducts.map((product: ProductType) => {
+                            return <ProductCardHorizantal product={product} />;
+                          })}
+                        </Box>
+                      ) : (
+                        <ProductsChunk products={cProducts} chunkLimit={4} />
+                      )}
                     </Grid>
                     <Grid item xs={isMobile ? 12 : 4}>
                       <CardMedia
@@ -88,7 +120,19 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                           {category.name}
                         </Typography>
                       </Box>
-                      <ProductsChunk products={cProducts} chunkLimit={6} />
+                      <Box
+                        sx={{
+                          marginTop: "40px",
+                          display: "flex",
+                          width: "100%",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        {cProducts.map((product: ProductType) => {
+                          return <ProductCardHorizantal product={product} />;
+                        })}
+                      </Box>
+                      {/* <ProductsChunk products={cProducts} chunkLimit={6} /> */}
                     </Grid>
                   </Grid>
                 )}
