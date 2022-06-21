@@ -4,6 +4,7 @@ import { isMobile, isBrowser } from "react-device-detect";
 import ProductsChunk from "../../components/productsChunk/productsChunk";
 import ProductCardHorizantal from "../../components/productCardHorizontal/productCardHorizontal";
 import CategoryFooter from "../../components/categoryFooter/categoryFooter";
+import BrandsFooter from "../../components/brandsFooter/brandsFooter";
 import {
   titleStyle,
   boxStyle,
@@ -69,7 +70,6 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
         ) : (
           <ProductsChunk products={c1Products} chunkLimit={6} />
         )}
-        {/* <ProductsChunk products={c1Products} /> */}
       </Box>
       <Box sx={secondSectionStyle}>
         {removeCategoryById("c1", categories).map((category: CategoryType) => {
@@ -131,8 +131,8 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                         {cProducts.map((product: ProductType) => {
                           return <ProductCardHorizantal product={product} />;
                         })}
+                        <BrandsFooter />
                       </Box>
-                      {/* <ProductsChunk products={cProducts} chunkLimit={6} /> */}
                     </Grid>
                   </Grid>
                 )}

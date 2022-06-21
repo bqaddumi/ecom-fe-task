@@ -1,3 +1,5 @@
+import { isMobile } from "react-device-detect";
+
 export const container = {
   display: "flex",
   width: "465px",
@@ -10,7 +12,7 @@ export const nameStyle = {
 };
 
 export const cardContentStyle = {
-  borderRight: "1px solid",
+  borderRight: isMobile ? "0" : "1px solid",
   borderColor: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#515151" : "#E0E0E0",
   display: "flex",
