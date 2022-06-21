@@ -11,6 +11,7 @@ import {
   secondSectionStyle,
   titleContainer,
   firstSectionMobileStyle,
+  categoryImage,
 } from "./shopPage-style";
 
 import {
@@ -71,6 +72,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                     </Grid>
                     <Grid item xs={isMobile ? 12 : 4}>
                       <CardMedia
+                        sx={categoryImage}
                         component="img"
                         image={category.image}
                         alt="JBL speaker"

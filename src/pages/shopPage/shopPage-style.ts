@@ -47,7 +47,7 @@ export const secondSectionStyle = {
 
 export const productsContainer = {
   width: "calc(100% - 40px)",
-  minHeight: '400px',
+  minHeight: "400px",
   overflowX: "auto",
   margin: "20px 20px",
   display: "flex",
@@ -58,4 +58,10 @@ export const productsContainer = {
 export const pageButtonContainer = {
   display: "flex",
   justifyContent: "center",
+};
+
+export const categoryImage = {
+  height: "450px",
+  width: "330px",
+  marginTop: "30px",
 };
