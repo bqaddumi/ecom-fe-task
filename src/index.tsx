@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import { DarkThemeProvider } from "./shared/darkThemeContext";
+import { ProductsProvider } from "./shared/productsContext";
 import { TotalQuantityProvider } from "./shared/totalQuantityContext";
 
 const root = ReactDOM.createRoot(
@@ -10,11 +11,13 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <TotalQuantityProvider>
-    <DarkThemeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </DarkThemeProvider>
-  </TotalQuantityProvider>
+  <ProductsProvider>
+    <TotalQuantityProvider>
+      <DarkThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </DarkThemeProvider>
+    </TotalQuantityProvider>
+  </ProductsProvider>
 );
