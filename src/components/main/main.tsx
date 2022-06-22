@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../header/header";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
-import { mainContainer, bodyScollableBoxstyle } from "./main-style";
+import { mainContainer, bodyScollableBoxstyle, listItem } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
 import ShopPage from "../../pages/shopPage/shopPage";
 import FooterLinks from "../footer/footerLinks";
@@ -25,7 +25,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
       <Navbar />
       <Box ref={ref} sx={bodyScollableBoxstyle}>
         <Stack>
-          <ListItem>
+          <ListItem sx={listItem}>
             <Routes>
               <Route path="/" element={<CartPage />} />
               <Route path="*" element={<CartPage />} />
