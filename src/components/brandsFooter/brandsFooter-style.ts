@@ -7,4 +7,9 @@ export const container = {
   padding: "20px 50px",
 };
 
-export const imageStyle = { width: 100, margin: "20px", objectFit: "fill" };
+export const imageStyle = {
+  width: 100,
+  height: 50,
+  margin: "20px",
+  objectFit: "fill",
+};
