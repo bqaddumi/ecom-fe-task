@@ -7,9 +7,10 @@ import { container, imageStyle } from "./brandsFooter-style";
 const BrandsFooter: React.FC = () => {
   return (
     <Box sx={container}>
-      {BRANDS_IMAGES.map((imgLink: string) => {
+      {BRANDS_IMAGES.map((imgLink: string, index: number) => {
         return (
           <CardMedia
+            key={index}
             component="img"
             sx={imageStyle}
             image={imgLink}

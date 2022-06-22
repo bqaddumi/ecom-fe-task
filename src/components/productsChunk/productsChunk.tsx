@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { isMobile, isBrowser } from "react-device-detect";
+import { isBrowser } from "react-device-detect";
 import { Box } from "@mui/material";
 import ProductCard from "../../components/productCard/productCard";
 import PaginationButton from "../../components/paginationButton/paginationButton";
@@ -24,30 +24,22 @@ const ProductsChunk: React.FC<ProductsChunkProps> = ({
 
   const chunkedProducts = getProductsChunked(products, chunkLimit);
 
-  const renderProductInMobile = () => {
-    return products?.map((product: ProductType) => {
-      const { name, imgUrl, price } = product;
-      return (
-        <Box key={product.id}>
-          <ProductCard name={name} imgUrl={imgUrl} price={price} />{" "}
-        </Box>
-      );
-    });
-  };
-
   return (
     <Box width={"100%"}>
       <Box sx={productsContainer}>
-        {isMobile
-          ? renderProductInMobile()
-          : chunkedProducts[activeIndex]?.map((product) => {
-              const { name, imgUrl, price } = product;
-              return (
-                <Box key={product.id}>
-                  <ProductCard name={name} imgUrl={imgUrl} price={price} />{" "}
-                </Box>
-              );
-            })}
+        {chunkedProducts[activeIndex]?.map((product) => {
+          const { name, imgUrl, price, id } = product;
+          return (
+            <Box key={product.id}>
+              <ProductCard
+                name={name}
+                imgUrl={imgUrl}
+                price={price}
+                productId={id}
+              />
+            </Box>
+          );
+        })}
       </Box>
       {isBrowser && (
         <Box sx={pageButtonContainer}>

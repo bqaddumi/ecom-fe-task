@@ -5,6 +5,7 @@ export const container = {
   width: "465px",
   marginBottom: "20px",
   marginLeft: "20px",
+  cursor: 'pointer'
 };
 
 export const nameStyle = {

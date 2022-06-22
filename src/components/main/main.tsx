@@ -7,6 +7,7 @@ import { mainContainer, bodyScollableBoxstyle } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
 import ShopPage from "../../pages/shopPage/shopPage";
 import FooterLinks from "../footer/footerLinks";
+import ProductPage from "../../pages/productPage/productPage";
 
 type MainProps = {};
 
@@ -27,7 +28,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
               {/* TODO: Implement products page */}
               <Route path="/shop" element={<ShopPage />} />
               {/* TODO: add product page */}
-              {/* <Route path="/products/:productId/" element={<ProductPage />} /> */}
+              <Route path="/products/:productId/" element={<ProductPage />} />
             </Routes>
           </ListItem>
 

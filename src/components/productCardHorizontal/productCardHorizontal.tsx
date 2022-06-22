@@ -7,6 +7,7 @@ import {
   cardContentStyle,
 } from "./productCardHorizontal-style";
 import { ProductType } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 type ProductCardHorizantalProps = {
   product: ProductType;
@@ -15,14 +16,18 @@ type ProductCardHorizantalProps = {
 const ProductCardHorizantal: React.FC<ProductCardHorizantalProps> = (
   props: ProductCardHorizantalProps
 ) => {
+  const navigate = useNavigate();
   const {
-    product: { imgUrl, name, price },
+    product: { imgUrl, name, price, id },
   } = props;
 
   const containerWidth = { width: isMobile ? "auto" : "465px" };
 
   return (
-    <Box sx={{ ...container, ...containerWidth }}>
+    <Box
+      sx={{ ...container, ...containerWidth }}
+      onClick={() => navigate(`/products/${id}`)}
+    >
       <CardMedia
         component="img"
         sx={{ width: 151 }}

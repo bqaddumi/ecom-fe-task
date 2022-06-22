@@ -63,8 +63,8 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
               flexWrap: "wrap",
             }}
           >
-            {c1Products.map((product: ProductType) => {
-              return <ProductCardHorizantal product={product} />;
+            {c1Products.map((product: ProductType, index: number) => {
+              return <ProductCardHorizantal product={product} key={index} />;
             })}
           </Box>
         ) : (
@@ -94,9 +94,16 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                             flexWrap: "wrap",
                           }}
                         >
-                          {cProducts.map((product: ProductType) => {
-                            return <ProductCardHorizantal product={product} />;
-                          })}
+                          {cProducts.map(
+                            (product: ProductType, index: number) => {
+                              return (
+                                <ProductCardHorizantal
+                                  product={product}
+                                  key={index}
+                                />
+                              );
+                            }
+                          )}
                         </Box>
                       ) : (
                         <ProductsChunk products={cProducts} chunkLimit={4} />
@@ -128,9 +135,16 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                           flexWrap: "wrap",
                         }}
                       >
-                        {cProducts.map((product: ProductType) => {
-                          return <ProductCardHorizantal product={product} />;
-                        })}
+                        {cProducts.map(
+                          (product: ProductType, index: number) => {
+                            return (
+                              <ProductCardHorizantal
+                                product={product}
+                                key={index}
+                              />
+                            );
+                          }
+                        )}
                         <BrandsFooter />
                       </Box>
                     </Grid>
