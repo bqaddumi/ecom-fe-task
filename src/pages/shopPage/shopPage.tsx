@@ -14,6 +14,7 @@ import {
   titleContainer,
   firstSectionMobileStyle,
   categoryImage,
+  thirdSectionContainer
 } from "./shopPage-style";
 
 import {
@@ -56,12 +57,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
         </Box>
         {isMobile ? (
           <Box
-            sx={{
-              marginTop: "40px",
-              display: "flex",
-              width: "100%",
-              flexWrap: "wrap",
-            }}
+            sx={thirdSectionContainer}
           >
             {c1Products.map((product: ProductType, index: number) => {
               return <ProductCardHorizantal product={product} key={index} />;
@@ -87,12 +83,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                       </Box>
                       {isMobile ? (
                         <Box
-                          sx={{
-                            marginTop: "40px",
-                            display: "flex",
-                            width: "100%",
-                            flexWrap: "wrap",
-                          }}
+                          sx={thirdSectionContainer}
                         >
                           {cProducts.map(
                             (product: ProductType, index: number) => {
@@ -128,12 +119,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                         </Typography>
                       </Box>
                       <Box
-                        sx={{
-                          marginTop: "40px",
-                          display: "flex",
-                          width: "100%",
-                          flexWrap: "wrap",
-                        }}
+                        sx={thirdSectionContainer}
                       >
                         {cProducts.map(
                           (product: ProductType, index: number) => {

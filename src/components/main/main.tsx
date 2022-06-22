@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import { Box, Stack, ListItem } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import Header from "../header/header";
@@ -12,23 +13,25 @@ import ProductPage from "../../pages/productPage/productPage";
 type MainProps = {};
 
 const Main: React.FC<MainProps> = (props: MainProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = () => {
+    ref.current?.scrollTo(0, 0);
+  };
+
   return (
-    <Box sx={mainContainer}>
+    <Box sx={mainContainer} >
       <Header />
       <Navbar />
-      <Box sx={bodyScollableBoxstyle}>
+      <Box ref={ref} sx={bodyScollableBoxstyle}>
         <Stack>
           <ListItem>
             <Routes>
               <Route path="/" element={<CartPage />} />
               <Route path="*" element={<CartPage />} />
-              {/* TODO: add product page */}
-              {/* <Route path="/home" element={<HomePage />} /> */}
               <Route path="/cart" element={<CartPage />} />
-              {/* TODO: Implement products page */}
               <Route path="/shop" element={<ShopPage />} />
-              {/* TODO: add product page */}
-              <Route path="/products/:productId/" element={<ProductPage />} />
+              <Route path="/products/:productId/" element={<ProductPage scrollToTop={scrollToTop} />} />
             </Routes>
           </ListItem>
 

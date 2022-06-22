@@ -65,3 +65,10 @@ export const categoryImage = {
   width: "330px",
   marginTop: "30px",
 };
+
+export const thirdSectionContainer = {
+  marginTop: "40px",
+  display: "flex",
+  width: "100%",
+  flexWrap: "wrap",
+};
