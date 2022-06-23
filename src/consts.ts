@@ -51,6 +51,14 @@ const BRANDS_IMAGES = [
   "https://thumb.danhsachcuahang.com/image/2019/11/thoi-trang-nu-yody-fashion-thumb-580.png",
 ];
 
+const ADD_TO_CART = "Add To Cart";
+
+const PRODUCT_TABS = {
+  DETAILS: "DETAILS",
+  INFO: "MORE INFORMATION",
+  REVIEWS: "REVIEWS",
+};
+
 export {
   CART_LINK,
   NAVBAR_ITEMS,
@@ -66,4 +74,6 @@ export {
   SECTION_FOOTER,
   LEARN_MORE,
   BRANDS_IMAGES,
+  ADD_TO_CART,
+  PRODUCT_TABS
 };

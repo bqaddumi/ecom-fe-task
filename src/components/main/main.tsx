@@ -18,15 +18,15 @@ type MainProps = {};
 const Main: React.FC<MainProps> = (props: MainProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const { dispatch } = useProducts(); //{type:"set", products: products}
+  // const { dispatch } = useProducts(); //{type:"set", products: products}
 
-  useEffect(() => {
-    getProducts().then((res: { data: ProductType[] }) => {
-      const { data } = res;
-      dispatch({ type: "set", products: data });
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   getProducts().then((res: { data: ProductType[] }) => {
+  //     const { data } = res;
+  //     dispatch({ type: "set", products: data });
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const scrollToTop = () => {
     ref.current?.scrollTo(0, 0);

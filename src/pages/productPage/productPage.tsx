@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/system";
+import { Box, Button, CardMedia, Typography } from "@mui/material";
 import { ChevronLeftOutlined, ChevronRightOutlined } from "@mui/icons-material";
-
+import { Autorenew, FavoriteBorder, Favorite } from "@mui/icons-material";
 import {
   container,
   previewContainer,
   toggleProductscontainer,
-  chevronContainer
+  chevronContainer,
+  imageStyle,
+  detailsContainer,
+  quantityContainerStyle,
+  quantityButtonStyle,
+  quantitytitleStyle,
+  productQuantityAndFav,
+  iconsContainer,
+  priceStyle,
 } from "./productPage-style";
 import { useProducts } from "../../shared/productsContext";
 import { ProductType } from "../../types";
+import { ADD_TO_CART } from "../../consts";
+import ProductPreviewImages from "../../components/productPreviewImages/productPreviewImages";
+import ProductDetails from "../../components/productDetails/productDetails";
 
 type ProductPageProps = {
   scrollToTop: () => void;
@@ -20,26 +31,90 @@ const ProductPage: React.FC<ProductPageProps> = ({
   scrollToTop,
 }: ProductPageProps) => {
   const [product, setProduct] = useState<ProductType>();
+  const [quantity, setQuantity] = useState<number>(1);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<string>("");
   const { productId = "" } = useParams();
   const {
     state: { products },
   } = useProducts();
 
   useEffect(() => {
-    const product = products.find(
+    const productN = products.find(
       (product: ProductType) => product.id === parseInt(productId, 10)
     );
-    setProduct(product);
+    setProduct(productN);
     scrollToTop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [productId, products, scrollToTop]);
+
+  const onImageClicked = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const onFavoriteClicked = () => {
+    setIsFavorite((prev: boolean) => !prev);
+  };
+
+  const previewImgs = product?.previewImages || [
+    product?.imgUrl ? product?.imgUrl : "",
+  ];
 
   return (
     <Box sx={container}>
       <Box sx={previewContainer}>
-        <Box>1</Box>
-        <Box>2</Box>
-        <Box>3</Box>
+        <Box>
+          <ProductPreviewImages
+            images={previewImgs}
+            onImageClicked={onImageClicked}
+          />
+        </Box>
+        <Box>
+          <CardMedia
+            component="img"
+            sx={imageStyle}
+            image={selectedImage || product?.imgUrl}
+            alt={`Preview image ${product?.name}`}
+          />
+        </Box>
+        <Box sx={detailsContainer}>
+          <Typography>Home / {product?.name}</Typography>
+          <Typography variant="h4">{product?.name}</Typography>
+          <Typography sx={priceStyle}>${product?.price}</Typography>
+          <Typography>{product?.desc}</Typography>
+          <Box sx={productQuantityAndFav}>
+            <Box sx={quantityContainerStyle}>
+              <Box
+                sx={quantityButtonStyle}
+                onClick={() => quantity > 1 && setQuantity((prev) => prev - 1)}
+              >
+                -
+              </Box>
+              <Box sx={quantitytitleStyle}>{quantity}</Box>
+              <Box
+                sx={quantityButtonStyle}
+                onClick={() => setQuantity((prev) => prev + 1)}
+              >
+                +
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                ...iconsContainer,
+                color: isFavorite ? "#D32F2F" : "#707070",
+              }}
+              onClick={onFavoriteClicked}
+            >
+              {isFavorite ? <Favorite /> : <FavoriteBorder />}
+            </Box>
+            <Box sx={iconsContainer}>
+              <Autorenew />
+            </Box>
+          </Box>
+          <Box>
+            <Button> {ADD_TO_CART} </Button>
+          </Box>
+          <Typography>{product?.name}</Typography>
+        </Box>
         <Box sx={toggleProductscontainer}>
           <Box sx={chevronContainer}>
             <ChevronLeftOutlined />
@@ -49,7 +124,9 @@ const ProductPage: React.FC<ProductPageProps> = ({
           </Box>
         </Box>
       </Box>
-      <Box>4</Box>
+      <Box>
+        <ProductDetails />
+      </Box>
     </Box>
   );
 };
