@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Box, CardMedia } from "@mui/material";
 import { ChevronLeftOutlined, ChevronRightOutlined } from "@mui/icons-material";
 
@@ -24,6 +24,7 @@ type ProductPageProps = {
 const ProductPage: React.FC<ProductPageProps> = ({
   scrollToTop,
 }: ProductPageProps) => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState<ProductType>();
   const [selectedImage, setSelectedImage] = useState<string>("");
   const { productId = "" } = useParams();
@@ -47,6 +48,34 @@ const ProductPage: React.FC<ProductPageProps> = ({
     product?.imgUrl ? product?.imgUrl : "",
   ];
 
+  const findProductIndex = () => {
+    const productIndex = products.findIndex(
+      (product: ProductType) => product.id === parseInt(productId, 10)
+    );
+
+    return productIndex;
+  };
+
+  const changeProduct = (direction: string) => {
+    let index = findProductIndex();
+    if (index === 0 && products && direction === "left") {
+      index = products.length;
+    } else if (index === products.length - 1 && direction === "right") {
+      index = -1;
+    }
+    let nextProduct: ProductType;
+    switch (direction) {
+      case "left":
+        nextProduct = products[index - 1];
+        navigate(`/products/${nextProduct.id}`);
+        break;
+      case "right":
+        nextProduct = products[index + 1];
+        navigate(`/products/${nextProduct.id}`);
+
+        break;
+    }
+  };
   return (
     <Box sx={container}>
       <Box sx={previewContainer}>
@@ -66,11 +95,11 @@ const ProductPage: React.FC<ProductPageProps> = ({
         </Box>
         <ProductDetails product={product} />
         <Box sx={toggleProductscontainer}>
-          <Box sx={chevronContainer}>
+          <Box sx={chevronContainer} onClick={() => changeProduct("left")}>
             <ChevronLeftOutlined />
           </Box>
           <Box sx={chevronContainer}>
-            <ChevronRightOutlined />
+            <ChevronRightOutlined onClick={() => changeProduct("right")} />
           </Box>
         </Box>
       </Box>
