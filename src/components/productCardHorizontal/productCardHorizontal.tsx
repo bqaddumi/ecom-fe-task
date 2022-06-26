@@ -7,6 +7,7 @@ import {
   cardContentStyle,
 } from "./productCardHorizontal-style";
 import { ProductType } from "../../types";
+import { numberWithCommas } from "../../helpers";
 import { useNavigate } from "react-router-dom";
 
 type ProductCardHorizantalProps = {
@@ -45,7 +46,7 @@ const ProductCardHorizantal: React.FC<ProductCardHorizantalProps> = (
             component="div"
             sx={{ fontWeight: "500", color: "#AE1B26" }}
           >
-            ${price}
+            ${numberWithCommas(price.toFixed(2))}
           </Typography>
         </CardContent>
       </Box>

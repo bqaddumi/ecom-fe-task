@@ -3,6 +3,7 @@ import { isMobile } from "react-device-detect";
 export const detailsContainer = {
   marginLeft: isMobile ? "0" : "auto",
   marginRight: isMobile ? "0" : "100px",
+  width: "100%",
 };
 
 export const quantityContainerStyle = {

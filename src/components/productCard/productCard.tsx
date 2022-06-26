@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, CardMedia } from "@mui/material";
-
+import { numberWithCommas } from "../../helpers";
 import {
   containerStyle,
   productImage,
@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = (props: ProductCardProps) => {
         alt="Product name"
       />
       <Box sx={nameStyle}>{name}</Box>
-      <Box sx={priceStyle}>${price}</Box>
+      <Box sx={priceStyle}>${numberWithCommas(price.toFixed(2))}</Box>
     </Box>
   );
 };
