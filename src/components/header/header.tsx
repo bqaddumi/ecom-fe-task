@@ -5,7 +5,7 @@ import { Button, Typography, Box, Badge } from "@mui/material";
 import {
   ShoppingCartOutlined,
   FavoriteBorderOutlined,
-  KeyboardReturnOutlined,
+  Autorenew,
 } from "@mui/icons-material";
 
 import {
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             </Button>
             <Box sx={iconStyle}>
               <Badge badgeContent={"0"} color="error">
-                <KeyboardReturnOutlined />
+                <Autorenew />
               </Badge>
             </Box>
             <Box sx={iconStyle}>

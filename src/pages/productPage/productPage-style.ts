@@ -1,22 +1,26 @@
+import { isMobile } from "react-device-detect";
+
 export const container = {
   // background: "#cccbd6",
-  width: "100%",
-  margin: "30px 0% 0 10%",
+  width: isMobile ? "calc(100% - 40px)" : "100%",
+
+  margin: isMobile ? "30px 20px" : "30px 0% 0 10%",
 };
 
 export const previewContainer = {
   display: "flex",
   width: "100%",
+
+  flexDirection: isMobile ? "column" : "row",
   // justifyContent: "space-between",
 };
 
 export const toggleProductscontainer = {
   marginLeft: "auto",
-  width: "50px",
-  // height: "calc(100vh - 140px)",
+  width: isMobile ? "100%" : "50px",
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  flexDirection: isMobile ? "row" : "column",
+  justifyContent: isMobile ? "space-between" : "center",
   marginRight: "50px",
 };
 
@@ -34,45 +38,6 @@ export const chevronContainer = {
 };
 
 export const imageStyle = {
-  width: "500px",
-};
-
-export const detailsContainer = {
-  marginLeft: "auto",
-};
-
-export const quantityContainerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  border: "1px solid #f1f1f1",
-  padding: "15px 0px",
-};
-
-export const quantitytitleStyle = {
-  marginRight: "20px",
-  marginLeft: "20px",
-};
-
-export const quantityButtonStyle = {
-  cursor: "pointer",
-};
-
-export const productQuantityAndFav = {
-  display: "flex",
-  justifyContent: "center",
-  padding: "15px 0px",
-};
-
-export const iconsContainer = {
-  display: "flex",
-  justifyContent: "center",
-  border: "1px solid #f1f1f1",
-  padding: "15px",
-  color: "#707070",
-  cursor: "pointer",
-};
-
-export const priceStyle = {
-  fontWeight: "500",
-  color: "#AE1B26",
+  width: isMobile ? "100%" : "500px",
+  margin: isMobile ? "0" : "20px 20px",
 };

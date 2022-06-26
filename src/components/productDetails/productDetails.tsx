@@ -1,73 +1,86 @@
-import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { PRODUCT_TABS } from "../../consts";
+import React, { useState } from "react";
+import {
+  quantityContainerStyle,
+  quantityButtonStyle,
+  quantitytitleStyle,
+  priceStyle,
+  detailsContainer,
+  productQuantityAndFav,
+  iconsContainer,
+  addToCartButtonStyle,
+  pathNameStyle,
+  productNameStyle,
+  descStyle,
+} from "./productDetails-style";
+import { ProductType } from "../../types";
+import { Box } from "@mui/system";
+import {
+  Remove,
+  Add,
+  Favorite,
+  FavoriteBorder,
+  Autorenew,
+} from "@mui/icons-material";
+import { Typography, Button } from "@mui/material";
+import { ADD_TO_CART } from "../../consts";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+type ProductDetailsProps = {
+  product?: ProductType;
+};
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+const ProductDetails: React.FC<ProductDetailsProps> = (
+  props: ProductDetailsProps
+) => {
+  const { product } = props;
+  const [quantity, setQuantity] = useState<number>(1);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const onFavoriteClicked = () => {
+    setIsFavorite((prev: boolean) => !prev);
+  };
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+    <Box sx={detailsContainer}>
+      <Typography sx={pathNameStyle}>Home / {product?.name}</Typography>
+      <Typography variant="h4" sx={productNameStyle}>
+        {product?.name}
+      </Typography>
+      <Typography sx={priceStyle}>${product?.price}</Typography>
+      <Typography sx={descStyle}>{product?.desc}</Typography>
+      <Box sx={productQuantityAndFav}>
+        <Box sx={quantityContainerStyle}>
+          <Box
+            sx={quantityButtonStyle}
+            onClick={() => quantity > 1 && setQuantity((prev) => prev - 1)}
+          >
+            <Remove />
+          </Box>
+          <Box sx={quantitytitleStyle}>{quantity}</Box>
+          <Box
+            sx={quantityButtonStyle}
+            onClick={() => setQuantity((prev) => prev + 1)}
+          >
+            <Add />
+          </Box>
         </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
-  const { DETAILS, INFO, REVIEWS } = PRODUCT_TABS;
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
+        <Box
+          sx={{
+            ...iconsContainer,
+            color: isFavorite ? "#D32F2F" : "#707070",
+          }}
+          onClick={onFavoriteClicked}
         >
-          <Tab label={DETAILS} {...a11yProps(0)} />
-          <Tab label={INFO} {...a11yProps(1)} />
-          <Tab label={REVIEWS} {...a11yProps(2)} />
-        </Tabs>
+          {isFavorite ? <Favorite /> : <FavoriteBorder />}
+        </Box>
+        <Box sx={iconsContainer}>
+          <Autorenew />
+        </Box>
       </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+      <Box>
+        <Button sx={addToCartButtonStyle}> {ADD_TO_CART} </Button>
+      </Box>
+      <Typography sx={pathNameStyle}>{product?.name}</Typography>
     </Box>
   );
-}
+};
+
+export default ProductDetails;
