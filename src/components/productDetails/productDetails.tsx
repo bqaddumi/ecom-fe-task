@@ -14,7 +14,12 @@ import {
   descStyle,
 } from "./productDetails-style";
 import { CartType, ProductType } from "../../types";
-import { getCart, sendDataToCart } from "../../axios";
+import {
+  getCart,
+  getFavoriteProducts,
+  sendDataToCart,
+  sendDataFavoriteProducts,
+} from "../../axios";
 import { numberWithCommas } from "../../helpers";
 import { Box } from "@mui/system";
 import {
@@ -28,6 +33,7 @@ import { Typography, Button, AlertColor } from "@mui/material";
 import { ADD_TO_CART } from "../../consts";
 import { useTotalQuantity } from "../../shared/totalQuantityContext";
 import CustomizedSnackbars from "../snackbar/snackbar";
+import { useTotalFavorite } from "../../shared/favoriteContext";
 
 type ProductDetailsProps = {
   product?: ProductType;
@@ -37,6 +43,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
   props: ProductDetailsProps
 ) => {
   const totalQuantityContext = useTotalQuantity();
+  const totalFavoriteContext = useTotalFavorite();
   const navigate = useNavigate();
   const { product } = props;
   const [quantity, setQuantity] = useState<number>(1);
@@ -53,8 +60,27 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
     items: [],
     totalQuantity: 0,
   });
+
   const onFavoriteClicked = () => {
     setIsFavorite((prev: boolean) => !prev);
+
+    getFavoriteProducts().then((res: { data: ProductType[] }) => {
+      const resultFavProducts = res.data || [];
+      const isFav = !!resultFavProducts?.find((e) => e.id === product?.id);
+      const favProducts = isFav
+        ? resultFavProducts?.filter((e) => e.id !== product?.id)
+        : product
+        ? [...resultFavProducts, product]
+        : [];
+      sendDataFavoriteProducts(favProducts).then(
+        (res: { data: ProductType[] }) => {}
+      );
+      if (isFav) {
+        totalFavoriteContext.dispatch({ type: "remove", totalFavorite: 1 });
+      } else {
+        totalFavoriteContext.dispatch({ type: "add", totalFavorite: 1 });
+      }
+    });
   };
 
   useEffect(() => {
@@ -63,8 +89,14 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
 
       setCart({ ...nCart, items: nCart.items || [] });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    getFavoriteProducts().then((res: { data: ProductType[] }) => {
+      const resultFavProducts = res.data || [];
+      const isFav = !!resultFavProducts?.find((e) => e.id === product?.id);
+
+      setIsFavorite(isFav);
+    });
+  }, [product]);
 
   const addToCart = () => {
     const { totalQuantity, items } = cart;
@@ -113,7 +145,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
         {product?.name}
       </Typography>
       <Typography sx={priceStyle}>
-        ${numberWithCommas(product?.price.toFixed(2) || '')}
+        ${numberWithCommas(product?.price.toFixed(2) || "")}
       </Typography>
       <Typography sx={descStyle}>{product?.desc}</Typography>
       <Box sx={productQuantityAndFav}>
