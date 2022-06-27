@@ -1,37 +1,46 @@
+import React, { useRef } from "react";
 import { Box, Stack, ListItem } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
+
 import Header from "../header/header";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
-import { mainContainer, bodyScollableBoxstyle } from "./main-style";
+import { mainContainer, bodyScollableBoxstyle, listItem } from "./main-style";
 import CartPage from "../../pages/cartPage/cartPage";
+import ShopPage from "../../pages/shopPage/shopPage";
 import FooterLinks from "../footer/footerLinks";
+import ProductPage from "../../pages/productPage/productPage";
 
 type MainProps = {};
 
 const Main: React.FC<MainProps> = (props: MainProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = () => {
+    ref.current?.scrollTo(0, 0);
+  };
+
   return (
     <Box sx={mainContainer}>
       <Header />
       <Navbar />
-      <Box sx={bodyScollableBoxstyle}>
+      <Box ref={ref} sx={bodyScollableBoxstyle}>
         <Stack>
-          <ListItem>
+          <ListItem sx={listItem}>
             <Routes>
               <Route path="/" element={<CartPage />} />
               <Route path="*" element={<CartPage />} />
-              {/* TODO: add product page */}
-              {/* <Route path="/home" element={<HomePage />} /> */}
               <Route path="/cart" element={<CartPage />} />
-              {/* TODO: Implement products page */}
-              {/* <Route path="/products" element={<ShopPage />} /> */}
-              {/* TODO: add product page */}
-              {/* <Route path="/products/:productId/" element={<ProductPage />} /> */}
+              <Route path="/shop" element={<ShopPage />} />
+              <Route
+                path="/products/:productId/"
+                element={<ProductPage scrollToTop={scrollToTop} />}
+              />
             </Routes>
           </ListItem>
 
           <Footer />
-          <FooterLinks/>
+          <FooterLinks />
         </Stack>
       </Box>
     </Box>

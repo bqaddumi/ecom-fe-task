@@ -13,6 +13,7 @@ import MobileNavbar from "./mobileNavbar";
 type NavbarProps = {};
 
 const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
+  const navItems = Object.values(NAVBAR_ITEMS);
   return (
     <Box sx={boxContainerStyle}>
       <AppBar position="static" sx={navBarStyles}>
@@ -21,31 +22,20 @@ const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
             <MobileNavbar />
           ) : (
             <>
-              <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/" style={navbarLinkStyles}>
-                  {NAVBAR_ITEMS.HOME}
-                </Link>
-              </Typography>
-              <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/" style={navbarLinkStyles}>
-                  {NAVBAR_ITEMS.SHOP}
-                </Link>
-              </Typography>
-              <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/" style={navbarLinkStyles}>
-                  {NAVBAR_ITEMS.PAGES}
-                </Link>
-              </Typography>
-              <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/" style={navbarLinkStyles}>
-                  {NAVBAR_ITEMS.LOOKBOOK}
-                </Link>
-              </Typography>
-              <Typography variant="inherit" component="div" sx={{ mr: 2 }}>
-                <Link to="/" style={navbarLinkStyles}>
-                  {NAVBAR_ITEMS.BRANDS}
-                </Link>
-              </Typography>
+              {navItems.map((item) => {
+                return (
+                  <Typography
+                    key={item.name}
+                    variant="inherit"
+                    component="div"
+                    sx={{ mr: 2 }}
+                  >
+                    <Link to={item.link} style={navbarLinkStyles}>
+                      {item.name}
+                    </Link>
+                  </Typography>
+                );
+              })}
             </>
           )}
         </Toolbar>

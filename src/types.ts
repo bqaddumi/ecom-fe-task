@@ -1,9 +1,11 @@
 export type ProductType = {
   id: number;
-  desc: "string";
+  desc: string;
   imgUrl: string;
   name: string;
   price: number;
+  categoryId: string;
+  previewImages?: string[];
 };
 
 export type CartItemType = {
@@ -30,3 +32,9 @@ export type CheckoutType = {
   totalQuantity: number;
   totalOrderPrice: number;
 }[];
+
+export type CategoryType = {
+  id: string;
+  name: string;
+  image: string;
+};

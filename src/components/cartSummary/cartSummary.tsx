@@ -17,6 +17,7 @@ import {
   CHECKOUT_MULTIPLE_ADDRESS,
 } from "../../consts";
 import { CartItemType, CheckoutType } from "../../types";
+import { numberWithCommas } from '../../helpers'
 import { AlertColor } from "@mui/material/Alert";
 import CustomizedSnackbars from "../../components/snackbar/snackbar";
 
@@ -58,7 +59,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
       .catch((e) => {
         console.error("Can't get checkout", e);
       });
-  },[]);
+  }, []);
 
   const onCheckoutClicked = () => {
     sendDataToCheckout([
@@ -95,7 +96,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
                 {SUBTOTAL}
               </TableCell>
               <TableCell sx={summaryCellStyle} align="right">
-                ${totalPrice}
+                ${numberWithCommas(totalPrice.toFixed(2))}
               </TableCell>
             </TableRow>
             <TableRow>
@@ -117,7 +118,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
                 sx={{ ...summaryCellStyle, ...noBorderStyle }}
                 align="right"
               >
-                ${orderTotal}
+                ${numberWithCommas(orderTotal.toFixed(2))}
               </TableCell>
             </TableRow>
           </TableBody>

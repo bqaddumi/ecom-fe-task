@@ -11,6 +11,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { CartItemType, ProductsImagesType } from "../../types";
+import {numberWithCommas} from '../../helpers'
 import { CART_TABLE_COLS } from "../../consts";
 import {
   tableStyle,
@@ -87,14 +88,14 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
                         {product.name}
                       </Typography>
                       <Typography component="div" variant="h6">
-                        ${product.price}
+                        ${numberWithCommas(product.price.toFixed(2))}
                       </Typography>
                     </CardContent>
                   </Box>
                 </Box>
               </TableCell>
 
-              <TableCell align="center"> ${product.price}</TableCell>
+              <TableCell align="center"> ${numberWithCommas(product.price.toFixed(2))}</TableCell>
               <TableCell align="center">
                 <Box sx={quantityContainerStyle}>
                   <Box
@@ -114,7 +115,9 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
                   </Box>
                 </Box>
               </TableCell>
-              <TableCell align="center">${product.totalPrice}</TableCell>
+              <TableCell align="center">
+                ${numberWithCommas(product.totalPrice.toFixed(2))}
+              </TableCell>
               <TableCell align="center">
                 <Box
                   sx={deleteButtonStyle}
