@@ -1,10 +1,11 @@
 export type ProductType = {
   id: number;
-  desc: "string";
+  desc: string;
   imgUrl: string;
   name: string;
   price: number;
   categoryId: string;
+  previewImages?: string[];
 };
 
 export type CartItemType = {

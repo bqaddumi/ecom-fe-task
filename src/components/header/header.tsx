@@ -5,7 +5,7 @@ import { Button, Typography, Box, Badge } from "@mui/material";
 import {
   ShoppingCartOutlined,
   FavoriteBorderOutlined,
-  KeyboardReturnOutlined,
+  Autorenew,
 } from "@mui/icons-material";
 
 import {
@@ -20,6 +20,7 @@ import {
 import { HEADER_TITLE, DARK, LIGHT, CART_LINK } from "../../consts";
 import { useDarkTheme } from "../../shared/darkThemeContext";
 import { useTotalQuantity } from "../../shared/totalQuantityContext";
+import { useTotalFavorite } from "../../shared/favoriteContext";
 
 type HeaderProps = {};
 
@@ -33,7 +34,9 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const {
     state: { totalQuantity },
   } = useTotalQuantity();
-
+  const {
+    state: { totalFavorite },
+  } = useTotalFavorite();
   return (
     <Box sx={containerStyle}>
       <Typography variant="h4" component="div" sx={titleStyle}>
@@ -47,16 +50,16 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             </Button>
             <Box sx={iconStyle}>
               <Badge badgeContent={"0"} color="error">
-                <KeyboardReturnOutlined />
+                <Autorenew />
               </Badge>
             </Box>
             <Box sx={iconStyle}>
-              <Badge badgeContent={"0"} color="error">
+              <Badge badgeContent={totalFavorite || "0"} color="error">
                 <FavoriteBorderOutlined />
               </Badge>
             </Box>
             <Box onClick={() => navigate("/")} sx={iconStyle}>
-              <Badge badgeContent={totalQuantity} color="error">
+              <Badge badgeContent={totalQuantity || "0"} color="error">
                 <ShoppingCartOutlined />
               </Badge>
             </Box>

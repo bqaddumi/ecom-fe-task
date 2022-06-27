@@ -7,6 +7,8 @@ import {
   cardContentStyle,
 } from "./productCardHorizontal-style";
 import { ProductType } from "../../types";
+import { numberWithCommas } from "../../helpers";
+import { useNavigate } from "react-router-dom";
 
 type ProductCardHorizantalProps = {
   product: ProductType;
@@ -15,14 +17,18 @@ type ProductCardHorizantalProps = {
 const ProductCardHorizantal: React.FC<ProductCardHorizantalProps> = (
   props: ProductCardHorizantalProps
 ) => {
+  const navigate = useNavigate();
   const {
-    product: { imgUrl, name, price },
+    product: { imgUrl, name, price, id },
   } = props;
 
   const containerWidth = { width: isMobile ? "auto" : "465px" };
 
   return (
-    <Box sx={{ ...container, ...containerWidth }}>
+    <Box
+      sx={{ ...container, ...containerWidth }}
+      onClick={() => navigate(`/products/${id}`)}
+    >
       <CardMedia
         component="img"
         sx={{ width: 151 }}
@@ -40,7 +46,7 @@ const ProductCardHorizantal: React.FC<ProductCardHorizantalProps> = (
             component="div"
             sx={{ fontWeight: "500", color: "#AE1B26" }}
           >
-            ${price}
+            ${numberWithCommas(price.toFixed(2))}
           </Typography>
         </CardContent>
       </Box>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CartType, CheckoutType } from "./types";
+import { CartType, CheckoutType, ProductType } from "./types";
 
 const axiosClient = axios.create();
 
@@ -18,7 +18,20 @@ export const sendDataToCart = (cart: CartType) => {
 };
 
 export const sendDataToCheckout = (checkout: CheckoutType) => {
-  return axiosClient.put(`/checkout.json`, checkout).then((response) => response);
+  return axiosClient
+    .put(`/checkout.json`, checkout)
+    .then((response) => response);
+};
+
+export const sendDataFavoriteProducts = (product: ProductType[]) => {
+  return axiosClient
+    .put(`/favoriteProducts.json`, product)
+    .then((response) => response);
+};
+
+
+export const getFavoriteProducts = () => {
+  return axiosClient.get(`/favoriteProducts.json`).then((response) => response);
 };
 
 export const getCheckout = () => {
@@ -27,4 +40,4 @@ export const getCheckout = () => {
 
 export const getCategories = () => {
   return axiosClient.get(`/categories.json`).then((response) => response);
-}
+};

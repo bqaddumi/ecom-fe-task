@@ -14,6 +14,7 @@ import {
   titleContainer,
   firstSectionMobileStyle,
   categoryImage,
+  thirdSectionContainer
 } from "./shopPage-style";
 
 import {
@@ -56,15 +57,10 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
         </Box>
         {isMobile ? (
           <Box
-            sx={{
-              marginTop: "40px",
-              display: "flex",
-              width: "100%",
-              flexWrap: "wrap",
-            }}
+            sx={thirdSectionContainer}
           >
-            {c1Products.map((product: ProductType) => {
-              return <ProductCardHorizantal product={product} />;
+            {c1Products.map((product: ProductType, index: number) => {
+              return <ProductCardHorizantal product={product} key={index} />;
             })}
           </Box>
         ) : (
@@ -87,16 +83,18 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                       </Box>
                       {isMobile ? (
                         <Box
-                          sx={{
-                            marginTop: "40px",
-                            display: "flex",
-                            width: "100%",
-                            flexWrap: "wrap",
-                          }}
+                          sx={thirdSectionContainer}
                         >
-                          {cProducts.map((product: ProductType) => {
-                            return <ProductCardHorizantal product={product} />;
-                          })}
+                          {cProducts.map(
+                            (product: ProductType, index: number) => {
+                              return (
+                                <ProductCardHorizantal
+                                  product={product}
+                                  key={index}
+                                />
+                              );
+                            }
+                          )}
                         </Box>
                       ) : (
                         <ProductsChunk products={cProducts} chunkLimit={4} />
@@ -121,16 +119,18 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                         </Typography>
                       </Box>
                       <Box
-                        sx={{
-                          marginTop: "40px",
-                          display: "flex",
-                          width: "100%",
-                          flexWrap: "wrap",
-                        }}
+                        sx={thirdSectionContainer}
                       >
-                        {cProducts.map((product: ProductType) => {
-                          return <ProductCardHorizantal product={product} />;
-                        })}
+                        {cProducts.map(
+                          (product: ProductType, index: number) => {
+                            return (
+                              <ProductCardHorizantal
+                                product={product}
+                                key={index}
+                              />
+                            );
+                          }
+                        )}
                         <BrandsFooter />
                       </Box>
                     </Grid>
