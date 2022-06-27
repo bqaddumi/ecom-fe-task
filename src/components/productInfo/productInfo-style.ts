@@ -7,6 +7,7 @@ export const tabPanelContainer = {
   borderTop: 1,
   borderColor: "divider",
   margin: "0% 10%",
+  marginBottom: '50px'
 };
 
 export const tabPanel = {
