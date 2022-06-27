@@ -1,8 +1,12 @@
 import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
+
+import {
+  tabsContainer,
+  tabPanelContainer,
+  tabPanel,
+  indicator,
+} from "./productInfo-style";
 import { PRODUCT_TABS } from "../../consts";
 
 interface TabPanelProps {
@@ -23,7 +27,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={tabPanel}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -38,7 +42,14 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+type ProductInfoProps = {
+  desc?: string;
+  moreInfo?: string;
+  reviews?: string;
+};
+
+const ProductInfo: React.FC<ProductInfoProps> = (props) => {
+  const { desc, moreInfo, reviews } = props;
   const [value, setValue] = React.useState(0);
   const { DETAILS, INFO, REVIEWS } = PRODUCT_TABS;
 
@@ -48,26 +59,33 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={tabsContainer}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          textColor="inherit"
+          centered
+          sx={indicator}
         >
           <Tab label={DETAILS} {...a11yProps(0)} />
           <Tab label={INFO} {...a11yProps(1)} />
           <Tab label={REVIEWS} {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+      <Box sx={tabPanelContainer}>
+        <TabPanel value={value} index={0}>
+          {desc}
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          {moreInfo}
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          {reviews}
+        </TabPanel>
+      </Box>
     </Box>
   );
-}
+};
+
+export default ProductInfo;
