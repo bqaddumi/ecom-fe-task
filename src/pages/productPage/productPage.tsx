@@ -33,12 +33,16 @@ const ProductPage: React.FC<ProductPageProps> = ({
   } = useProducts();
 
   useEffect(() => {
+    scrollToTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     const productN = products.find(
       (product: ProductType) => product.id === parseInt(productId, 10)
     );
     setProduct(productN);
-    scrollToTop();
-  }, [productId, products, scrollToTop]);
+  }, [productId, products]);
 
   const onImageClicked = (image: string) => {
     setSelectedImage(image);
@@ -68,10 +72,12 @@ const ProductPage: React.FC<ProductPageProps> = ({
       case "left":
         nextProduct = products[index - 1];
         navigate(`/products/${nextProduct.id}`);
+        scrollToTop();
         break;
       case "right":
         nextProduct = products[index + 1];
         navigate(`/products/${nextProduct.id}`);
+        scrollToTop();
 
         break;
     }

@@ -16,3 +16,20 @@ export const navbarLinkStyles = {
 export const boxContainerStyle = {
   flexGrow: 1,
 };
+
+export const headerContainer = {
+ width: 'calc(100vw - 36px)',
+  display: "flex",
+  alignItems: "center",
+};
+
+export const iconsContainer = {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+};
+
+export const iconStyle = {
+  marginLeft: '15px'
+}

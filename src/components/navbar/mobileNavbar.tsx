@@ -1,8 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Box, IconButton, Typography, MenuItem, Menu } from "@mui/material";
-import { ShoppingCartOutlined } from "@mui/icons-material";
+import {
+  Box,
+  IconButton,
+  Typography,
+  MenuItem,
+  Menu,
+  Badge,
+} from "@mui/material";
+import {
+  ShoppingCartOutlined,
+  FavoriteBorderOutlined,
+} from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { navbarLinkStyles } from "./navbar-style";
+import { useTotalQuantity } from "../../shared/totalQuantityContext";
+import { useTotalFavorite } from "../../shared/favoriteContext";
+import {
+  navbarLinkStyles,
+  headerContainer,
+  iconsContainer,
+  iconStyle,
+} from "./navbar-style";
 import {
   NAVBAR_ITEMS,
   HEADER_TITLE,
@@ -28,6 +45,12 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
     dispatch,
   } = useDarkTheme();
 
+  const {
+    state: { totalQuantity },
+  } = useTotalQuantity();
+  const {
+    state: { totalFavorite },
+  } = useTotalFavorite();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -43,25 +66,34 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
 
   return (
     <Box>
-      <IconButton
-        id="positioned-button"
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        sx={{ mr: 2 }}
-        aria-controls={open ? "positioned-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <MenuIcon />
-      </IconButton>
+      <Box sx={headerContainer}>
+        <IconButton
+          id="positioned-button"
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+          aria-controls={open ? "positioned-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+        >
+          <MenuIcon />
+        </IconButton>
 
-      <Typography variant="h6" component="span" sx={{ mr: 2 }}>
-        {HEADER_TITLE}
-      </Typography>
-
+        <Typography variant="h6" component="span" sx={{ mr: 2 }}>
+          {HEADER_TITLE}
+        </Typography>
+        <Box sx={iconsContainer}>
+          <Badge badgeContent={totalFavorite || "0"} color="error">
+            <FavoriteBorderOutlined sx={iconStyle} />
+          </Badge>
+          <Badge badgeContent={totalQuantity || "0"} color="error">
+            <ShoppingCartOutlined sx={iconStyle} />
+          </Badge>
+        </Box>
+      </Box>
       <Menu
         id="positioned-menu"
         aria-labelledby="positioned-button"
@@ -86,7 +118,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
         })}
         <MenuItem onClick={handleClose}>
           <Box sx={cartLinkContainerStyle} onClick={() => navigate("/cart")}>
-            <ShoppingCartOutlined />
+            <Badge badgeContent={totalQuantity || "0"} color="error">
+              <ShoppingCartOutlined />
+            </Badge>
             <Typography component="span" sx={titleStyle}>
               {CART_LINK}
             </Typography>
