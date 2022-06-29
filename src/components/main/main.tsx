@@ -10,6 +10,8 @@ import CartPage from "../../pages/cartPage/cartPage";
 import ShopPage from "../../pages/shopPage/shopPage";
 import FooterLinks from "../footer/footerLinks";
 import ProductPage from "../../pages/productPage/productPage";
+import AddProductPage from "../../pages/addProduct/addProduct";
+import Login from '../../pages/loginPage/loginPage'
 
 type MainProps = {};
 
@@ -36,6 +38,8 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
                 path="/products/:productId/"
                 element={<ProductPage scrollToTop={scrollToTop} />}
               />
+              <Route path="/add-product" element={<AddProductPage />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </ListItem>
 

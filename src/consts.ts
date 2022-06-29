@@ -4,9 +4,10 @@ const NAVBAR_ITEMS = {
   PAGES: { name: "PAGES", link: "/" },
   LOOKBOOK: { name: "LOOKBOOK", link: "/" },
   BRANDS: { name: "BRANDS", link: "/" },
+  CREATE_PRODUCT: { name: "CREATE PRODUCT", link: "/add-product" },
 };
 
-const HEADER_TITLE = "CAMARO";
+const HEADER_TITLE = "CAMARO00";
 const DARK = "Dark";
 const LIGHT = "light";
 const SHOPPING_CART = "Shopping Cart";
@@ -75,5 +76,5 @@ export {
   LEARN_MORE,
   BRANDS_IMAGES,
   ADD_TO_CART,
-  PRODUCT_TABS
+  PRODUCT_TABS,
 };

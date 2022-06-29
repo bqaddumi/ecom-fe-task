@@ -11,7 +11,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { CartItemType, ProductsImagesType } from "../../types";
-import {numberWithCommas} from '../../helpers'
+import { numberWithCommas } from "../../helpers";
 import { CART_TABLE_COLS } from "../../consts";
 import {
   tableStyle,
@@ -74,7 +74,7 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
                 <Box sx={{ display: "flex" }}>
                   <CardMedia
                     component="img"
-                    sx={{ width: 100 }}
+                    sx={{ width: "50%", objectFit: "contain" }}
                     image={getProductImage(product.id)}
                     alt="Product name"
                   />
@@ -95,7 +95,9 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
                 </Box>
               </TableCell>
 
-              <TableCell align="center"> ${numberWithCommas(product.price.toFixed(2))}</TableCell>
+              <TableCell align="center">
+                ${numberWithCommas(product.price.toFixed(2))}
+              </TableCell>
               <TableCell align="center">
                 <Box sx={quantityContainerStyle}>
                   <Box
