@@ -14,6 +14,7 @@ export const productImage = {
   marginBottom: "30px",
   borderRight: "1px solid",
   padding: "0px 20px",
+  objectFit: "contain",
   borderColor: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#515151" : "#E0E0E0",
 };

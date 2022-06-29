@@ -31,7 +31,7 @@ const ProductCardHorizantal: React.FC<ProductCardHorizantalProps> = (
     >
       <CardMedia
         component="img"
-        sx={{ width: 151 }}
+        sx={{ width: 151, objectFit: "contain" }}
         image={imgUrl}
         alt="Live from space album cover"
       />

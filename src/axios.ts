@@ -12,6 +12,11 @@ export const getCart = () => {
 export const getProducts = () => {
   return axiosClient.get(`/products.json`).then((response) => response);
 };
+export const sendDataToProducts = (products: ProductType[]) => {
+  return axiosClient
+    .put(`/products.json`, products)
+    .then((response) => response);
+};
 
 export const sendDataToCart = (cart: CartType) => {
   return axiosClient.put(`/cart.json`, cart).then((response) => response);
@@ -23,12 +28,11 @@ export const sendDataToCheckout = (checkout: CheckoutType) => {
     .then((response) => response);
 };
 
-export const sendDataFavoriteProducts = (product: ProductType[]) => {
+export const sendDataFavoriteProducts = (products: ProductType[]) => {
   return axiosClient
-    .put(`/favoriteProducts.json`, product)
+    .put(`/favoriteProducts.json`, products)
     .then((response) => response);
 };
-
 
 export const getFavoriteProducts = () => {
   return axiosClient.get(`/favoriteProducts.json`).then((response) => response);

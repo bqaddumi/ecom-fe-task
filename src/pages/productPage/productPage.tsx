@@ -71,17 +71,20 @@ const ProductPage: React.FC<ProductPageProps> = ({
     switch (direction) {
       case "left":
         nextProduct = products[index - 1];
+        setSelectedImage("");
         navigate(`/products/${nextProduct.id}`);
         scrollToTop();
         break;
       case "right":
         nextProduct = products[index + 1];
+        setSelectedImage("");
         navigate(`/products/${nextProduct.id}`);
         scrollToTop();
 
         break;
     }
   };
+
   return (
     <Box sx={container}>
       <Box sx={previewContainer}>
