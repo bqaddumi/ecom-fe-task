@@ -1,4 +1,4 @@
-import React, { useEffect, useState, KeyboardEvent } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -61,6 +61,15 @@ const AddProductPage: React.FC = () => {
 
   const handleChange = (e: { target: { value: string } }) => {
     setCurrentImage(e.target.value);
+
+      if (validateImage(e.target.value)) {
+        setImages((oldState) => [...oldState, e.target.value]);
+        setIsImage(true);
+        setCurrentImage("");
+      } else {
+        setIsImage(false);
+      }
+    
   };
 
   const validateImage = (image: string) => {
@@ -69,19 +78,6 @@ const AddProductPage: React.FC = () => {
     );
   };
 
-  const handleKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLTextAreaElement;
-    console.log(validateImage(target.value));
-    if (e.keyCode === 32) {
-      if (validateImage(target.value)) {
-        setImages((oldState) => [...oldState, target.value]);
-        setIsImage(true);
-        setCurrentImage("");
-      } else {
-        setIsImage(false);
-      }
-    }
-  };
 
   const handleDelete = (item: string, index: number) => {
     let arr = [...images];
@@ -187,7 +183,6 @@ const AddProductPage: React.FC = () => {
               label="images Url seperated by a space"
               value={currentImage}
               onChange={handleChange}
-              onKeyDown={handleKeyUp}
             />
             {!isImage && (
               <Alert severity="error">Please enter an image url</Alert>
