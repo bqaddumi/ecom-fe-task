@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -23,15 +23,6 @@ export default function SignIn() {
     if (user) navigate("/add-product");
   }, [user, navigate]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -51,9 +42,6 @@ export default function SignIn() {
             Sign in with google
           </Typography>
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
             sx={{ mt: 1 }}
           >
             <Button

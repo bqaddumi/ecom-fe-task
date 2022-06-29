@@ -71,7 +71,6 @@ const AddProductPage: React.FC = () => {
 
   const handleKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
     const target = e.target as HTMLTextAreaElement;
-    console.log(validateImage(target.value));
     if (e.keyCode === 32) {
       if (validateImage(target.value)) {
         setImages((oldState) => [...oldState, target.value]);
