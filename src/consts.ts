@@ -7,7 +7,7 @@ const NAVBAR_ITEMS = {
   CREATE_PRODUCT: { name: "CREATE PRODUCT", link: "/add-product" },
 };
 
-const HEADER_TITLE = "CAMARO00";
+const HEADER_TITLE = "CAMARO";
 const DARK = "Dark";
 const LIGHT = "light";
 const SHOPPING_CART = "Shopping Cart";

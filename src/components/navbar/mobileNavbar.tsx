@@ -90,7 +90,10 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
             <FavoriteBorderOutlined sx={iconStyle} />
           </Badge>
           <Badge badgeContent={totalQuantity || "0"} color="error">
-            <ShoppingCartOutlined sx={iconStyle} />
+            <ShoppingCartOutlined
+              sx={iconStyle}
+              onClick={() => navigate("/cart")}
+            />
           </Badge>
         </Box>
       </Box>
