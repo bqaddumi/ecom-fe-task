@@ -1,6 +1,5 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "./styles";
-import { CartType, ProductType } from "./types";
 import Main from "./components/main/main";
 import { useDarkTheme } from "./shared/darkThemeContext";
 import { useEffect } from "react";
@@ -19,21 +18,23 @@ function App() {
   const totalFavoriteContext = useTotalFavorite();
 
   useEffect(() => {
-    getCart().then((res: { data: CartType }) => {
-      const { totalQuantity } = res.data;
-      totalQuantityContext.dispatch({ type: "set", totalQuantity });
-    });
-    getProducts().then((res: { data: ProductType[] }) => {
-      const { data } = res;
-      productsContext.dispatch({ type: "set", products: data });
-    });
-    getFavoriteProducts().then((res: { data: ProductType[] }) => {
-      const { data = [] } = res;
+    const fetchData = async () => {
+      const cart = await getCart();
+      const products = await getProducts();
+      const favProducts = await getFavoriteProducts();
+
+      totalQuantityContext.dispatch({
+        type: "set",
+        totalQuantity: cart.data?.totalQuantity,
+      });
+      productsContext.dispatch({ type: "set", products: products.data });
       totalFavoriteContext.dispatch({
         type: "set",
-        totalFavorite: data.length,
+        totalFavorite: favProducts.data?.length,
       });
-    });
+    };
+
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -17,7 +17,7 @@ import {
   CHECKOUT_MULTIPLE_ADDRESS,
 } from "../../consts";
 import { CartItemType, CheckoutType } from "../../types";
-import { numberWithCommas } from '../../helpers'
+import { numberWithCommas } from "../../helpers";
 import { AlertColor } from "@mui/material/Alert";
 import CustomizedSnackbars from "../../components/snackbar/snackbar";
 
@@ -52,32 +52,30 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
   const orderTotal = totalPrice + 5;
 
   useEffect(() => {
-    getCheckout()
-      .then((res: { data: CheckoutType }) => {
-        setCheckout(res.data);
-      })
-      .catch((e) => {
-        console.error("Can't get checkout", e);
-      });
+    const fetchData = async () => {
+      const checkout = await getCheckout();
+      setCheckout(checkout.data);
+    };
+    fetchData();
   }, []);
 
-  const onCheckoutClicked = () => {
-    sendDataToCheckout([
+  const onCheckoutClicked = async () => {
+    const checkoutData = await sendDataToCheckout([
       ...checkout,
       { items: products, totalQuantity, totalOrderPrice: orderTotal },
-    ])
-      .then(() => {
-        setSnackbar({
-          message: `Checkout Added! total quantity is ${totalQuantity}`,
-          severity: "success",
-        });
-      })
-      .catch((e) => {
-        setSnackbar({
-          message: `Checkout problem please try again later!`,
-          severity: "error",
-        });
+    ]);
+
+    if (checkoutData.status === 200) {
+      setSnackbar({
+        message: `Checkout Added! total quantity is ${totalQuantity}`,
+        severity: "success",
       });
+    } else {
+      setSnackbar({
+        message: `Checkout problem please try again later!`,
+        severity: "error",
+      });
+    }
   };
 
   return (

@@ -43,33 +43,26 @@ const AddProductPage: React.FC = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    getProducts()
-      .then((res: { data: ProductType[] }) => {
-        setProducts(res.data);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-    getCategories()
-      .then((res: { data: CategoryType[] }) => {
-        setCategories(res.data);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    const fetchData = async () => {
+      const products = await getProducts();
+      const categories = await getCategories();
+      setProducts(products.data);
+      setCategories(categories.data);
+    };
+
+    fetchData();
   }, []);
 
   const handleChange = (e: { target: { value: string } }) => {
     setCurrentImage(e.target.value);
 
-      if (validateImage(e.target.value)) {
-        setImages((oldState) => [...oldState, e.target.value]);
-        setIsImage(true);
-        setCurrentImage("");
-      } else {
-        setIsImage(false);
-      }
-    
+    if (validateImage(e.target.value)) {
+      setImages((oldState) => [...oldState, e.target.value]);
+      setIsImage(true);
+      setCurrentImage("");
+    } else {
+      setIsImage(false);
+    }
   };
 
   const validateImage = (image: string) => {
@@ -77,7 +70,6 @@ const AddProductPage: React.FC = () => {
       image
     );
   };
-
 
   const handleDelete = (item: string, index: number) => {
     let arr = [...images];
@@ -89,7 +81,7 @@ const AddProductPage: React.FC = () => {
     setCategoryId(event.target.value as string);
   };
 
-  const onAddProductClicked = () => {
+  const onAddProductClicked = async () => {
     setIsValidated(true);
     if (
       productName &&
@@ -108,24 +100,21 @@ const AddProductPage: React.FC = () => {
         price: parseFloat(productPrice),
       };
 
-      sendDataToProducts([...products, product])
-        .then(() => {
-          setIsSubmitted(true);
-          setCategoryId("c1");
-          setProductName("");
-          setProductPrice("");
-          setProductDesc("");
-          setImages([]);
-          setTimeout(() => {
-            setIsSubmitted(false);
-          }, 2000);
-        })
-        .catch((e) => {
-          console.log("Error in adding product");
-        });
-    } else {
-      setIsValidated(false);
+      const { status } = await sendDataToProducts([...products, product]);
+      if (status === 200) {
+        setIsSubmitted(true);
+        setCategoryId("c1");
+        setProductName("");
+        setProductPrice("");
+        setProductDesc("");
+        setImages([]);
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 2000);
+        return;
+      }
     }
+    setIsValidated(false);
   };
 
   const onLogoutClicked = () => {
