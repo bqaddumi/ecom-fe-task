@@ -18,7 +18,7 @@ export const boxContainerStyle = {
 };
 
 export const headerContainer = {
- width: 'calc(100vw - 36px)',
+  width: "calc(100vw - 55px)",
   display: "flex",
   alignItems: "center",
 };
@@ -31,5 +31,19 @@ export const iconsContainer = {
 };
 
 export const iconStyle = {
-  marginLeft: '15px'
-}
+  marginLeft: "15px",
+};
+
+export const navItemsContainer = {
+  display: "flex",
+  "@media only screen and (max-width: 600px)": {
+    display: "none",
+  },
+};
+
+export const mobileNavContainer = {
+  display: "none",
+  "@media only screen and (max-width: 600px)": {
+    display: "block",
+  },
+};
