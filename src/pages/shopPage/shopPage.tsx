@@ -14,7 +14,7 @@ import {
   titleContainer,
   firstSectionMobileStyle,
   categoryImage,
-  thirdSectionContainer
+  thirdSectionContainer,
 } from "./shopPage-style";
 
 import {
@@ -33,14 +33,14 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const sectionStyle = isMobile ? firstSectionMobileStyle : firstSectionStyle;
 
   useEffect(() => {
-    getCategories().then((res: { data: CategoryType[] }) => {
-      const { data } = res;
-      setCategories(data);
-    });
-    getProducts().then((res: { data: ProductType[] }) => {
-      const { data } = res;
-      setProducts(data);
-    });
+    const fetchData = async () => {
+      const productsData = await getProducts();
+      const categoriesData = await getCategories();
+
+      setCategories(categoriesData.data);
+      setProducts(productsData.data);
+    };
+    fetchData();
   }, []);
 
   const c1Products = getCategoryProductsByCategoryId("c1", products);
@@ -56,9 +56,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
           </Typography>
         </Box>
         {isMobile ? (
-          <Box
-            sx={thirdSectionContainer}
-          >
+          <Box sx={thirdSectionContainer}>
             {c1Products.map((product: ProductType, index: number) => {
               return <ProductCardHorizantal product={product} key={index} />;
             })}
@@ -82,9 +80,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                         </Typography>
                       </Box>
                       {isMobile ? (
-                        <Box
-                          sx={thirdSectionContainer}
-                        >
+                        <Box sx={thirdSectionContainer}>
                           {cProducts.map(
                             (product: ProductType, index: number) => {
                               return (
@@ -118,9 +114,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                           {category.name}
                         </Typography>
                       </Box>
-                      <Box
-                        sx={thirdSectionContainer}
-                      >
+                      <Box sx={thirdSectionContainer}>
                         {cProducts.map(
                           (product: ProductType, index: number) => {
                             return (

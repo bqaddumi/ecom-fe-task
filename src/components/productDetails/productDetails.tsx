@@ -61,44 +61,44 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
     totalQuantity: 0,
   });
 
-  const onFavoriteClicked = () => {
+  const onFavoriteClicked = async () => {
     setIsFavorite((prev: boolean) => !prev);
+    const favProduct = await getFavoriteProducts();
 
-    getFavoriteProducts().then((res: { data: ProductType[] }) => {
-      const resultFavProducts = res.data || [];
-      const isFav = !!resultFavProducts?.find((e) => e.id === product?.id);
-      const favProducts = isFav
-        ? resultFavProducts?.filter((e) => e.id !== product?.id)
-        : product
-        ? [...resultFavProducts, product]
-        : [];
-      sendDataFavoriteProducts(favProducts).then(
-        (res: { data: ProductType[] }) => {}
-      );
-      if (isFav) {
-        totalFavoriteContext.dispatch({ type: "remove", totalFavorite: 1 });
-      } else {
-        totalFavoriteContext.dispatch({ type: "add", totalFavorite: 1 });
-      }
-    });
+    const resultFavProducts = favProduct.data || [];
+    const isFav = !!resultFavProducts?.find(
+      (e: { id: number | undefined }) => e.id === product?.id
+    );
+    const favProducts = isFav
+      ? resultFavProducts?.filter(
+          (e: { id: number | undefined }) => e.id !== product?.id
+        )
+      : product
+      ? [...resultFavProducts, product]
+      : [];
+    await sendDataFavoriteProducts(favProducts);
+    if (isFav) {
+      totalFavoriteContext.dispatch({ type: "remove", totalFavorite: 1 });
+    } else {
+      totalFavoriteContext.dispatch({ type: "add", totalFavorite: 1 });
+    }
   };
 
   useEffect(() => {
-    getCart().then((res) => {
-      const nCart = res.data;
-
-      setCart({ ...nCart, items: nCart.items || [] });
-    });
-
-    getFavoriteProducts().then((res: { data: ProductType[] }) => {
-      const resultFavProducts = res.data || [];
-      const isFav = !!resultFavProducts?.find((e) => e.id === product?.id);
-
+    const fetchData = async () => {
+      const cart = await getCart();
+      const favProduct = await getFavoriteProducts();
+      const isFav = !!favProduct?.data?.find(
+        (e: { id: number | undefined }) => e.id === product?.id
+      );
       setIsFavorite(isFav);
-    });
+      setCart({ ...cart.data });
+    };
+
+    fetchData();
   }, [product]);
 
-  const addToCart = () => {
+  const addToCart = async () => {
     const { totalQuantity, items } = cart;
     const existingItem = items.find((item) => item.id === product?.id);
     const newTotal = totalQuantity + quantity;
@@ -121,21 +121,24 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
     }
     totalQuantityContext.dispatch({ type: "set", totalQuantity: newTotal });
     setCart({ ...cart, items: newItems, totalQuantity: newTotal });
-    sendDataToCart({ ...cart, items: newItems, totalQuantity: newTotal })
-      .then(() => {
-        setSnackbar({
-          message: `Product added! ${totalQuantity}`,
-          severity: "success",
-        });
-        navigate("/cart");
-      })
-      .catch((e) => {
-        console.log("error", e);
-        setSnackbar({
-          message: `Proplem in add to cart, please try again later!`,
-          severity: "error",
-        });
+    const { status } = await sendDataToCart({
+      ...cart,
+      items: newItems,
+      totalQuantity: newTotal,
+    });
+
+    if (status === 200) {
+      await setSnackbar({
+        message: `Product added! ${totalQuantity}`,
+        severity: "success",
       });
+      navigate("/cart");
+    } else {
+      setSnackbar({
+        message: `Proplem in add to cart, please try again later!`,
+        severity: "error",
+      });
+    }
   };
 
   return (

@@ -3,7 +3,6 @@ import { Box, Grid, Typography } from "@mui/material";
 import { isMobile } from "react-device-detect";
 import {
   CartItemType,
-  CartType,
   ProductsImagesType,
   ProductType,
 } from "../../types";
@@ -43,8 +42,12 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   };
 
   useEffect(() => {
-    getCart().then((res: { data: CartType }) => {
-      const { items, totalQuantity } = res.data;
+    const fetchData = async () => {
+      const cart = await getCart();
+      const products = await getProducts();
+      const {
+        data: { totalQuantity, items },
+      } = cart;
       setTotal(totalQuantity);
       setProducts(items);
 
@@ -53,18 +56,15 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
       for (let i = 0; i < items.length; i++) {
         totalPrice += items[i].totalPrice;
       }
-
       setOrderTotalPrice(totalPrice);
-    });
 
-    getProducts().then((res) => {
-      const { data } = res;
-      const productsImages = data.map((product: ProductType) => ({
+      const productsImages = products?.data.map((product: ProductType) => ({
         id: product.id,
         imgUrl: product.imgUrl,
       }));
       setProductsImages(productsImages);
-    });
+    };
+    fetchData();
   }, []);
 
   const onXClicked = (productId: number) => {
@@ -169,7 +169,11 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
           />
         </Grid>
         <Grid item xs={isMobile ? 12 : 5}>
-          <CartSummary totalPrice={orderTotalPrice} products={products} totalQuantity={total} />
+          <CartSummary
+            totalPrice={orderTotalPrice}
+            products={products}
+            totalQuantity={total}
+          />
         </Grid>
       </Grid>
     </Box>
