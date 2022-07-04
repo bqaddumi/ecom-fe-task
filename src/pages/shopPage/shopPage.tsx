@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Box, Typography, Grid, CardMedia } from "@mui/material";
-import { isMobile, isBrowser } from "react-device-detect";
 import ProductsChunk from "../../components/productsChunk/productsChunk";
 import ProductCardHorizantal from "../../components/productCardHorizontal/productCardHorizontal";
 import CategoryFooter from "../../components/categoryFooter/categoryFooter";
@@ -8,13 +7,16 @@ import BrandsFooter from "../../components/brandsFooter/brandsFooter";
 import {
   titleStyle,
   boxStyle,
-  boxMobileStyle,
-  firstSectionStyle,
   secondSectionStyle,
   titleContainer,
-  firstSectionMobileStyle,
   categoryImage,
   thirdSectionContainer,
+  productsChunkContainer,
+  thirdSectionDesktop,
+  sectionStyle,
+  gridContainer,
+  gridSection,
+  gridSectionImage,
 } from "./shopPage-style";
 
 import {
@@ -29,8 +31,6 @@ type ShopPageProps = {};
 const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
-
-  const sectionStyle = isMobile ? firstSectionMobileStyle : firstSectionStyle;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,22 +48,21 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     getCategoryProductsByCategoryId(id, products);
 
   return (
-    <Box sx={isMobile ? boxMobileStyle : boxStyle}>
+    <Box sx={boxStyle}>
       <Box sx={sectionStyle}>
         <Box sx={titleContainer}>
           <Typography variant="body1" sx={titleStyle}>
             {getCategoryById("c1", categories)?.name}
           </Typography>
         </Box>
-        {isMobile ? (
-          <Box sx={thirdSectionContainer}>
-            {c1Products.map((product: ProductType, index: number) => {
-              return <ProductCardHorizantal product={product} key={index} />;
-            })}
-          </Box>
-        ) : (
+        <Box sx={thirdSectionContainer}>
+          {c1Products.map((product: ProductType, index: number) => {
+            return <ProductCardHorizantal product={product} key={index} />;
+          })}
+        </Box>
+        <Box sx={productsChunkContainer}>
           <ProductsChunk products={c1Products} chunkLimit={6} />
-        )}
+        </Box>
       </Box>
       <Box sx={secondSectionStyle}>
         {removeCategoryById("c1", categories).map((category: CategoryType) => {
@@ -72,40 +71,39 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
             <Box key={category.id} sx={secondSectionStyle}>
               <Box sx={sectionStyle}>
                 {category.image ? (
-                  <Grid container spacing={2}>
-                    <Grid item xs={isMobile ? 12 : 8}>
+                  <Box sx={gridContainer}>
+                    <Box sx={gridSection}>
                       <Box sx={titleContainer}>
                         <Typography variant="body1" sx={titleStyle}>
                           {category.name}
                         </Typography>
                       </Box>
-                      {isMobile ? (
-                        <Box sx={thirdSectionContainer}>
-                          {cProducts.map(
-                            (product: ProductType, index: number) => {
-                              return (
-                                <ProductCardHorizantal
-                                  product={product}
-                                  key={index}
-                                />
-                              );
-                            }
-                          )}
-                        </Box>
-                      ) : (
+                      <Box sx={thirdSectionContainer}>
+                        {cProducts.map(
+                          (product: ProductType, index: number) => {
+                            return (
+                              <ProductCardHorizantal
+                                product={product}
+                                key={index}
+                              />
+                            );
+                          }
+                        )}
+                      </Box>
+                      <Box sx={productsChunkContainer}>
                         <ProductsChunk products={cProducts} chunkLimit={4} />
-                      )}
-                    </Grid>
-                    <Grid item xs={isMobile ? 12 : 4}>
+                      </Box>
+                    </Box>
+                    <Box sx={gridSectionImage}>
                       <CardMedia
                         sx={categoryImage}
                         component="img"
                         image={category.image}
                         alt="JBL speaker"
                       />
-                    </Grid>
-                    {isBrowser && <CategoryFooter />}
-                  </Grid>
+                    </Box>
+                    <CategoryFooter />
+                  </Box>
                 ) : (
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -114,7 +112,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                           {category.name}
                         </Typography>
                       </Box>
-                      <Box sx={thirdSectionContainer}>
+                      <Box sx={thirdSectionDesktop}>
                         {cProducts.map(
                           (product: ProductType, index: number) => {
                             return (

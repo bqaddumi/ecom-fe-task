@@ -1,5 +1,4 @@
 import React from "react";
-import { isMobile } from "react-device-detect";
 import { Box, Typography, CardMedia, CardContent } from "@mui/material";
 import {
   container,
@@ -22,13 +21,8 @@ const ProductCardHorizantal: React.FC<ProductCardHorizantalProps> = (
     product: { imgUrl, name, price, id },
   } = props;
 
-  const containerWidth = { width: isMobile ? "auto" : "465px" };
-
   return (
-    <Box
-      sx={{ ...container, ...containerWidth }}
-      onClick={() => navigate(`/products/${id}`)}
-    >
+    <Box sx={container} onClick={() => navigate(`/products/${id}`)}>
       <CardMedia
         component="img"
         sx={{ width: 151, objectFit: "contain" }}

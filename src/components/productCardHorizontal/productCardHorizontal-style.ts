@@ -5,7 +5,10 @@ export const container = {
   width: "465px",
   marginBottom: "20px",
   marginLeft: "20px",
-  cursor: 'pointer'
+  cursor: 'pointer',
+  "@media only screen and (max-width: 600px)": {
+    width: "100%",
+  },
 };
 
 export const nameStyle = {
@@ -18,4 +21,7 @@ export const cardContentStyle = {
     theme.palette.mode === "dark" ? "#515151" : "#E0E0E0",
   display: "flex",
   flexDirection: "column",
+  "@media only screen and (max-width: 600px)": {
+    border: "0",
+  },
 };
