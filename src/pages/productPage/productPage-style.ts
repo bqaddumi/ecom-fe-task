@@ -1,27 +1,33 @@
-import { isMobile } from "react-device-detect";
-
 export const container = {
-  // background: "#cccbd6",
-  width: isMobile ? "calc(100% - 40px)" : "100%",
-
-  margin: isMobile ? "30px 20px" : "30px 0% 0 10%",
+  width: "100%",
+  margin: "30px 0% 0 10%",
+  "@media only screen and (max-width: 600px)": {
+    width: "calc(100% - 40px)",
+    margin: "30px 20px",
+  },
 };
 
 export const previewContainer = {
   display: "flex",
   width: "100%",
-
-  flexDirection: isMobile ? "column" : "row",
-  // justifyContent: "space-between",
+  flexDirection: "row",
+  "@media only screen and (max-width: 600px)": {
+    flexDirection: "column",
+  },
 };
 
 export const toggleProductscontainer = {
   marginLeft: "auto",
-  width: isMobile ? "100%" : "50px",
+  width: "50px",
   display: "flex",
-  flexDirection: isMobile ? "row" : "column",
-  justifyContent: isMobile ? "space-between" : "center",
+  flexDirection: "column",
+  justifyContent: "center",
   marginRight: "50px",
+  "@media only screen and (max-width: 600px)": {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 };
 
 export const chevronContainer = {
@@ -38,6 +44,10 @@ export const chevronContainer = {
 };
 
 export const imageStyle = {
-  width: isMobile ? "100%" : "500px",
-  margin: isMobile ? "0" : "20px 20px",
+  width: "500px",
+  margin: "20px 20px",
+  "@media only screen and (max-width: 600px)": {
+    width: "100%",
+    margin: "0",
+  },
 };

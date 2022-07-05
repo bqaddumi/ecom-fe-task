@@ -1,5 +1,3 @@
-import { isMobile } from "react-device-detect";
-
 export const titleStyle = {
   margin: "0",
   fontWeight: "600",
@@ -39,8 +37,11 @@ export const productsContainer = {
   overflowX: "auto",
   margin: "20px 20px",
   display: "flex",
-  flexDirection: isMobile ? "column" : "row",
+  flexDirection: "row",
   marginTop: "70px",
+  "@media only screen and (max-width: 600px)": {
+    flexDirection: "column",
+  },
 };
 
 export const pageButtonContainer = {

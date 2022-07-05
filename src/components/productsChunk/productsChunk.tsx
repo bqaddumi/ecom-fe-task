@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { isBrowser } from "react-device-detect";
 import { Box } from "@mui/material";
 import ProductCard from "../../components/productCard/productCard";
 import PaginationButton from "../../components/paginationButton/paginationButton";
@@ -41,19 +40,17 @@ const ProductsChunk: React.FC<ProductsChunkProps> = ({
           );
         })}
       </Box>
-      {isBrowser && (
-        <Box sx={pageButtonContainer}>
-          {chunkedProducts.map((item, index) => (
-            <Box key={index}>
-              <PaginationButton
-                key={index}
-                onTabClicked={() => onTabClicked(index)}
-                isActive={activeIndex === index}
-              />
-            </Box>
-          ))}
-        </Box>
-      )}
+      <Box sx={pageButtonContainer}>
+        {chunkedProducts.map((item, index) => (
+          <Box key={index}>
+            <PaginationButton
+              key={index}
+              onTabClicked={() => onTabClicked(index)}
+              isActive={activeIndex === index}
+            />
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
