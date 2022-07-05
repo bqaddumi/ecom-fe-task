@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prod": "node -e \"require('fs').rename('build/index.html', 'build/200.html', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\" && surge build ecom-bashar.surge.sh",
-    "rename": "node -e \"require('fs').rename('build/index.html', 'build/200.html', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\""
+    "buildProd": "npm run build && npm run prod"
   },
   "eslintConfig": {
     "extends": [
