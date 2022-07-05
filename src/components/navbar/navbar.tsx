@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
-import { isMobile } from "react-device-detect";
 import {
   navBarStyles,
   navbarLinkStyles,
   boxContainerStyle,
+  navItemsContainer,
+  mobileNavContainer,
 } from "./navbar-style";
 import { NAVBAR_ITEMS } from "../../consts";
 
@@ -18,26 +19,25 @@ const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
     <Box sx={boxContainerStyle}>
       <AppBar position="static" sx={navBarStyles}>
         <Toolbar>
-          {isMobile ? (
+          <Box sx={mobileNavContainer}>
             <MobileNavbar />
-          ) : (
-            <>
-              {navItems.map((item) => {
-                return (
-                  <Typography
-                    key={item.name}
-                    variant="inherit"
-                    component="div"
-                    sx={{ mr: 2 }}
-                  >
-                    <Link to={item.link} style={navbarLinkStyles}>
-                      {item.name}
-                    </Link>
-                  </Typography>
-                );
-              })}
-            </>
-          )}
+          </Box>
+          <Box sx={navItemsContainer}>
+            {navItems.map((item) => {
+              return (
+                <Typography
+                  key={item.name}
+                  variant="inherit"
+                  component="div"
+                  sx={{ mr: 2 }}
+                >
+                  <Link to={item.link} style={navbarLinkStyles}>
+                    {item.name}
+                  </Link>
+                </Typography>
+              );
+            })}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

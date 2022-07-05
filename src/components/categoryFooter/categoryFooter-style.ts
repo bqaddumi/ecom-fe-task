@@ -6,6 +6,9 @@ export const container = {
   justifyContent: "space-between",
   alignItems: "center",
   color: "#DADFE2",
+  "@media only screen and (max-width: 600px)": {
+    display: "none",
+  },
 };
 
 export const footer = {

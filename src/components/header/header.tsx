@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { isBrowser } from "react-device-detect";
-
 import { Button, Typography, Box, Badge } from "@mui/material";
 import {
   ShoppingCartOutlined,
@@ -42,38 +40,36 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       <Typography variant="h4" component="div" sx={titleStyle}>
         {HEADER_TITLE}
       </Typography>
-      {isBrowser && (
-        <Box sx={rightSideStyle}>
-          <Box sx={cartIconsContainerStyle}>
-            <Button onClick={() => dispatch("toggle")}>
-              {isDark ? LIGHT : DARK}
-            </Button>
-            <Box sx={iconStyle}>
-              <Badge badgeContent={"0"} color="error">
-                <Autorenew />
-              </Badge>
-            </Box>
-            <Box sx={iconStyle}>
-              <Badge badgeContent={totalFavorite || "0"} color="error">
-                <FavoriteBorderOutlined />
-              </Badge>
-            </Box>
-            <Box onClick={() => navigate("/")} sx={iconStyle}>
-              <Badge badgeContent={totalQuantity || "0"} color="error">
-                <ShoppingCartOutlined />
-              </Badge>
-            </Box>
+      <Box sx={rightSideStyle}>
+        <Box sx={cartIconsContainerStyle}>
+          <Button onClick={() => dispatch("toggle")}>
+            {isDark ? LIGHT : DARK}
+          </Button>
+          <Box sx={iconStyle}>
+            <Badge badgeContent={"0"} color="error">
+              <Autorenew />
+            </Badge>
           </Box>
-          <Box sx={cartLinkContainerStyle} onClick={() => navigate("/")}>
-            <Typography component="div" sx={titleStyle}>
-              {CART_LINK}
-            </Typography>
-            <Typography component="div" sx={balanceStyle}>
-              {"$0.00"}
-            </Typography>
+          <Box sx={iconStyle}>
+            <Badge badgeContent={totalFavorite || "0"} color="error">
+              <FavoriteBorderOutlined />
+            </Badge>
+          </Box>
+          <Box onClick={() => navigate("/")} sx={iconStyle}>
+            <Badge badgeContent={totalQuantity || "0"} color="error">
+              <ShoppingCartOutlined />
+            </Badge>
           </Box>
         </Box>
-      )}
+        <Box sx={cartLinkContainerStyle} onClick={() => navigate("/")}>
+          <Typography component="div" sx={titleStyle}>
+            {CART_LINK}
+          </Typography>
+          <Typography component="div" sx={balanceStyle}>
+            {"$0.00"}
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 };

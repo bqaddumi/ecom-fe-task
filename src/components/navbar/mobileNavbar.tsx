@@ -112,9 +112,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
           horizontal: "right",
         }}
       >
-        {navItems.map((item) => {
+        {navItems.map((item, index) => {
           return (
-            <Link to={item.link} style={navbarLinkStyles}>
+            <Link key={index} to={item.link} style={navbarLinkStyles}>
               <MenuItem onClick={handleClose}>{item.name}</MenuItem>
             </Link>
           );

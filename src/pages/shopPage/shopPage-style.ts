@@ -1,5 +1,3 @@
-import { isMobile } from "react-device-detect";
-
 export const titleStyle = {
   margin: "0",
   fontWeight: "600",
@@ -22,22 +20,10 @@ export const boxStyle = {
   width: "100%",
   background: (theme: { palette: { mode: string } }) =>
     theme.palette.mode === "dark" ? "#1A2027" : "#F0F0F0",
-};
-
-export const boxMobileStyle = {
-  width: "100%",
-  padding: "0",
-};
-
-export const firstSectionStyle = {
-  margin: "30px 10% 0px",
-  background: (theme: { palette: { mode: string } }) =>
-    theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
-};
-
-export const firstSectionMobileStyle = {
-  background: (theme: { palette: { mode: string } }) =>
-    theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
+  "@media only screen and (max-width: 600px)": {
+    width: "100%",
+    padding: "0",
+  },
 };
 
 export const secondSectionStyle = {
@@ -51,8 +37,11 @@ export const productsContainer = {
   overflowX: "auto",
   margin: "20px 20px",
   display: "flex",
-  flexDirection: isMobile ? "column" : "row",
+  flexDirection: "row",
   marginTop: "70px",
+  "@media only screen and (max-width: 600px)": {
+    flexDirection: "column",
+  },
 };
 
 export const pageButtonContainer = {
@@ -64,11 +53,57 @@ export const categoryImage = {
   height: "450px",
   width: "330px",
   marginTop: "30px",
+  "@media only screen and (max-width: 600px)": {
+    height: "auto",
+    width: "100%",
+  },
 };
 
 export const thirdSectionContainer = {
+  display: "none",
+  "@media only screen and (max-width: 600px)": {
+    marginTop: "40px",
+    display: "flex",
+    width: "100%",
+    flexWrap: "wrap",
+  },
+};
+
+export const productsChunkContainer = {
+  "@media only screen and (max-width: 600px)": {
+    display: "none",
+  },
+};
+
+export const thirdSectionDesktop = {
   marginTop: "40px",
   display: "flex",
   width: "100%",
   flexWrap: "wrap",
+};
+
+export const sectionStyle = {
+  margin: "30px 10% 0px",
+  background: (theme: { palette: { mode: string } }) =>
+    theme.palette.mode === "dark" ? "#37353A" : "#FFFFFF",
+  "@media only screen and (max-width: 600px)": {
+    margin: "0",
+  },
+};
+
+export const gridContainer = {
+  display: "flex",
+  flexWrap: "wrap",
+};
+export const gridSection = {
+  width: "66%",
+  "@media only screen and (max-width: 600px)": {
+    width: "100%",
+  },
+};
+export const gridSectionImage = {
+  width: "33%",
+  "@media only screen and (max-width: 600px)": {
+    width: "100%",
+  },
 };

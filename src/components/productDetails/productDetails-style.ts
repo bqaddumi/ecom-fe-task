@@ -1,9 +1,11 @@
-import { isMobile } from "react-device-detect";
-
 export const detailsContainer = {
-  marginLeft: isMobile ? "0" : "auto",
-  marginRight: isMobile ? "0" : "100px",
+  marginLeft: "auto",
+  marginRight: "100px",
   width: "100%",
+  "@media only screen and (max-width: 600px)": {
+    marginLeft: "0",
+    marginRight: "0",
+  },
 };
 
 export const quantityContainerStyle = {
@@ -43,8 +45,6 @@ export const iconsContainer = {
   cursor: "pointer",
   marginLeft: "10px",
 };
-
-//b5b3b3
 
 export const priceStyle = {
   fontWeight: "500",

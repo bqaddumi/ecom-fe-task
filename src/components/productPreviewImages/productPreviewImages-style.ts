@@ -1,5 +1,3 @@
-import { isMobile } from "react-device-detect";
-
 export const imageStyle = {
   position: "relative",
   width: "130px",
@@ -13,8 +11,11 @@ export const imageStyle = {
 
 export const containerDesktop = {
   display: "flex",
-  flexDirection: isMobile ? "row" : "column",
+  flexDirection: "column",
   flexWrap: "wrap",
+  "@media only screen and (max-width: 600px)": {
+    flexDirection: "row",
+  },
 };
 
 export const selectedImage = {

@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import { isMobile } from "react-device-detect";
-import {
-  CartItemType,
-  ProductsImagesType,
-  ProductType,
-} from "../../types";
+import { CartItemType, ProductsImagesType, ProductType } from "../../types";
 import { getCart, getProducts, sendDataToCart } from "../../axios";
 import { useTotalQuantity } from "../../shared/totalQuantityContext";
 import { styled } from "@mui/material/styles";
 import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
 import CartSummary from "../../components/cartSummary/cartSummary";
-import { titleStyle, boxStyle, boxMobileStyle } from "./cartPageStyle";
+import {
+  titleStyle,
+  boxStyle,
+  sectionContainer,
+  productsTableContainer,
+  cartSummaryContainer,
+} from "./cartPageStyle";
 import { SHOPPING_CART } from "../../consts";
 
 type CartPageProps = {};
@@ -149,7 +150,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   };
 
   return (
-    <Box sx={isMobile ? boxMobileStyle : boxStyle}>
+    <Box sx={boxStyle}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
         <Grid item xs={12}>
           <Item>
@@ -158,23 +159,24 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
             </Typography>
           </Item>
         </Grid>
-
-        <Grid item xs={isMobile ? 12 : 7}>
-          <ProductsCartTable
-            products={products}
-            onXClicked={onXClicked}
-            productsImages={productsImages}
-            onIncreaseclicked={onIncreaseclicked}
-            onDecreaseclicked={onDecreaseclicked}
-          />
-        </Grid>
-        <Grid item xs={isMobile ? 12 : 5}>
-          <CartSummary
-            totalPrice={orderTotalPrice}
-            products={products}
-            totalQuantity={total}
-          />
-        </Grid>
+        <Box sx={sectionContainer}>
+          <Box sx={productsTableContainer}>
+            <ProductsCartTable
+              products={products}
+              onXClicked={onXClicked}
+              productsImages={productsImages}
+              onIncreaseclicked={onIncreaseclicked}
+              onDecreaseclicked={onDecreaseclicked}
+            />
+          </Box>
+          <Box sx={cartSummaryContainer}>
+            <CartSummary
+              totalPrice={orderTotalPrice}
+              products={products}
+              totalQuantity={total}
+            />
+          </Box>
+        </Box>
       </Grid>
     </Box>
   );
