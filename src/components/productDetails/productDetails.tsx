@@ -99,7 +99,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
   }, [product]);
 
   const addToCart = async () => {
-    const { totalQuantity, items } = cart;
+    const { totalQuantity, items=[] } = cart;
     const existingItem = items.find((item) => item.id === product?.id);
     const newTotal = totalQuantity + quantity;
     let newItems = items;
