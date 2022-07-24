@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   TableRow,
@@ -20,6 +21,7 @@ import {
   quantitytitleStyle,
   quantityButtonStyle,
 } from "./productsCartTableStyle";
+import EcomModal from "../modal/modal";
 
 type ProductsCartTableProps = {
   products: CartItemType[];
@@ -41,7 +43,8 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
   } = props;
 
   const { PRODUCT_NAME, PRICE, QUANTITY, TOTAL } = CART_TABLE_COLS;
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [itemSelected, setItemSelected] = useState<CartItemType>();
   const getProductImage = (productId: number) => {
     const product = productsImages.find(
       (product: { id: number; imgUrl: string }) => product.id === productId
@@ -52,6 +55,17 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
     return imageUrl;
   };
 
+  const isCancelClicked = () => {
+    setIsModalOpen(false);
+  };
+  const isYesClicked = () => {
+    itemSelected && onXClicked(itemSelected.id);
+    setIsModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <TableContainer component={Box}>
       <Table sx={tableStyle} aria-label="simple table">
@@ -123,10 +137,20 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
               <TableCell align="center">
                 <Box
                   sx={deleteButtonStyle}
-                  onClick={() => onXClicked(product.id)}
+                  onClick={() => {
+                    setItemSelected(product);
+                    setIsModalOpen(true);
+                  }}
                 >
                   {"x"}
                 </Box>
+                <EcomModal
+                  product={product}
+                  isOpen={isModalOpen}
+                  isCancelClicked={isCancelClicked}
+                  isYesClicked={isYesClicked}
+                  handleCloseModal={handleCloseModal}
+                ></EcomModal>
               </TableCell>
             </TableRow>
           ))}
