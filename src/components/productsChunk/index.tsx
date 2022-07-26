@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import ProductCard from '../../components/productCard/productCard';
-import PaginationButton from '../../components/paginationButton/paginationButton';
+import ProductCard from '../productCard';
+import PaginationButton from '../paginationButton';
 import { productsContainer, pageButtonContainer } from './productsChunk-style';
 import { ProductType } from '../../types';
 import { getProductsChunked } from '../../pages/shopPage/helpers';

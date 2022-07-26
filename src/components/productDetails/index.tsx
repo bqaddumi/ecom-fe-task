@@ -32,7 +32,7 @@ import {
 import { Typography, Button, AlertColor } from '@mui/material';
 import { ADD_TO_CART } from '../../consts';
 import { useTotalQuantity } from '../../shared/totalQuantityContext';
-import CustomizedSnackbars from '../snackbar/snackbar';
+import CustomizedSnackbars from '../snackbar';
 import { useTotalFavorite } from '../../shared/favoriteContext';
 
 interface ProductDetailsProps {

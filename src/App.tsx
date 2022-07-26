@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme, lightTheme } from './styles';
-import Main from './components/main/main';
+import Main from './components/main';
 import { useDarkTheme } from './shared/darkThemeContext';
 import { useEffect } from 'react';
 import { getCart, getFavoriteProducts, getProducts } from './axios';

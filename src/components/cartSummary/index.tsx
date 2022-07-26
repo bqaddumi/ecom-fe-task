@@ -19,7 +19,7 @@ import {
 import { CartItemType, CheckoutType } from '../../types';
 import { numberWithCommas } from '../../helpers';
 import { AlertColor } from '@mui/material/Alert';
-import CustomizedSnackbars from '../../components/snackbar/snackbar';
+import CustomizedSnackbars from '../snackbar';
 
 import {
   summaryContainerStyle,

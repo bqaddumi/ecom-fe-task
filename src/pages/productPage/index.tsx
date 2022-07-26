@@ -13,9 +13,9 @@ import {
 import { useProducts } from '../../shared/productsContext';
 import { ProductType } from '../../types';
 
-import ProductPreviewImages from '../../components/productPreviewImages/productPreviewImages';
-import ProductInfo from '../../components/productInfo/productInfo';
-import ProductDetails from '../../components/productDetails/productDetails';
+import ProductPreviewImages from '../../components/productPreviewImages';
+import ProductInfo from '../../components/productInfo';
+import ProductDetails from '../../components/productDetails';
 
 interface ProductPageProps {
   scrollToTop: () => void;

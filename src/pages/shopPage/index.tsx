@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography, Grid, CardMedia } from '@mui/material';
-import ProductsChunk from '../../components/productsChunk/productsChunk';
-import ProductCardHorizantal from '../../components/productCardHorizontal/productCardHorizontal';
-import CategoryFooter from '../../components/categoryFooter/categoryFooter';
-import BrandsFooter from '../../components/brandsFooter/brandsFooter';
+import ProductsChunk from '../../components/productsChunk';
+import ProductCardHorizantal from '../../components/productCardHorizontal';
+import CategoryFooter from '../../components/categoryFooter';
+import BrandsFooter from '../../components/brandsFooter';
 import {
   titleStyle,
   boxStyle,

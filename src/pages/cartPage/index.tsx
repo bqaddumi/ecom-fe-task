@@ -4,8 +4,8 @@ import { CartItemType, ProductsImagesType, ProductType } from '../../types';
 import { getCart, getProducts, sendDataToCart } from '../../axios';
 import { useTotalQuantity } from '../../shared/totalQuantityContext';
 import { styled } from '@mui/material/styles';
-import ProductsCartTable from '../../components/productsCartTable/productsCartTable';
-import CartSummary from '../../components/cartSummary/cartSummary';
+import ProductsCartTable from '../../components/productsCartTable';
+import CartSummary from '../../components/cartSummary';
 import {
   titleStyle,
   boxStyle,
