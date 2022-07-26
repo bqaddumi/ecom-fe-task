@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { Box, Typography, Grid, CardMedia } from "@mui/material";
-import ProductsChunk from "../../components/productsChunk/productsChunk";
-import ProductCardHorizantal from "../../components/productCardHorizontal/productCardHorizontal";
-import CategoryFooter from "../../components/categoryFooter/categoryFooter";
-import BrandsFooter from "../../components/brandsFooter/brandsFooter";
+import { useEffect, useState } from 'react';
+import { Box, Typography, Grid, CardMedia } from '@mui/material';
+import ProductsChunk from '../../components/productsChunk/productsChunk';
+import ProductCardHorizantal from '../../components/productCardHorizontal/productCardHorizontal';
+import CategoryFooter from '../../components/categoryFooter/categoryFooter';
+import BrandsFooter from '../../components/brandsFooter/brandsFooter';
 import {
   titleStyle,
   boxStyle,
@@ -17,18 +17,17 @@ import {
   gridContainer,
   gridSection,
   gridSectionImage,
-} from "./shopPage-style";
+} from './shopPage-style';
 
 import {
   removeCategoryById,
   getCategoryProductsByCategoryId,
   getCategoryById,
-} from "./helpers";
-import { CategoryType, ProductType } from "../../types";
-import { getCategories, getProducts } from "../../axios";
-type ShopPageProps = {};
+} from './helpers';
+import { CategoryType, ProductType } from '../../types';
+import { getCategories, getProducts } from '../../axios';
 
-const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
+const ShopPage: React.FC = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
 
@@ -43,7 +42,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
     fetchData();
   }, []);
 
-  const c1Products = getCategoryProductsByCategoryId("c1", products);
+  const c1Products = getCategoryProductsByCategoryId('c1', products);
   const categoryProducts = (id: string) =>
     getCategoryProductsByCategoryId(id, products);
 
@@ -52,7 +51,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
       <Box sx={sectionStyle}>
         <Box sx={titleContainer}>
           <Typography variant="body1" sx={titleStyle}>
-            {getCategoryById("c1", categories)?.name}
+            {getCategoryById('c1', categories)?.name}
           </Typography>
         </Box>
         <Box sx={thirdSectionContainer}>
@@ -65,7 +64,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
         </Box>
       </Box>
       <Box sx={secondSectionStyle}>
-        {removeCategoryById("c1", categories).map((category: CategoryType) => {
+        {removeCategoryById('c1', categories).map((category: CategoryType) => {
           const cProducts = categoryProducts(category.id);
           return (
             <Box key={category.id} sx={secondSectionStyle}>
@@ -87,7 +86,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                                 key={index}
                               />
                             );
-                          }
+                          },
                         )}
                       </Box>
                       <Box sx={productsChunkContainer}>
@@ -105,8 +104,8 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                     <CategoryFooter />
                   </Box>
                 ) : (
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                  <Grid container={true} spacing={2}>
+                    <Grid item={true} xs={12}>
                       <Box sx={titleContainer}>
                         <Typography variant="body1" sx={titleStyle}>
                           {category.name}
@@ -121,7 +120,7 @@ const ShopPage: React.FC<ShopPageProps> = (props: ShopPageProps) => {
                                 key={index}
                               />
                             );
-                          }
+                          },
                         )}
                         <BrandsFooter />
                       </Box>

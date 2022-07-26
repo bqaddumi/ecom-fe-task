@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import {
   Avatar,
   Box,
@@ -6,12 +6,12 @@ import {
   Container,
   CssBaseline,
   Typography,
-} from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import { auth, signInWithGoogle } from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { auth, signInWithGoogle } from '../../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const theme = createTheme();
 
@@ -20,7 +20,9 @@ export default function SignIn() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate("/add-product");
+    if (user) {
+      navigate('/add-product');
+    }
   }, [user, navigate]);
 
   return (
@@ -30,20 +32,18 @@ export default function SignIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in with google
           </Typography>
-          <Box
-            sx={{ mt: 1 }}
-          >
+          <Box sx={{ mt: 1 }}>
             <Button
               type="submit"
               fullWidth

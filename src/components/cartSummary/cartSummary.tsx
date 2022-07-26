@@ -8,18 +8,18 @@ import {
   Table,
   Button,
   Link,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import { getCheckout, sendDataToCheckout } from "../../axios";
+} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { getCheckout, sendDataToCheckout } from '../../axios';
 import {
   CART_SUMMARY_TABLE_COLS,
   CHECKOUT_BUTTON,
   CHECKOUT_MULTIPLE_ADDRESS,
-} from "../../consts";
-import { CartItemType, CheckoutType } from "../../types";
-import { numberWithCommas } from "../../helpers";
-import { AlertColor } from "@mui/material/Alert";
-import CustomizedSnackbars from "../../components/snackbar/snackbar";
+} from '../../consts';
+import { CartItemType, CheckoutType } from '../../types';
+import { numberWithCommas } from '../../helpers';
+import { AlertColor } from '@mui/material/Alert';
+import CustomizedSnackbars from '../../components/snackbar/snackbar';
 
 import {
   summaryContainerStyle,
@@ -29,13 +29,13 @@ import {
   checkoutButtonContainerStyle,
   noBorderStyle,
   multipleAddressStyle,
-} from "./cartSummaryStyle";
+} from './cartSummaryStyle';
 
-type CartSummaryProps = {
+interface CartSummaryProps {
   totalPrice: number;
   products: CartItemType[];
   totalQuantity: number;
-};
+}
 
 const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
   const [checkout, setCheckout] = useState<CheckoutType>([]);
@@ -43,8 +43,8 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
     message: string;
     severity: AlertColor;
   }>({
-    message: "",
-    severity: "success",
+    message: '',
+    severity: 'success',
   });
   const { SUMMARY, SUBTOTAL, SHIPPING, ORDER_TOTAL } = CART_SUMMARY_TABLE_COLS;
 
@@ -68,12 +68,12 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
     if (checkoutData.status === 200) {
       setSnackbar({
         message: `Checkout Added! total quantity is ${totalQuantity}`,
-        severity: "success",
+        severity: 'success',
       });
     } else {
       setSnackbar({
         message: `Checkout problem please try again later!`,
-        severity: "error",
+        severity: 'error',
       });
     }
   };
@@ -102,7 +102,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
                 {SHIPPING}
               </TableCell>
               <TableCell sx={summaryCellStyle} align="right">
-                {"$5.00"}
+                {'$5.00'}
               </TableCell>
             </TableRow>
             <TableRow>

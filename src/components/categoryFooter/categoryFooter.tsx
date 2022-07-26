@@ -1,9 +1,9 @@
-import React from "react";
-import { Box } from "@mui/material";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import React from 'react';
+import { Box } from '@mui/material';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
-import { container, footer, button } from "./categoryFooter-style";
-import { SECTION_FOOTER, LEARN_MORE } from "../../consts";
+import { container, footer, button } from './categoryFooter-style';
+import { SECTION_FOOTER, LEARN_MORE } from '../../consts';
 
 const CategoryFooter: React.FC = () => {
   return (

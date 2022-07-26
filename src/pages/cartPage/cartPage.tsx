@@ -1,30 +1,28 @@
-import { useEffect, useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
-import { CartItemType, ProductsImagesType, ProductType } from "../../types";
-import { getCart, getProducts, sendDataToCart } from "../../axios";
-import { useTotalQuantity } from "../../shared/totalQuantityContext";
-import { styled } from "@mui/material/styles";
-import ProductsCartTable from "../../components/productsCartTable/productsCartTable";
-import CartSummary from "../../components/cartSummary/cartSummary";
+import { useEffect, useState } from 'react';
+import { Box, Grid, Theme, Typography } from '@mui/material';
+import { CartItemType, ProductsImagesType, ProductType } from '../../types';
+import { getCart, getProducts, sendDataToCart } from '../../axios';
+import { useTotalQuantity } from '../../shared/totalQuantityContext';
+import { styled } from '@mui/material/styles';
+import ProductsCartTable from '../../components/productsCartTable/productsCartTable';
+import CartSummary from '../../components/cartSummary/cartSummary';
 import {
   titleStyle,
   boxStyle,
   sectionContainer,
   productsTableContainer,
   cartSummaryContainer,
-} from "./cartPageStyle";
-import { SHOPPING_CART } from "../../consts";
+} from './cartPageStyle';
+import { SHOPPING_CART } from '../../consts';
 
-type CartPageProps = {};
-
-const Item = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+const Item = styled(Box)(({ theme }: { theme: Theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   padding: theme.spacing(1),
-  textAlign: "center",
-  color: "inherit",
+  textAlign: 'center',
+  color: 'inherit',
 }));
 
-const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
+const CartPage: React.FC = () => {
   const [products, setProducts] = useState<CartItemType[]>([]);
   const [productsImages, setProductsImages] = useState<ProductsImagesType>([]);
   const [total, setTotal] = useState<number>(0);
@@ -35,8 +33,8 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   const getOrderTotalPrice = (items: CartItemType[]) => {
     let totalPrice = 0;
 
-    for (let i = 0; i < items.length; i++) {
-      totalPrice += items[i].totalPrice;
+    for (const item of items) {
+      totalPrice += item.totalPrice;
     }
 
     setOrderTotalPrice(totalPrice);
@@ -54,9 +52,10 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
 
       let totalPrice = 0;
 
-      for (let i = 0; i < items.length; i++) {
-        totalPrice += items[i].totalPrice;
+      for (const item of items) {
+        totalPrice += item.totalPrice;
       }
+
       setOrderTotalPrice(totalPrice);
 
       const productsImages = products?.data.map((product: ProductType) => ({
@@ -69,8 +68,12 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   }, []);
 
   const onXClicked = (productId: number) => {
-    let existingItem = products.find((item) => item.id === productId);
-    const newProducts = products.filter((item) => item.id !== existingItem?.id);
+    const existingItem = products.find(
+      (item: CartItemType) => item.id === productId,
+    );
+    const newProducts = products.filter(
+      (item: CartItemType) => item.id !== existingItem?.id,
+    );
     const quantity = existingItem?.quantity || 0;
     const newTotalQuantity = total - quantity;
     const cart = {
@@ -78,7 +81,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
       items: newProducts,
       totalQuantity: newTotalQuantity,
     };
-    dispatch({ type: "set", totalQuantity: newTotalQuantity });
+    dispatch({ type: 'set', totalQuantity: newTotalQuantity });
     setTotal(newTotalQuantity);
     setProducts(newProducts);
     sendDataToCart(cart);
@@ -88,12 +91,14 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
   const onIncreaseclicked = (
     productId: number,
     price: number,
-    name: string
+    name: string,
   ) => {
-    const existingItem = products.find((item) => item.id === productId);
+    const existingItem = products.find(
+      (item: CartItemType) => item.id === productId,
+    );
     const newTotal = total + 1;
     setTotal(newTotal);
-    let newProducts = products;
+    const newProducts = products;
     if (!existingItem) {
       newProducts.push({
         id: productId,
@@ -114,17 +119,21 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
 
       sendDataToCart(cart);
     }
-    dispatch({ type: "set", totalQuantity: newTotal });
+    dispatch({ type: 'set', totalQuantity: newTotal });
     getOrderTotalPrice(products);
   };
   const onDecreaseclicked = (productId: number) => {
     let newProducts = products;
 
-    const existingItem = products.find((item) => item.id === productId);
+    const existingItem = products.find(
+      (item: CartItemType) => item.id === productId,
+    );
     const newTotal = total - 1;
     setTotal(newTotal);
     if (existingItem?.quantity === 1) {
-      newProducts = products.filter((item) => item.id !== existingItem.id);
+      newProducts = products.filter(
+        (item: CartItemType) => item.id !== existingItem.id,
+      );
       setProducts(newProducts);
       const cart = {
         changed: true,
@@ -145,7 +154,7 @@ const CartPage: React.FC<CartPageProps> = (props: CartPageProps) => {
         sendDataToCart(cart);
       }
     }
-    dispatch({ type: "set", totalQuantity: newTotal });
+    dispatch({ type: 'set', totalQuantity: newTotal });
     getOrderTotalPrice(products);
   };
 

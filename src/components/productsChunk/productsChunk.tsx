@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Box } from "@mui/material";
-import ProductCard from "../../components/productCard/productCard";
-import PaginationButton from "../../components/paginationButton/paginationButton";
-import { productsContainer, pageButtonContainer } from "./productsChunk-style";
-import { ProductType } from "../../types";
-import { getProductsChunked } from "../../pages/shopPage/helpers";
+import React, { useState } from 'react';
+import { Box } from '@mui/material';
+import ProductCard from '../../components/productCard/productCard';
+import PaginationButton from '../../components/paginationButton/paginationButton';
+import { productsContainer, pageButtonContainer } from './productsChunk-style';
+import { ProductType } from '../../types';
+import { getProductsChunked } from '../../pages/shopPage/helpers';
 
-type ProductsChunkProps = {
+interface ProductsChunkProps {
   products: ProductType[];
   chunkLimit?: number;
-};
+}
 
 const ProductsChunk: React.FC<ProductsChunkProps> = ({
   products = [],
@@ -24,9 +24,9 @@ const ProductsChunk: React.FC<ProductsChunkProps> = ({
   const chunkedProducts = getProductsChunked(products, chunkLimit);
 
   return (
-    <Box width={"100%"}>
+    <Box width={'100%'}>
       <Box sx={productsContainer}>
-        {chunkedProducts[activeIndex]?.map((product) => {
+        {chunkedProducts[activeIndex]?.map((product: ProductType) => {
           const { name, imgUrl, price, id } = product;
           return (
             <Box key={product.id}>
@@ -41,7 +41,7 @@ const ProductsChunk: React.FC<ProductsChunkProps> = ({
         })}
       </Box>
       <Box sx={pageButtonContainer}>
-        {chunkedProducts.map((item, index) => (
+        {chunkedProducts.map((item: ProductType[], index: number) => (
           <Box key={index}>
             <PaginationButton
               key={index}

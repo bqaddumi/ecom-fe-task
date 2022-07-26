@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Box,
   TableRow,
@@ -10,29 +10,29 @@ import {
   CardMedia,
   Typography,
   CardContent,
-} from "@mui/material";
-import { CartItemType, ProductsImagesType } from "../../types";
-import { numberWithCommas } from "../../helpers";
-import { CART_TABLE_COLS } from "../../consts";
+} from '@mui/material';
+import { CartItemType, ProductsImagesType } from '../../types';
+import { numberWithCommas } from '../../helpers';
+import { CART_TABLE_COLS } from '../../consts';
 import {
   tableStyle,
   deleteButtonStyle,
   quantityContainerStyle,
   quantitytitleStyle,
   quantityButtonStyle,
-} from "./productsCartTableStyle";
-import EcomModal from "../modal/modal";
+} from './productsCartTableStyle';
+import EcomModal from '../modal/modal';
 
-type ProductsCartTableProps = {
+interface ProductsCartTableProps {
   products: CartItemType[];
   onXClicked: (productId: number) => void;
   onIncreaseclicked: (productId: number, price: number, name: string) => void;
   onDecreaseclicked: (productId: number) => void;
   productsImages: ProductsImagesType;
-};
+}
 
 const ProductsCartTable: React.FC<ProductsCartTableProps> = (
-  props: ProductsCartTableProps
+  props: ProductsCartTableProps,
 ) => {
   const {
     products = [],
@@ -47,10 +47,10 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
   const [itemSelected, setItemSelected] = useState<CartItemType>();
   const getProductImage = (productId: number) => {
     const product = productsImages.find(
-      (product: { id: number; imgUrl: string }) => product.id === productId
+      (product: { id: number; imgUrl: string }) => product.id === productId,
     );
 
-    const imageUrl = product?.imgUrl || "";
+    const imageUrl = product?.imgUrl || '';
 
     return imageUrl;
   };
@@ -59,7 +59,10 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
     setIsModalOpen(false);
   };
   const isYesClicked = () => {
-    itemSelected && onXClicked(itemSelected.id);
+    if (itemSelected) {
+      onXClicked(itemSelected.id);
+    }
+
     setIsModalOpen(false);
   };
 
@@ -75,25 +78,25 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
             <TableCell align="center">{PRICE}</TableCell>
             <TableCell align="center">{QUANTITY}</TableCell>
             <TableCell align="center">{TOTAL}</TableCell>
-            <TableCell align="center"></TableCell>
+            <TableCell align="center"/>
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => (
+          {products.map((product: CartItemType) => (
             <TableRow
               key={product.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: 'flex' }}>
                   <CardMedia
                     component="img"
-                    sx={{ width: "50%", objectFit: "contain" }}
+                    sx={{ width: '50%', objectFit: 'contain' }}
                     image={getProductImage(product.id)}
                     alt="Product name"
                   />
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <CardContent sx={{ flex: "1 0 auto" }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <CardContent sx={{ flex: '1 0 auto' }}>
                       <Typography
                         variant="subtitle1"
                         color="text.secondary"
@@ -142,7 +145,7 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
                     setIsModalOpen(true);
                   }}
                 >
-                  {"x"}
+                  {'x'}
                 </Box>
                 <EcomModal
                   product={product}
@@ -150,7 +153,7 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
                   isCancelClicked={isCancelClicked}
                   isYesClicked={isYesClicked}
                   handleCloseModal={handleCloseModal}
-                ></EcomModal>
+                />
               </TableCell>
             </TableRow>
           ))}

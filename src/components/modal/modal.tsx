@@ -1,18 +1,18 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { CartItemType } from "../../types";
-import { style } from "./modal-style";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { CartItemType } from '../../types';
+import { style } from './modal-style';
 
-type EcomModalProps = {
+interface EcomModalProps {
   isOpen?: boolean;
   isCancelClicked: () => void;
   isYesClicked: () => void;
   handleCloseModal: () => void;
   product: CartItemType;
-};
+}
 
 const EcomModal: React.FC<EcomModalProps> = (props: EcomModalProps) => {
   const {
@@ -41,18 +41,18 @@ const EcomModal: React.FC<EcomModalProps> = (props: EcomModalProps) => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          <Typography variant="h6" color={"error"} component="span">
+          <Typography variant="h6" color={'error'} component="span">
             Delete
-          </Typography>{" "}
+          </Typography>{' '}
           {product.name}
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Are you sure you want to delete{" "}
-          <Typography component={"span"} color={"error"}>
+          Are you sure you want to delete{' '}
+          <Typography component={'span'} color={'error'}>
             {product.quantity}
-          </Typography>{" "}
-          items of{" "}
-          <Typography component={"span"} color={"error"}>
+          </Typography>{' '}
+          items of{' '}
+          <Typography component={'span'} color={'error'}>
             {product.name}
           </Typography>
           ?

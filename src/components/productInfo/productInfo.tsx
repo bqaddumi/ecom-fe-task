@@ -1,13 +1,13 @@
-import * as React from "react";
-import { Tabs, Tab, Typography, Box } from "@mui/material";
+import * as React from 'react';
+import { Tabs, Tab, Typography, Box } from '@mui/material';
 
 import {
   tabsContainer,
   tabPanelContainer,
   tabPanel,
   indicator,
-} from "./productInfo-style";
-import { PRODUCT_TABS } from "../../consts";
+} from './productInfo-style';
+import { PRODUCT_TABS } from '../../consts';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -16,7 +16,7 @@ interface TabPanelProps {
 }
 
 function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
     <div
@@ -24,7 +24,6 @@ function TabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
       {value === index && (
         <Box sx={tabPanel}>
@@ -38,17 +37,17 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
-type ProductInfoProps = {
+interface ProductInfoProps {
   desc?: string;
   moreInfo?: string;
   reviews?: string;
-};
+}
 
-const ProductInfo: React.FC<ProductInfoProps> = (props) => {
+const ProductInfo: React.FC<ProductInfoProps> = (props: ProductInfoProps) => {
   const { desc, moreInfo, reviews } = props;
   const [value, setValue] = React.useState(0);
   const { DETAILS, INFO, REVIEWS } = PRODUCT_TABS;
@@ -58,7 +57,7 @@ const ProductInfo: React.FC<ProductInfoProps> = (props) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: '100%' }}>
       <Box sx={tabsContainer}>
         <Tabs
           value={value}

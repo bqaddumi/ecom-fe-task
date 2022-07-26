@@ -1,19 +1,16 @@
-import { Link } from "react-router-dom";
-import { Box, AppBar, Toolbar, Typography } from "@mui/material";
+import { Link } from 'react-router-dom';
+import { Box, AppBar, Toolbar, Typography } from '@mui/material';
 import {
   navBarStyles,
   navbarLinkStyles,
   boxContainerStyle,
   navItemsContainer,
   mobileNavContainer,
-} from "./navbar-style";
-import { NAVBAR_ITEMS } from "../../consts";
+} from './navbar-style';
+import { NAVBAR_ITEMS } from '../../consts';
+import MobileNavbar from './mobileNavbar';
 
-import MobileNavbar from "./mobileNavbar";
-
-type NavbarProps = {};
-
-const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
+const Navbar: React.FC = () => {
   const navItems = Object.values(NAVBAR_ITEMS);
   return (
     <Box sx={boxContainerStyle}>
@@ -23,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
             <MobileNavbar />
           </Box>
           <Box sx={navItemsContainer}>
-            {navItems.map((item) => {
+            {navItems.map((item: any) => {
               return (
                 <Typography
                   key={item.name}

@@ -1,4 +1,4 @@
-import { Button, Box, Typography, TextField } from "@mui/material";
+import { Button, Box, Typography, TextField } from '@mui/material';
 import {
   footerContainerStyle,
   titleStyle,
@@ -6,30 +6,28 @@ import {
   subscribeButtonStyle,
   emailInputStyle,
   emailContainerStyles,
-} from "./footer-style";
-import { FOOTER } from "../../consts";
-import { useState } from "react";
+} from './footer-style';
+import { FOOTER } from '../../consts';
+import { useState } from 'react';
 
-type FooterProps = {};
-
-const Footer: React.FC<FooterProps> = (props: FooterProps) => {
+const Footer: React.FC = () => {
   const { TITLE, SUBTITLE, EMAIL_PLACEHOLDER, SUBSCRIBE_BTN, SUBSCRIBED } =
     FOOTER;
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
   const [btnLabel, setBtnLabel] = useState<string>(SUBSCRIBE_BTN);
 
   const validateEmail = (email: string) => {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       return true;
     }
-    alert("You have entered an invalid email address!");
+    alert('You have entered an invalid email address!');
     return false;
   };
 
   const onSubscribeClicked = () => {
     if (validateEmail(email)) {
       setBtnLabel(SUBSCRIBED);
-      setEmail("");
+      setEmail('');
     }
   };
   return (
@@ -42,7 +40,9 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
           variant="outlined"
           placeholder={EMAIL_PLACEHOLDER}
           sx={emailInputStyle}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(
+            e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+          ) => setEmail(e.target.value)}
         />
         <Button sx={subscribeButtonStyle} onClick={onSubscribeClicked}>
           {btnLabel}

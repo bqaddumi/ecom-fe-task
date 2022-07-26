@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import {
   paginationContainer,
   pageStyle,
   pageButton,
   hoverEffect,
-} from "./paginationButton-style";
+} from './paginationButton-style';
 
-type PaginationButtonProps = {
+interface PaginationButtonProps {
   isActive?: boolean;
   onTabClicked: () => void;
-};
+}
 
 const PaginationButton: React.FC<PaginationButtonProps> = (
-  props: PaginationButtonProps
+  props: PaginationButtonProps,
 ) => {
   const [isHover, setIsHover] = useState<boolean>(false);
   const { isActive, onTabClicked } = props;
@@ -29,7 +29,7 @@ const PaginationButton: React.FC<PaginationButtonProps> = (
         onMouseOut={() => setIsHover(false)}
         sx={pageButton}
       >
-        <Box onMouseEnter={() => setIsHover(true)} sx={buttonStyle}></Box>
+        <Box onMouseEnter={() => setIsHover(true)} sx={buttonStyle} />
       </Box>
     </Box>
   );

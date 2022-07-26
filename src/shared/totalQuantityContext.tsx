@@ -1,13 +1,19 @@
-import { createContext, ReactNode, useContext, useReducer } from "react";
+import {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useReducer,
+} from 'react';
 
 const defaultState = {
   totalQuantity: 0,
 };
 
-export type ActionType = {
-  type: "set";
+export interface ActionType {
+  type: 'set';
   totalQuantity: number;
-};
+}
 export type State = typeof defaultState;
 export type Dispatch = (action: ActionType) => void;
 
@@ -16,14 +22,21 @@ const TotalQuantityContext = createContext<{
   dispatch: Dispatch;
 } | null>(null);
 
-const totalQuantityReducer = (state: State, action: ActionType) => {
+const totalQuantityReducer = (
+  state: State,
+  action: ActionType,
+): { totalQuantity: number } => {
   switch (action.type) {
-    case "set":
-      return { totalQuantity: 0 | action.totalQuantity };
+    case 'set':
+      return { totalQuantity: 0 || action.totalQuantity };
   }
 };
 
-export function TotalQuantityProvider({ children }: { children: ReactNode }) {
+export function TotalQuantityProvider({
+  children,
+}: {
+  children: ReactNode;
+}): ReactElement<any, any> {
   const [state, dispatch] = useReducer(totalQuantityReducer, defaultState);
   return (
     <TotalQuantityContext.Provider value={{ state, dispatch }}>
@@ -32,12 +45,16 @@ export function TotalQuantityProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export const useTotalQuantity = () => {
+export const useTotalQuantity = (): {
+  state: State;
+  dispatch: Dispatch;
+} => {
   const totalQuantity = useContext(TotalQuantityContext);
-  if (!totalQuantity)
+  if (!totalQuantity) {
     throw new Error(
-      "useTotalQuantity must be used inside a totalQuantity provider"
+      'useTotalQuantity must be used inside a totalQuantity provider',
     );
+  }
 
   return totalQuantity;
 };

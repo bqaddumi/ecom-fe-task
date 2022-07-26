@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -10,16 +10,16 @@ import {
   Select,
   SelectChangeEvent,
   Alert,
-} from "@mui/material";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, logout } from "../../firebase";
+} from '@mui/material';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, logout } from '../../firebase';
 import {
   container,
   imagesContainer,
   addProductButton,
-} from "./addProduct-style";
-import { getCategories, getProducts, sendDataToProducts } from "../../axios";
-import { ProductType, CategoryType } from "../../types";
+} from './addProduct-style';
+import { getCategories, getProducts, sendDataToProducts } from '../../axios';
+import { ProductType, CategoryType } from '../../types';
 
 const AddProductPage: React.FC = () => {
   const [user] = useAuthState(auth);
@@ -30,16 +30,18 @@ const AddProductPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [currentImage, setCurrentImage] = useState<string>("");
+  const [currentImage, setCurrentImage] = useState<string>('');
 
   const [images, setImages] = useState<string[]>([]);
-  const [productName, setProductName] = useState<string>("");
-  const [productPrice, setProductPrice] = useState<string>("");
-  const [productDesc, setProductDesc] = useState<string>("");
-  const [categoryId, setCategoryId] = useState<string>("");
+  const [productName, setProductName] = useState<string>('');
+  const [productPrice, setProductPrice] = useState<string>('');
+  const [productDesc, setProductDesc] = useState<string>('');
+  const [categoryId, setCategoryId] = useState<string>('');
 
   useEffect(() => {
-    if (!user) navigate("/login");
+    if (!user) {
+      navigate('/login');
+    }
   }, [user, navigate]);
 
   useEffect(() => {
@@ -57,9 +59,9 @@ const AddProductPage: React.FC = () => {
     setCurrentImage(e.target.value);
 
     if (validateImage(e.target.value)) {
-      setImages((oldState) => [...oldState, e.target.value]);
+      setImages((oldState: string[]) => [...oldState, e.target.value]);
       setIsImage(true);
-      setCurrentImage("");
+      setCurrentImage('');
     } else {
       setIsImage(false);
     }
@@ -67,12 +69,12 @@ const AddProductPage: React.FC = () => {
 
   const validateImage = (image: string) => {
     return /^(?:(?:https?:)\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/.test(
-      image
+      image,
     );
   };
 
   const handleDelete = (item: string, index: number) => {
-    let arr = [...images];
+    const arr = [...images];
     arr.splice(index, 1);
     setImages(arr);
   };
@@ -103,10 +105,10 @@ const AddProductPage: React.FC = () => {
       const { status } = await sendDataToProducts([...products, product]);
       if (status === 200) {
         setIsSubmitted(true);
-        setCategoryId("c1");
-        setProductName("");
-        setProductPrice("");
-        setProductDesc("");
+        setCategoryId('c1');
+        setProductName('');
+        setProductPrice('');
+        setProductDesc('');
         setImages([]);
         setTimeout(() => {
           setIsSubmitted(false);
@@ -119,7 +121,7 @@ const AddProductPage: React.FC = () => {
 
   const onLogoutClicked = () => {
     logout();
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
@@ -129,7 +131,7 @@ const AddProductPage: React.FC = () => {
       <Box
         component="form"
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}
         noValidate
         autoComplete="off"
@@ -138,26 +140,33 @@ const AddProductPage: React.FC = () => {
           <TextField
             required
             label="Product Name"
-            onChange={(e) => setProductName(e.target.value)}
+            // e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+            onChange={(
+              e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+            ) => setProductName(e.target.value)}
             value={productName}
           />
           <TextField
             required
             label="Product Description"
-            onChange={(e) => setProductDesc(e.target.value)}
+            onChange={(
+              e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+            ) => setProductDesc(e.target.value)}
             value={productDesc}
           />
           <TextField
             required
             type="number"
             label="Product Price"
-            onChange={(e) => setProductPrice(e.target.value)}
+            onChange={(
+              e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+            ) => setProductPrice(e.target.value)}
             value={productPrice}
           />
         </Box>
         <Box sx={imagesContainer}>
           <Box>
-            {images.map((item, index) => (
+            {images.map((item: string, index: number) => (
               <Chip
                 key={index}
                 size="small"
@@ -181,11 +190,11 @@ const AddProductPage: React.FC = () => {
             <Select
               required
               placeholder="Chose Category.."
-              value={categoryId || "c1"}
+              value={categoryId || 'c1'}
               label="Choose a category"
               onChange={onCategoryIdChanged}
             >
-              {categories.map((category, index) => {
+              {categories.map((category: CategoryType, index: number) => {
                 return (
                   <MenuItem key={index} value={category.id}>
                     {category.name}

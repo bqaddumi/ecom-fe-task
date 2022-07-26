@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Box, CardMedia } from "@mui/material";
-import { ChevronLeftOutlined, ChevronRightOutlined } from "@mui/icons-material";
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Box, CardMedia } from '@mui/material';
+import { ChevronLeftOutlined, ChevronRightOutlined } from '@mui/icons-material';
 
 import {
   container,
@@ -9,25 +9,25 @@ import {
   toggleProductscontainer,
   chevronContainer,
   imageStyle,
-} from "./productPage-style";
-import { useProducts } from "../../shared/productsContext";
-import { ProductType } from "../../types";
+} from './productPage-style';
+import { useProducts } from '../../shared/productsContext';
+import { ProductType } from '../../types';
 
-import ProductPreviewImages from "../../components/productPreviewImages/productPreviewImages";
-import ProductInfo from "../../components/productInfo/productInfo";
-import ProductDetails from "../../components/productDetails/productDetails";
+import ProductPreviewImages from '../../components/productPreviewImages/productPreviewImages';
+import ProductInfo from '../../components/productInfo/productInfo';
+import ProductDetails from '../../components/productDetails/productDetails';
 
-type ProductPageProps = {
+interface ProductPageProps {
   scrollToTop: () => void;
-};
+}
 
 const ProductPage: React.FC<ProductPageProps> = ({
   scrollToTop,
 }: ProductPageProps) => {
   const navigate = useNavigate();
   const [product, setProduct] = useState<ProductType>();
-  const [selectedImage, setSelectedImage] = useState<string>("");
-  const { productId = "" } = useParams();
+  const [selectedImage, setSelectedImage] = useState<string>('');
+  const { productId = '' } = useParams();
   const {
     state: { products },
   } = useProducts();
@@ -39,7 +39,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
 
   useEffect(() => {
     const productN = products.find(
-      (product: ProductType) => product.id === parseInt(productId, 10)
+      (product: ProductType) => product.id === parseInt(productId, 10),
     );
     setProduct(productN);
   }, [productId, products]);
@@ -49,12 +49,12 @@ const ProductPage: React.FC<ProductPageProps> = ({
   };
 
   const previewImgs = product?.previewImages || [
-    product?.imgUrl ? product?.imgUrl : "",
+    product?.imgUrl ? product?.imgUrl : '',
   ];
 
   const findProductIndex = () => {
     const productIndex = products.findIndex(
-      (product: ProductType) => product.id === parseInt(productId, 10)
+      (product: ProductType) => product.id === parseInt(productId, 10),
     );
 
     return productIndex;
@@ -62,22 +62,22 @@ const ProductPage: React.FC<ProductPageProps> = ({
 
   const changeProduct = (direction: string) => {
     let index = findProductIndex();
-    if (index === 0 && products && direction === "left") {
+    if (index === 0 && products && direction === 'left') {
       index = products.length;
-    } else if (index === products.length - 1 && direction === "right") {
+    } else if (index === products.length - 1 && direction === 'right') {
       index = -1;
     }
     let nextProduct: ProductType;
     switch (direction) {
-      case "left":
+      case 'left':
         nextProduct = products[index - 1];
-        setSelectedImage("");
+        setSelectedImage('');
         navigate(`/products/${nextProduct.id}`);
         scrollToTop();
         break;
-      case "right":
+      case 'right':
         nextProduct = products[index + 1];
-        setSelectedImage("");
+        setSelectedImage('');
         navigate(`/products/${nextProduct.id}`);
         scrollToTop();
 
@@ -104,11 +104,11 @@ const ProductPage: React.FC<ProductPageProps> = ({
         </Box>
         <ProductDetails product={product} />
         <Box sx={toggleProductscontainer}>
-          <Box sx={chevronContainer} onClick={() => changeProduct("left")}>
+          <Box sx={chevronContainer} onClick={() => changeProduct('left')}>
             <ChevronLeftOutlined />
           </Box>
           <Box sx={chevronContainer}>
-            <ChevronRightOutlined onClick={() => changeProduct("right")} />
+            <ChevronRightOutlined onClick={() => changeProduct('right')} />
           </Box>
         </Box>
       </Box>
@@ -116,7 +116,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
         <ProductInfo
           desc={product?.desc}
           moreInfo={`${product?.name} Price: $${product?.price.toFixed(2)}`}
-          reviews={"Good product!"}
+          reviews={'Good product!'}
         />
       </Box>
     </Box>

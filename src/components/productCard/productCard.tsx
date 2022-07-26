@@ -1,20 +1,20 @@
-import React from "react";
-import { Box, CardMedia } from "@mui/material";
-import { numberWithCommas } from "../../helpers";
+import React from 'react';
+import { Box, CardMedia } from '@mui/material';
+import { numberWithCommas } from '../../helpers';
 import {
   containerStyle,
   productImage,
   nameStyle,
   priceStyle,
-} from "./productCard-style";
-import { useNavigate } from "react-router-dom";
+} from './productCard-style';
+import { useNavigate } from 'react-router-dom';
 
-type ProductCardProps = {
+interface ProductCardProps  {
   imgUrl: string;
   name: string;
   price: number;
   productId: number;
-};
+}
 
 const ProductCard: React.FC<ProductCardProps> = (props: ProductCardProps) => {
   const navigate = useNavigate();

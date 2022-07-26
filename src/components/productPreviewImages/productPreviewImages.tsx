@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { Box, CardMedia } from "@mui/material";
+import React, { useState } from 'react';
+import { Box, CardMedia } from '@mui/material';
 import {
   imageStyle,
   containerDesktop,
   selectedImage,
-} from "./productPreviewImages-style";
+} from './productPreviewImages-style';
 
-type ProductPreviewImagesProps = {
+interface ProductPreviewImagesProps {
   images: string[];
   onImageClicked: (image: string) => void;
-};
+}
 
 const ProductPreviewImages: React.FC<ProductPreviewImagesProps> = (
-  props: ProductPreviewImagesProps
+  props: ProductPreviewImagesProps,
 ) => {
   const [selectedImg, setSelectedImg] = useState<number>(0);
 

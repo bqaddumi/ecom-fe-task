@@ -1,9 +1,9 @@
-import axios from "axios";
-import { CartType, CheckoutType, ProductType } from "./types";
+import axios from 'axios';
+import { CartType, CheckoutType, ProductType } from './types';
 
 const axiosClient = axios.create();
 
-axiosClient.defaults.baseURL = "https://test-50167.firebaseio.com";
+axiosClient.defaults.baseURL = 'https://test-50167.firebaseio.com';
 
 export const getCart = async () => {
   return await axiosClient.get(`/cart.json`);

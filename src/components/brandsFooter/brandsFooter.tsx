@@ -1,8 +1,8 @@
-import React from "react";
-import { Box, CardMedia } from "@mui/material";
+import React from 'react';
+import { Box, CardMedia } from '@mui/material';
 
-import { BRANDS_IMAGES } from "../../consts";
-import { container, imageStyle } from "./brandsFooter-style";
+import { BRANDS_IMAGES } from '../../consts';
+import { container, imageStyle } from './brandsFooter-style';
 
 const BrandsFooter: React.FC = () => {
   return (
