@@ -30,7 +30,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "paths": {
-      "tslib": ["path/to/node_modules/tslib/tslib.d.ts"]
+      "tslib": ["./node_modules/tslib/tslib.d.ts"]
     }
   },
   "exclude": [
