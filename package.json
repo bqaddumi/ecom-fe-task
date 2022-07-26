@@ -31,6 +31,9 @@
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "prod": "node -e \"require('fs').rename('build/index.html', 'build/200.html', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\" && surge build ecom-bashar.surge.sh",
+    "prettier": "prettier src --check",
+    "lint-staged": "lint-staged --config lint-staged.js",
+    "husky-install": "husky install",
     "buildProd": "npm run build && npm run prod"
   },
   "eslintConfig": {
@@ -52,7 +55,10 @@
     ]
   },
   "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
+    "tsc-files": "^1.1.3",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^5.0.0"
