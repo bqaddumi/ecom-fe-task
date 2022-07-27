@@ -29,7 +29,7 @@ import {
   checkoutButtonContainerStyle,
   noBorderStyle,
   multipleAddressStyle,
-} from './cartSummaryStyle';
+} from './cartSummary-Style';
 
 interface CartSummaryProps {
   totalPrice: number;

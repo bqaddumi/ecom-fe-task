@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Link, To, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -27,7 +28,6 @@ import {
   DARK,
   LIGHT,
 } from '../../consts';
-import React from 'react';
 import {
   cartLinkContainerStyle,
   titleStyle,
@@ -48,7 +48,7 @@ const MobileNavbar: React.FC = () => {
     state: { totalFavorite },
   } = useTotalFavorite();
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

@@ -12,7 +12,7 @@ import {
   sectionContainer,
   productsTableContainer,
   cartSummaryContainer,
-} from './cartPageStyle';
+} from './cartPage-style';
 import { SHOPPING_CART } from '../../consts';
 
 const Item = styled(Box)(({ theme }: { theme: Theme }) => ({

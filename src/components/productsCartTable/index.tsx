@@ -20,7 +20,7 @@ import {
   quantityContainerStyle,
   quantitytitleStyle,
   quantityButtonStyle,
-} from './productsCartTableStyle';
+} from './productsCartTable-style';
 import EcomModal from '../modal';
 
 interface ProductsCartTableProps {
