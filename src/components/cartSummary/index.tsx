@@ -31,6 +31,8 @@ import {
   multipleAddressStyle,
 } from './cartSummary-Style';
 
+// TODO: need to be refactored
+
 interface CartSummaryProps {
   totalPrice: number;
   products: CartItemType[];
