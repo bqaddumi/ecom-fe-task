@@ -39,7 +39,7 @@ const Main: React.FC = () => {
               <Route path="/add-product" element={<AddProductPage />} />
               <Route path="/login" element={<Login />} />
             </Routes>
-          </ListItem>          
+          </ListItem>
           <SubscribeForm />
           <FooterLinks />
         </Stack>
