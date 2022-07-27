@@ -60,6 +60,55 @@ const PRODUCT_TABS = {
   REVIEWS: 'REVIEWS',
 };
 
+const FOOTER_LINKS_SECOND_SECTION = [
+  {
+    NAME: 'Our Stores',
+    LINKS: [
+      '501 Floor, Nguyen Ngoc Vu, Cau Giay, Ha Noi',
+      '741 - 11A Sandiago, L.A City, USA',
+      '5thFloor, 169 Green Lakes, WestBrown, Liverpool City',
+      '628 Brooklyn Street, Fulham District, Wales',
+      '10001 Street, WinLow District, Mexico',
+      '1st Floor BrickHouse, 250 Wall Street, C.A City UK',
+    ],
+  },
+  {
+    NAME: 'My Account',
+    LINKS: [
+      'My Cart',
+      'Check Out',
+      'Wishlist',
+      'Team & Policy',
+      'Your Account',
+    ],
+  },
+  {
+    NAME: 'Information',
+    LINKS: [
+      'Shipping & Return',
+      'Gift Cards',
+      'Track My Order',
+      'Team & Policy',
+      'FAQs',
+    ],
+  },
+  {
+    NAME: 'How to Buy',
+    LINKS: [
+      'Making Payments',
+      'Delivary Options',
+      'Buyer Protection',
+      'New User Guide',
+      'Partner Ship',
+    ],
+  },
+];
+
+const FOOTER_LINKS_FIRST_SECTION = [
+  { NAME: 'Our Office Address', VALUE: '169 Florida Ave, L.A City' },
+  { NAME: 'Please call us', VALUE: '(+84) 12346869669' },
+];
+
 export {
   CART_LINK,
   NAVBAR_ITEMS,
@@ -77,4 +126,6 @@ export {
   BRANDS_IMAGES,
   ADD_TO_CART,
   PRODUCT_TABS,
+  FOOTER_LINKS_SECOND_SECTION,
+  FOOTER_LINKS_FIRST_SECTION,
 };

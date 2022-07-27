@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, CardMedia } from '@mui/material';
 
 import { BRANDS_IMAGES } from '../../consts';
-import { container, imageStyle } from './brandsFooter-style';
+import { container, imageStyle } from './brands-style';
 
-const BrandsFooter: React.FC = () => {
+const Brands: React.FC = () => {
   return (
     <Box sx={container}>
       {BRANDS_IMAGES.map((imgLink: string, index: number) => {
@@ -22,4 +22,4 @@ const BrandsFooter: React.FC = () => {
   );
 };
 
-export default BrandsFooter;
+export default Brands;

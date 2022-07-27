@@ -6,11 +6,11 @@ import {
   subscribeButtonStyle,
   emailInputStyle,
   emailContainerStyles,
-} from './footer-style';
+} from './subscribeForm-style';
 import { FOOTER } from '../../consts';
 import { useState } from 'react';
 
-const Footer: React.FC = () => {
+const SubscribeForm: React.FC = () => {
   const { TITLE, SUBTITLE, EMAIL_PLACEHOLDER, SUBSCRIBE_BTN, SUBSCRIBED } =
     FOOTER;
   const [email, setEmail] = useState<string>('');
@@ -52,4 +52,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default SubscribeForm;

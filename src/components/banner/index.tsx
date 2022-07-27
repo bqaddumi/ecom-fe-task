@@ -2,10 +2,10 @@ import React from 'react';
 import { Box } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
-import { container, footer, button } from './categoryFooter-style';
+import { container, footer, button } from './banner-style';
 import { SECTION_FOOTER, LEARN_MORE } from '../../consts';
 
-const CategoryFooter: React.FC = () => {
+const Banner: React.FC = () => {
   return (
     <Box sx={container}>
       <Box sx={footer}> {SECTION_FOOTER}</Box>
@@ -16,4 +16,4 @@ const CategoryFooter: React.FC = () => {
   );
 };
 
-export default CategoryFooter;
+export default Banner;

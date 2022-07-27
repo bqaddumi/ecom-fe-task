@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from '../header';
 import Navbar from '../navbar';
-import Footer from '../footer';
+import SubscribeForm from '../subscribeForm';
 import { mainContainer, bodyScollableBoxstyle, listItem } from './main-style';
 import CartPage from '../../pages/cartPage';
 import ShopPage from '../../pages/shopPage';
@@ -39,9 +39,8 @@ const Main: React.FC = () => {
               <Route path="/add-product" element={<AddProductPage />} />
               <Route path="/login" element={<Login />} />
             </Routes>
-          </ListItem>
-
-          <Footer />
+          </ListItem>          
+          <SubscribeForm />
           <FooterLinks />
         </Stack>
       </Box>

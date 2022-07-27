@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Box, Typography, Grid, CardMedia } from '@mui/material';
 import ProductsChunk from '../../components/productsChunk';
 import ProductCardHorizantal from '../../components/productCardHorizontal';
-import CategoryFooter from '../../components/categoryFooter';
-import BrandsFooter from '../../components/brandsFooter';
+import Banner from '../../components/banner';
+import Brands from '../../components/brands';
 import {
   titleStyle,
   boxStyle,
@@ -101,7 +101,7 @@ const ShopPage: React.FC = () => {
                         alt="JBL speaker"
                       />
                     </Box>
-                    <CategoryFooter />
+                    <Banner />
                   </Box>
                 ) : (
                   <Grid container={true} spacing={2}>
@@ -122,7 +122,7 @@ const ShopPage: React.FC = () => {
                             );
                           },
                         )}
-                        <BrandsFooter />
+                        <Brands />
                       </Box>
                     </Grid>
                   </Grid>
