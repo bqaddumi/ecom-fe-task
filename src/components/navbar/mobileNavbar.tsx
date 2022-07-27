@@ -1,4 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, To, useNavigate } from 'react-router-dom';
 import {
   Box,
   IconButton,
@@ -6,40 +7,35 @@ import {
   MenuItem,
   Menu,
   Badge,
-} from "@mui/material";
+} from '@mui/material';
 import {
   ShoppingCartOutlined,
   FavoriteBorderOutlined,
-} from "@mui/icons-material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useTotalQuantity } from "../../shared/totalQuantityContext";
-import { useTotalFavorite } from "../../shared/favoriteContext";
+} from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useTotalQuantity } from '../../shared/totalQuantityContext';
+import { useTotalFavorite } from '../../shared/favoriteContext';
 import {
   navbarLinkStyles,
   headerContainer,
   iconsContainer,
   iconStyle,
-} from "./navbar-style";
+} from './navbar-style';
 import {
   NAVBAR_ITEMS,
   HEADER_TITLE,
   CART_LINK,
   DARK,
   LIGHT,
-} from "../../consts";
-import React from "react";
+} from '../../consts';
 import {
   cartLinkContainerStyle,
   titleStyle,
   balanceStyle,
-} from "../header/header-style";
-import { useDarkTheme } from "../../shared/darkThemeContext";
+} from '../header/header-style';
+import { useDarkTheme } from '../../shared/darkThemeContext';
 
-type MobileNavbarProps = {};
-
-const MobileNavbar: React.FC<MobileNavbarProps> = (
-  props: MobileNavbarProps
-) => {
+const MobileNavbar: React.FC = () => {
   const {
     state: { isDark },
     dispatch,
@@ -52,7 +48,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
     state: { totalFavorite },
   } = useTotalFavorite();
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -74,9 +70,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
-          aria-controls={open ? "positioned-menu" : undefined}
+          aria-controls={open ? 'positioned-menu' : undefined}
           aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
+          aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
           <MenuIcon />
@@ -86,13 +82,13 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
           {HEADER_TITLE}
         </Typography>
         <Box sx={iconsContainer}>
-          <Badge badgeContent={totalFavorite || "0"} color="error">
+          <Badge badgeContent={totalFavorite || '0'} color="error">
             <FavoriteBorderOutlined sx={iconStyle} />
           </Badge>
-          <Badge badgeContent={totalQuantity || "0"} color="error">
+          <Badge badgeContent={totalQuantity || '0'} color="error">
             <ShoppingCartOutlined
               sx={iconStyle}
-              onClick={() => navigate("/cart")}
+              onClick={() => navigate('/cart')}
             />
           </Badge>
         </Box>
@@ -104,37 +100,56 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
         open={open}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
       >
-        {navItems.map((item, index) => {
-          return (
-            <Link key={index} to={item.link} style={navbarLinkStyles}>
-              <MenuItem onClick={handleClose}>{item.name}</MenuItem>
-            </Link>
-          );
-        })}
+        {navItems.map(
+          (
+            item: {
+              link: To;
+              name:
+                | string
+                | number
+                | boolean
+                | React.ReactElement<
+                    any,
+                    string | React.JSXElementConstructor<any>
+                  >
+                | React.ReactFragment
+                | React.ReactPortal
+                | null
+                | undefined;
+            },
+            index: React.Key,
+          ) => {
+            return (
+              <Link key={index} to={item.link} style={navbarLinkStyles}>
+                <MenuItem onClick={handleClose}>{item.name}</MenuItem>
+              </Link>
+            );
+          },
+        )}
         <MenuItem onClick={handleClose}>
-          <Box sx={cartLinkContainerStyle} onClick={() => navigate("/cart")}>
-            <Badge badgeContent={totalQuantity || "0"} color="error">
+          <Box sx={cartLinkContainerStyle} onClick={() => navigate('/cart')}>
+            <Badge badgeContent={totalQuantity || '0'} color="error">
               <ShoppingCartOutlined />
             </Badge>
             <Typography component="span" sx={titleStyle}>
               {CART_LINK}
             </Typography>
             <Typography component="div" sx={balanceStyle}>
-              {"$0.00"}
+              {'$0.00'}
             </Typography>
           </Box>
         </MenuItem>
         <MenuItem
           onClick={() => {
-            dispatch("toggle");
+            dispatch('toggle');
             setTimeout(() => handleClose(), 500);
           }}
         >
@@ -146,16 +161,3 @@ const MobileNavbar: React.FC<MobileNavbarProps> = (
 };
 
 export default MobileNavbar;
-
-/*  <IconButton
-       id="demo-positioned-button"
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        sx={{ mr: 2 }}
-      >
-        <MenuIcon />
-      </IconButton>
-      
-       */

@@ -1,10 +1,10 @@
-import  { createContext, ReactNode, useContext, useReducer } from "react";
+import { createContext, ReactNode, useContext, useReducer } from 'react';
 
 const defaultState = {
   isDark: false,
 };
 
-export type ActionType = "toggle";
+export type ActionType = 'toggle';
 export type State = typeof defaultState;
 export type Dispatch = (action: ActionType) => void;
 
@@ -15,7 +15,7 @@ const DarkThemeContext = createContext<{
 
 const darkThemeReducer = (state: State, action: ActionType) => {
   switch (action) {
-    case "toggle":
+    case 'toggle':
       return { isDark: !state.isDark };
   }
 };
@@ -31,8 +31,9 @@ export function DarkThemeProvider({ children }: { children: ReactNode }) {
 
 export const useDarkTheme = () => {
   const darkTheme = useContext(DarkThemeContext);
-  if (!darkTheme)
-    throw new Error("useDarkTheme must be used inside a darkTheme provider");
+  if (!darkTheme) {
+    throw new Error('useDarkTheme must be used inside a darkTheme provider');
+  }
 
   return darkTheme;
 };

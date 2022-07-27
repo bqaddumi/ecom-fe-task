@@ -1,14 +1,20 @@
-import { createContext, ReactNode, useContext, useReducer } from "react";
-import { ProductType } from "../types";
+import {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useReducer,
+} from 'react';
+import { ProductType } from '../types';
 
 const defaultState = {
   products: [],
 };
 
-export type ActionType = {
-  type: "set";
+export interface ActionType {
+  type: 'set';
   products: ProductType[] | any;
-};
+}
 export type State = typeof defaultState;
 export type Dispatch = (action: ActionType) => void;
 
@@ -19,12 +25,16 @@ const ProductsContext = createContext<{
 
 const productsReducer = (state: State, action: ActionType) => {
   switch (action.type) {
-    case "set":
-      return { products:  action.products };
+    case 'set':
+      return { products: action.products };
   }
 };
 
-export function ProductsProvider({ children }: { children: ReactNode }) {
+export function ProductsProvider({
+  children,
+}: {
+  children: ReactNode;
+}): ReactElement<any, any> {
   const [state, dispatch] = useReducer(productsReducer, defaultState);
   return (
     <ProductsContext.Provider value={{ state, dispatch }}>
@@ -33,10 +43,14 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export const useProducts = () => {
+export const useProducts = (): {
+  state: State;
+  dispatch: Dispatch;
+} => {
   const products = useContext(ProductsContext);
-  if (!products)
-    throw new Error("useProducts must be used inside a products provider");
+  if (!products) {
+    throw new Error('useProducts must be used inside a products provider');
+  }
 
   return products;
 };
