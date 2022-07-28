@@ -10,6 +10,7 @@ const Brands: React.FC = () => {
       {BRANDS_IMAGES.map((imgLink: string, index: number) => {
         return (
           <CardMedia
+            data-testid={`brand${index}`}
             key={index}
             component="img"
             sx={imageStyle}

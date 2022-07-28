@@ -78,7 +78,7 @@ const ProductsCartTable: React.FC<ProductsCartTableProps> = (
             <TableCell align="center">{PRICE}</TableCell>
             <TableCell align="center">{QUANTITY}</TableCell>
             <TableCell align="center">{TOTAL}</TableCell>
-            <TableCell align="center"/>
+            <TableCell align="center" />
           </TableRow>
         </TableHead>
         <TableBody>

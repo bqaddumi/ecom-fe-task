@@ -118,7 +118,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
       existingItem.quantity += quantity;
       existingItem.totalPrice =
         existingItem.price * quantity + existingItem.totalPrice;
-      const itemIndex = items.findIndex((item: CartItemType) => item.id === existingItem.id);
+      const itemIndex = items.findIndex(
+        (item: CartItemType) => item.id === existingItem.id,
+      );
       newItems[itemIndex] = existingItem;
     }
     totalQuantityContext.dispatch({ type: 'set', totalQuantity: newTotal });
@@ -157,7 +159,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
         <Box sx={quantityContainerStyle}>
           <Box
             sx={quantityButtonStyle}
-            onClick={() => quantity > 1 && setQuantity((prev: number) => prev - 1)}
+            onClick={() =>
+              quantity > 1 && setQuantity((prev: number) => prev - 1)
+            }
           >
             <Remove />
           </Box>

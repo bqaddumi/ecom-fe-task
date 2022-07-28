@@ -7,10 +7,13 @@ import { SECTION_FOOTER, LEARN_MORE } from '../../consts';
 
 const Banner: React.FC = () => {
   return (
-    <Box sx={container}>
-      <Box sx={footer}> {SECTION_FOOTER}</Box>
-      <Box sx={button}>
-        {LEARN_MORE} <ArrowRightAltIcon />
+    <Box data-testid="banner-container" sx={container}>
+      <Box data-testid="section-footer" sx={footer}>
+        {SECTION_FOOTER}
+      </Box>
+      <Box data-testid="learn-more-button" sx={button}>
+        {LEARN_MORE}
+        <ArrowRightAltIcon />
       </Box>
     </Box>
   );

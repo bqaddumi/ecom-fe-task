@@ -9,7 +9,7 @@ import {
 } from './productCard-style';
 import { useNavigate } from 'react-router-dom';
 
-interface ProductCardProps  {
+interface ProductCardProps {
   imgUrl: string;
   name: string;
   price: number;
