@@ -1,3 +1,5 @@
+import { To } from 'react-router-dom';
+
 export interface ProductType {
   id: number;
   desc: string;
@@ -37,4 +39,17 @@ export interface CategoryType {
   id: string;
   name: string;
   image: string;
+}
+
+export interface NavItemType {
+  link: To;
+  name:
+    | string
+    | number
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | React.ReactFragment
+    | React.ReactPortal
+    | null
+    | undefined;
 }

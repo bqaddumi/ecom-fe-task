@@ -8,7 +8,7 @@ import {
   mobileNavContainer,
 } from './navbar-style';
 import { NAVBAR_ITEMS } from '../../consts';
-import MobileNavbar from './mobileNavbar';
+import MobileNavbar from '../mobileNavbar';
 
 const Navbar: React.FC = () => {
   const navItems = Object.values(NAVBAR_ITEMS);
