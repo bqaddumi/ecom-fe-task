@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  quantityContainerStyle,
-  quantityButtonStyle,
-  quantitytitleStyle,
   priceStyle,
   detailsContainer,
   productQuantityAndFav,
@@ -22,17 +19,12 @@ import {
 } from '../../axios';
 import { numberWithCommas } from '../../helpers';
 import { Box } from '@mui/system';
-import {
-  Remove,
-  Add,
-  Favorite,
-  FavoriteBorder,
-  Autorenew,
-} from '@mui/icons-material';
-import { Typography, Button, AlertColor } from '@mui/material';
+import { Autorenew } from '@mui/icons-material';
+import { Typography, Button } from '@mui/material';
+import ProductCounter from './productCounter';
+import FavProduct from './FavProduct';
 import { ADD_TO_CART } from '../../consts';
 import { useTotalQuantity } from '../../shared/totalQuantityContext';
-import CustomizedSnackbars from '../snackbar';
 import { useTotalFavorite } from '../../shared/favoriteContext';
 
 interface ProductDetailsProps {
@@ -48,13 +40,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
   const { product } = props;
   const [quantity, setQuantity] = useState<number>(1);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  const [snackbar, setSnackbar] = useState<{
-    message: string;
-    severity: AlertColor;
-  }>({
-    message: '',
-    severity: 'success',
-  });
   const [cart, setCart] = useState<CartType>({
     changed: false,
     items: [],
@@ -66,9 +51,13 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
     const favProduct = await getFavoriteProducts();
 
     const resultFavProducts = favProduct.data || [];
+
+    // Check if the current product is favorite
     const isFav = !!resultFavProducts?.find(
       (e: { id: number | undefined }) => e.id === product?.id,
     );
+
+    // If current product is favorite then filter out the product else add it to array
     const favProducts = isFav
       ? resultFavProducts?.filter(
           (e: { id: number | undefined }) => e.id !== product?.id,
@@ -77,6 +66,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
       ? [...resultFavProducts, product]
       : [];
     await sendDataFavoriteProducts(favProducts);
+    // Add the count of favorite products to context
     if (isFav) {
       totalFavoriteContext.dispatch({ type: 'remove', totalFavorite: 1 });
     } else {
@@ -85,6 +75,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
   };
 
   useEffect(() => {
+    // Get current cart and check if the product is fav to change the icon
     const fetchData = async () => {
       const cart = await getCart();
       const favProduct = await getFavoriteProducts();
@@ -98,6 +89,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
     fetchData();
   }, [product]);
 
+  // Add the current product to cart with its count
   const addToCart = async () => {
     const { totalQuantity, items = [] } = cart;
     const existingItem = items.find(
@@ -130,58 +122,33 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
       items: newItems,
       totalQuantity: newTotal,
     });
-
     if (status === 200) {
-      await setSnackbar({
-        message: `Product added! ${totalQuantity}`,
-        severity: 'success',
-      });
       navigate('/cart');
     } else {
-      setSnackbar({
-        message: `Proplem in add to cart, please try again later!`,
-        severity: 'error',
-      });
+      window.alert('Something went wrong please try again later!');
     }
   };
 
   return (
     <Box sx={detailsContainer}>
-      <Typography sx={pathNameStyle}>Home / {product?.name}</Typography>
-      <Typography variant="h4" sx={productNameStyle}>
+      <Typography data-testid="breadcrumbs" sx={pathNameStyle}>
+        Home / {product?.name}
+      </Typography>
+      <Typography data-testid="productName" variant="h4" sx={productNameStyle}>
         {product?.name}
       </Typography>
-      <Typography sx={priceStyle}>
+      <Typography data-testid="price" sx={priceStyle}>
         ${numberWithCommas(product?.price.toFixed(2) || '')}
       </Typography>
-      <Typography sx={descStyle}>{product?.desc}</Typography>
+      <Typography data-testid="desc" sx={descStyle}>
+        {product?.desc}
+      </Typography>
       <Box sx={productQuantityAndFav}>
-        <Box sx={quantityContainerStyle}>
-          <Box
-            sx={quantityButtonStyle}
-            onClick={() =>
-              quantity > 1 && setQuantity((prev: number) => prev - 1)
-            }
-          >
-            <Remove />
-          </Box>
-          <Box sx={quantitytitleStyle}>{quantity}</Box>
-          <Box
-            sx={quantityButtonStyle}
-            onClick={() => setQuantity((prev: number) => prev + 1)}
-          >
-            <Add />
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            ...iconsContainer,
-            color: isFavorite ? '#D32F2F' : '#707070',
-          }}
-          onClick={onFavoriteClicked}
-        >
-          {isFavorite ? <Favorite /> : <FavoriteBorder />}
-        </Box>
+        <ProductCounter quantity={quantity} setQuantity={setQuantity} />
+        <FavProduct
+          isFavorite={isFavorite}
+          onFavoriteClicked={onFavoriteClicked}
+        />
         <Box sx={iconsContainer}>
           <Autorenew />
         </Box>
@@ -192,10 +159,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = (
         </Button>
       </Box>
       <Typography sx={pathNameStyle}>{product?.name}</Typography>
-      <CustomizedSnackbars
-        message={snackbar.message}
-        severity={snackbar.severity}
-      />
     </Box>
   );
 };

@@ -114,7 +114,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
       </Box>
       <Box>
         <ProductInfo
-          desc={product?.desc}
+          desc={product?.desc || ''}
           moreInfo={`${product?.name} Price: $${product?.price.toFixed(2)}`}
           reviews={'Good product!'}
         />
