@@ -5,12 +5,12 @@ import { TotalFavoriteProvider } from '../shared/favoriteContext';
 import { ProductsProvider } from '../shared/productsContext';
 import { TotalQuantityProvider } from '../shared/totalQuantityContext';
 
-interface MockContexProvider {
+interface MockContexProviderProps {
   children: ReactNode;
 }
 
-const MockContexProvider: React.FC<MockContexProvider> = (
-  props: MockContexProvider,
+const MockContexProvider: React.FC<MockContexProviderProps> = (
+  props: MockContexProviderProps,
 ) => {
   return (
     <TotalFavoriteProvider>
