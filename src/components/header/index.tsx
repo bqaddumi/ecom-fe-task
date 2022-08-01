@@ -23,7 +23,7 @@ const Header: React.FC = () => {
       </Typography>
       <Box sx={rightSideStyle}>
         <Box sx={cartIconsContainerStyle}>
-          <Button onClick={() => dispatch('toggle')}>
+          <Button data-testid="toggleDarkBtn" onClick={() => dispatch('toggle')}>
             {isDark ? LIGHT : DARK}
           </Button>
           <Icons />
