@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { DarkThemeProvider } from '../shared/darkThemeContext';
+import { DarkThemeContext } from '../shared/darkThemeContext';
 import { TotalFavoriteContext } from '../shared/favoriteContext';
 import { ProductsProvider } from '../shared/productsContext';
 import { TotalQuantityContext } from '../shared/totalQuantityContext';
@@ -8,8 +8,9 @@ import { TotalQuantityContext } from '../shared/totalQuantityContext';
 interface MockContexProviderWithValueProps {
   children: ReactNode;
   value: {
-    totalQuantity: number;
-    totalFavorite: number;
+    totalQuantity?: number;
+    totalFavorite?: number;
+    isDark?: boolean;
   };
 }
 
@@ -17,7 +18,7 @@ const MockContexProviderWithValue: React.FC<
   MockContexProviderWithValueProps
 > = (props: MockContexProviderWithValueProps) => {
   const {
-    value: { totalFavorite, totalQuantity },
+    value: { totalFavorite = 0, totalQuantity = 0, isDark = true },
   } = props;
 
   return (
@@ -28,9 +29,11 @@ const MockContexProviderWithValue: React.FC<
         <TotalQuantityContext.Provider
           value={{ state: { totalQuantity }, dispatch: jest.fn() }}
         >
-          <DarkThemeProvider>
+          <DarkThemeContext.Provider
+            value={{ state: { isDark }, dispatch: jest.fn() }}
+          >
             <BrowserRouter>{props.children}</BrowserRouter>
-          </DarkThemeProvider>
+          </DarkThemeContext.Provider>
         </TotalQuantityContext.Provider>
       </ProductsProvider>
     </TotalFavoriteContext.Provider>

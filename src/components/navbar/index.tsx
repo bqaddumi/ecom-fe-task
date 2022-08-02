@@ -11,7 +11,6 @@ import { NAVBAR_ITEMS } from '../../consts';
 import MobileNavbar from '../mobileNavbar';
 
 const Navbar: React.FC = () => {
-  const navItems = Object.values(NAVBAR_ITEMS);
   return (
     <Box sx={boxContainerStyle}>
       <AppBar position="static" sx={navBarStyles}>
@@ -20,7 +19,7 @@ const Navbar: React.FC = () => {
             <MobileNavbar />
           </Box>
           <Box sx={navItemsContainer}>
-            {navItems.map((item: any) => {
+            {NAVBAR_ITEMS.map((item: any) => {
               return (
                 <Typography
                   key={item.name}

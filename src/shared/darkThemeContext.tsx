@@ -8,7 +8,7 @@ export type ActionType = 'toggle';
 export type State = typeof defaultState;
 export type Dispatch = (action: ActionType) => void;
 
-const DarkThemeContext = createContext<{
+export const DarkThemeContext = createContext<{
   state: State;
   dispatch: Dispatch;
 } | null>(null);
