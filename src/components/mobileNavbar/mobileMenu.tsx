@@ -50,16 +50,23 @@ const MobileMenu: React.FC<MobileMenuProps> = (props: MobileMenuProps) => {
     >
       {NAVBAR_ITEMS.map((item: NavItemType, index: number) => {
         return (
-          <Link key={index} to={item.link} style={navbarLinkStyles}>
-            <MenuItem data-testid={`menuItem${index}`} onClick={handleClose}>
-              {item.name}
-            </MenuItem>
+          <Link
+            data-testid={`menuItem${index}`}
+            key={index}
+            to={item.link}
+            style={navbarLinkStyles}
+          >
+            <MenuItem onClick={handleClose}>{item.name}</MenuItem>
           </Link>
         );
       })}
       <MenuItem onClick={handleClose}>
         <Box sx={cartLinkContainerStyle} onClick={() => navigate('/cart')}>
-          <Badge data-testid="mobileMenuTotalQuantityBadge" badgeContent={totalQuantity || '0'} color="error">
+          <Badge
+            data-testid="mobileMenuTotalQuantityBadge"
+            badgeContent={totalQuantity || '0'}
+            color="error"
+          >
             <ShoppingCartOutlined />
           </Badge>
           <Typography component="span" sx={titleStyle}>

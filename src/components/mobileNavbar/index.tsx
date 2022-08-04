@@ -44,7 +44,7 @@ const MobileNavbar: React.FC = () => {
     <Box>
       <Box sx={headerContainer}>
         <IconButton
-        data-testid="iconButton"
+          data-testid="iconButton"
           id="positioned-button"
           size="large"
           edge="start"
@@ -63,10 +63,18 @@ const MobileNavbar: React.FC = () => {
           {HEADER_TITLE}
         </Typography>
         <Box sx={iconsContainer}>
-          <Badge data-testid="mobileTotalFav" badgeContent={totalFavorite || '0'} color="error">
+          <Badge
+            data-testid="mobileTotalFav"
+            badgeContent={totalFavorite || '0'}
+            color="error"
+          >
             <FavoriteBorderOutlined sx={iconStyle} />
           </Badge>
-          <Badge data-testid="mobileTotalQuantity" badgeContent={totalQuantity || '0'} color="error">
+          <Badge
+            data-testid="mobileTotalQuantity"
+            badgeContent={totalQuantity || '0'}
+            color="error"
+          >
             <ShoppingCartOutlined
               sx={iconStyle}
               onClick={() => navigate('/cart')}

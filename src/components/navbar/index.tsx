@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
             <MobileNavbar />
           </Box>
           <Box sx={navItemsContainer}>
-            {NAVBAR_ITEMS.map((item: any) => {
+            {NAVBAR_ITEMS.map((item: any, index: number) => {
               return (
                 <Typography
                   key={item.name}
@@ -27,7 +27,11 @@ const Navbar: React.FC = () => {
                   component="div"
                   sx={{ mr: 2 }}
                 >
-                  <Link to={item.link} style={navbarLinkStyles}>
+                  <Link
+                    data-testid={`navItem${index}`}
+                    to={item.link}
+                    style={navbarLinkStyles}
+                  >
                     {item.name}
                   </Link>
                 </Typography>

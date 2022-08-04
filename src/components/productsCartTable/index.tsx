@@ -21,7 +21,7 @@ import {
   quantitytitleStyle,
   quantityButtonStyle,
 } from './productsCartTable-style';
-import EcomModal from '../modal';
+import EcomModal from '../EcomModal';
 
 interface ProductsCartTableProps {
   products: CartItemType[];

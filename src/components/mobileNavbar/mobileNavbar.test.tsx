@@ -20,6 +20,7 @@ describe('MobileNavbar component', () => {
       async ({ name, link }: { name: string; link: string }, index: number) => {
         const menuElement = await screen.findByTestId(`menuItem${index}`);
         expect(menuElement.textContent).toBe(name);
+        expect(menuElement.getAttribute('href')).toBe(link);
       },
     );
   });
