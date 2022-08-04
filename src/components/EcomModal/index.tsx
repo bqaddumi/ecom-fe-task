@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { CartItemType } from '../../types';
-import { style } from './modal-style';
+import { style } from './EcomModal-style';
 
 interface EcomModalProps {
   isOpen?: boolean;
@@ -40,13 +40,13 @@ const EcomModal: React.FC<EcomModalProps> = (props: EcomModalProps) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          <Typography variant="h6" color={'error'} component="span">
+        <Typography data-testid="modalTitle" id="modal-modal-title" variant="h6" component="h2">
+          <Typography  variant="h6" color={'error'} component="span">
             Delete
           </Typography>{' '}
           {product.name}
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        <Typography data-testid="modalDesc" id="modal-modal-description" sx={{ mt: 2 }}>
           Are you sure you want to delete{' '}
           <Typography component={'span'} color={'error'}>
             {product.quantity}
@@ -57,8 +57,8 @@ const EcomModal: React.FC<EcomModalProps> = (props: EcomModalProps) => {
           </Typography>
           ?
         </Typography>
-        <Button onClick={isYesClicked}>yes</Button>
-        <Button onClick={isCancelClicked}>cancel</Button>
+        <Button data-testid="yesBtn" onClick={isYesClicked}>yes</Button>
+        <Button data-testid="cancelBtn" onClick={isCancelClicked}>cancel</Button>
       </Box>
     </Modal>
   );

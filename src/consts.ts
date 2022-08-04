@@ -1,11 +1,11 @@
-const NAVBAR_ITEMS = {
-  HOME: { name: 'HOME', link: '/' },
-  SHOP: { name: 'SHOP', link: '/shop' },
-  PAGES: { name: 'PAGES', link: '/' },
-  LOOKBOOK: { name: 'LOOKBOOK', link: '/' },
-  BRANDS: { name: 'BRANDS', link: '/' },
-  CREATE_PRODUCT: { name: 'CREATE PRODUCT', link: '/add-product' },
-};
+const NAVBAR_ITEMS = [
+   { name: 'HOME', link: '/' },
+   { name: 'SHOP', link: '/shop' },
+   { name: 'PAGES', link: '/' },
+   { name: 'LOOKBOOK', link: '/' },
+   { name: 'BRANDS', link: '/' },
+   { name: 'CREATE PRODUCT', link: '/add-product' },
+];
 
 const HEADER_TITLE = 'CAMARO';
 const DARK = 'Dark';
@@ -54,11 +54,7 @@ const BRANDS_IMAGES = [
 
 const ADD_TO_CART = 'Add To Cart';
 
-const PRODUCT_TABS = {
-  DETAILS: 'DETAILS',
-  INFO: 'MORE INFORMATION',
-  REVIEWS: 'REVIEWS',
-};
+const PRODUCT_TABS = ['DETAILS', 'MORE INFORMATION', 'REVIEWS'];
 
 const FOOTER_LINKS_SECOND_SECTION = [
   {

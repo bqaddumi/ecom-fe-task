@@ -95,7 +95,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
               <TableCell sx={cellTitleStyle} align="left">
                 {SUBTOTAL}
               </TableCell>
-              <TableCell sx={summaryCellStyle} align="right">
+              <TableCell data-testid="subtotal" sx={summaryCellStyle} align="right">
                 ${numberWithCommas(totalPrice.toFixed(2))}
               </TableCell>
             </TableRow>
@@ -103,7 +103,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
               <TableCell sx={cellTitleStyle} align="left">
                 {SHIPPING}
               </TableCell>
-              <TableCell sx={summaryCellStyle} align="right">
+              <TableCell  data-testid="shipping" sx={summaryCellStyle} align="right">
                 {'$5.00'}
               </TableCell>
             </TableRow>
@@ -117,6 +117,7 @@ const CartSummary: React.FC<CartSummaryProps> = (props: CartSummaryProps) => {
               <TableCell
                 sx={{ ...summaryCellStyle, ...noBorderStyle }}
                 align="right"
+                data-testid="orderTotal"
               >
                 ${numberWithCommas(orderTotal.toFixed(2))}
               </TableCell>

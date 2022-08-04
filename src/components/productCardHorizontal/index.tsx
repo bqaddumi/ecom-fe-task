@@ -9,7 +9,7 @@ import { ProductType } from '../../types';
 import { numberWithCommas } from '../../helpers';
 import { useNavigate } from 'react-router-dom';
 
-interface ProductCardHorizantalProps  {
+interface ProductCardHorizantalProps {
   product: ProductType;
 }
 

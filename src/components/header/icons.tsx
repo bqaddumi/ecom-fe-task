@@ -22,17 +22,17 @@ const Icons: React.FC = () => {
   return (
     <>
       <Box sx={iconStyle}>
-        <Badge badgeContent={'0'} color="error">
+        <Badge  badgeContent={'0'} color="error">
           <Autorenew />
         </Badge>
       </Box>
       <Box sx={iconStyle}>
-        <Badge badgeContent={totalFavorite || '0'} color="error">
+        <Badge data-testid="totalFavorite" badgeContent={totalFavorite || '0'} color="error">
           <FavoriteBorderOutlined />
         </Badge>
       </Box>
-      <Box onClick={() => navigate('/')} sx={iconStyle}>
-        <Badge badgeContent={totalQuantity || '0'} color="error">
+      <Box data-testid="cartIcon" onClick={() => navigate('/cart')} sx={iconStyle}>
+        <Badge data-testid="totalQuantity" badgeContent={totalQuantity || '0'} color="error">
           <ShoppingCartOutlined />
         </Badge>
       </Box>

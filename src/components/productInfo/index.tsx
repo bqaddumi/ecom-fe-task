@@ -16,16 +16,15 @@ function a11yProps(index: number) {
 }
 
 interface ProductInfoProps {
-  desc?: string;
-  moreInfo?: string;
-  reviews?: string;
+  desc: string;
+  moreInfo: string;
+  reviews: string;
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = (props: ProductInfoProps) => {
   const { desc, moreInfo, reviews } = props;
   const [value, setValue] = React.useState(0);
-  const { DETAILS, INFO, REVIEWS } = PRODUCT_TABS;
-
+  const tabPanels = [desc, moreInfo, reviews];
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -41,21 +40,22 @@ const ProductInfo: React.FC<ProductInfoProps> = (props: ProductInfoProps) => {
           centered
           sx={indicator}
         >
-          <Tab label={DETAILS} {...a11yProps(0)} />
-          <Tab label={INFO} {...a11yProps(1)} />
-          <Tab label={REVIEWS} {...a11yProps(2)} />
+          {PRODUCT_TABS.map((tabName: string, index: number) => (
+            <Tab
+              key={index}
+              data-testid={`${tabName}Tab`}
+              label={tabName}
+              {...a11yProps(index)}
+            />
+          ))}
         </Tabs>
       </Box>
       <Box sx={tabPanelContainer}>
-        <TabPanel value={value} index={0}>
-          {desc}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {moreInfo}
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          {reviews}
-        </TabPanel>
+        {tabPanels.map((item: string, index: number) => (
+          <TabPanel key={index} value={value} index={index}>
+            {item}
+          </TabPanel>
+        ))}
       </Box>
     </Box>
   );

@@ -17,7 +17,7 @@ export interface ActionType {
 export type State = typeof defaultState;
 export type Dispatch = (action: ActionType) => void;
 
-const TotalQuantityContext = createContext<{
+export const TotalQuantityContext = createContext<{
   state: State;
   dispatch: Dispatch;
 } | null>(null);

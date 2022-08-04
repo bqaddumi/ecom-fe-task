@@ -32,8 +32,6 @@ const MobileMenu: React.FC<MobileMenuProps> = (props: MobileMenuProps) => {
     state: { totalQuantity },
   } = useTotalQuantity();
 
-  const navItems = Object.values(NAVBAR_ITEMS);
-
   return (
     <Menu
       id="positioned-menu"
@@ -50,16 +48,25 @@ const MobileMenu: React.FC<MobileMenuProps> = (props: MobileMenuProps) => {
         horizontal: 'right',
       }}
     >
-      {navItems.map((item: NavItemType, index: number) => {
+      {NAVBAR_ITEMS.map((item: NavItemType, index: number) => {
         return (
-          <Link key={index} to={item.link} style={navbarLinkStyles}>
+          <Link
+            data-testid={`menuItem${index}`}
+            key={index}
+            to={item.link}
+            style={navbarLinkStyles}
+          >
             <MenuItem onClick={handleClose}>{item.name}</MenuItem>
           </Link>
         );
       })}
       <MenuItem onClick={handleClose}>
         <Box sx={cartLinkContainerStyle} onClick={() => navigate('/cart')}>
-          <Badge badgeContent={totalQuantity || '0'} color="error">
+          <Badge
+            data-testid="mobileMenuTotalQuantityBadge"
+            badgeContent={totalQuantity || '0'}
+            color="error"
+          >
             <ShoppingCartOutlined />
           </Badge>
           <Typography component="span" sx={titleStyle}>
@@ -71,6 +78,7 @@ const MobileMenu: React.FC<MobileMenuProps> = (props: MobileMenuProps) => {
         </Box>
       </MenuItem>
       <MenuItem
+        data-testid="themeToggleButton"
         onClick={() => {
           dispatch('toggle');
           setTimeout(() => handleClose(), 500);
