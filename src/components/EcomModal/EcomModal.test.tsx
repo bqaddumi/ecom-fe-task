@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { jest } from '@jest/globals';
 import EcomModal from './index';
+import React from 'react';
 
 const testProps = {
   isOpen: true,

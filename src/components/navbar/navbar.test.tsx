@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 import { NAVBAR_ITEMS } from '../../consts';
 import MockContexProviderWithValue from '../../test/MockContextProviderWithValue';
 import Navbar from './index';

@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import MockContexProviderWithValue from '../../test/MockContextProviderWithValue';
 import MobileNavbar from './index';
 import { NAVBAR_ITEMS } from '../../consts';
+import React from 'react';
 
 describe('MobileNavbar component', () => {
   const setup = () =>
