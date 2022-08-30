@@ -1,6 +1,6 @@
 ## Ecom project
 
-Demo: [https://ecom-bashar.surge.sh](https://ecom-bashar.surge.sh).
+Demo: [https://ecom-bashar.surge.sh](https://ecom-bashar.surge.sh)
 
 ## Available Scripts
 
