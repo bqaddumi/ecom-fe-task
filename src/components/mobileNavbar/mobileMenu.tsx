@@ -12,6 +12,7 @@ import {
 } from './mobileNavbar-style';
 
 import { CART_LINK, DARK, LIGHT, NAVBAR_ITEMS } from '../../consts';
+import { useCookies } from 'react-cookie';
 
 interface MobileMenuProps {
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
@@ -28,9 +29,16 @@ const MobileMenu: React.FC<MobileMenuProps> = (props: MobileMenuProps) => {
     state: { isDark },
     dispatch,
   } = useDarkTheme();
+  const [, setCookie] = useCookies();
   const {
     state: { totalQuantity },
   } = useTotalQuantity();
+
+  const onDarkThemeClicked = () => {
+    setCookie('dark', !isDark, { path: '/' });
+    dispatch({ type: 'toggle' });
+    setTimeout(() => handleClose(), 500);
+  };
 
   return (
     <Menu
@@ -77,13 +85,7 @@ const MobileMenu: React.FC<MobileMenuProps> = (props: MobileMenuProps) => {
           </Typography>
         </Box>
       </MenuItem>
-      <MenuItem
-        data-testid="themeToggleButton"
-        onClick={() => {
-          dispatch('toggle');
-          setTimeout(() => handleClose(), 500);
-        }}
-      >
+      <MenuItem data-testid="themeToggleButton" onClick={onDarkThemeClicked}>
         {isDark ? LIGHT : DARK}
       </MenuItem>
     </Menu>

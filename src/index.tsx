@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import './index.css';
 import { DarkThemeProvider } from './shared/darkThemeContext';
@@ -12,15 +13,17 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <TotalFavoriteProvider>
-    <ProductsProvider>
-      <TotalQuantityProvider>
-        <DarkThemeProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </DarkThemeProvider>
-      </TotalQuantityProvider>
-    </ProductsProvider>
-  </TotalFavoriteProvider>,
+  <CookiesProvider>
+    <TotalFavoriteProvider>
+      <ProductsProvider>
+        <TotalQuantityProvider>
+          <DarkThemeProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </DarkThemeProvider>
+        </TotalQuantityProvider>
+      </ProductsProvider>
+    </TotalFavoriteProvider>
+  </CookiesProvider>,
 );
