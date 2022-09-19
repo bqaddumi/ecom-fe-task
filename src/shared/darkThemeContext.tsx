@@ -4,7 +4,10 @@ const defaultState = {
   isDark: false,
 };
 
-export type ActionType = 'toggle';
+export interface ActionType {
+  type: 'set' | 'toggle';
+  isDark?: any;
+}
 export type State = typeof defaultState;
 export type Dispatch = (action: ActionType) => void;
 
@@ -14,9 +17,11 @@ export const DarkThemeContext = createContext<{
 } | null>(null);
 
 const darkThemeReducer = (state: State, action: ActionType) => {
-  switch (action) {
+  switch (action.type) {
     case 'toggle':
       return { isDark: !state.isDark };
+    case 'set':
+      return { isDark: action.isDark };
   }
 };
 

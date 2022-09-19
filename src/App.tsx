@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
+import { useCookies } from 'react-cookie';
 import { darkTheme, lightTheme } from './styles';
 import Main from './components/main';
 import { useDarkTheme } from './shared/darkThemeContext';
@@ -9,15 +10,15 @@ import { useProducts } from './shared/productsContext';
 import { useTotalFavorite } from './shared/favoriteContext';
 
 function App() {
-  const {
-    state: { isDark },
-  } = useDarkTheme();
+  const [cookies] = useCookies();
 
+  const darkThemeContext = useDarkTheme();
   const totalQuantityContext = useTotalQuantity();
   const productsContext = useProducts();
   const totalFavoriteContext = useTotalFavorite();
 
   useEffect(() => {
+    darkThemeContext.dispatch({ type: 'set', isDark: cookies.dark });
     const fetchData = async () => {
       const cart = await getCart();
       const products = await getProducts();
@@ -39,7 +40,9 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+    <ThemeProvider
+      theme={darkThemeContext.state.isDark ? darkTheme : lightTheme}
+    >
       <Main />
     </ThemeProvider>
   );
