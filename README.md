@@ -15,18 +15,4 @@ then
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Desktop Dark:
 
-![Desktop Dark](https://i.postimg.cc/RFnRTgV0/desktop-Dark.jpg)
-
-Desktop Light:
-
-![Desktop Light](https://i.postimg.cc/VvQFZXdW/desktop-Light.jpg)
-
-Mobile Dark:
-
-![Mobile Dark](https://i.postimg.cc/vTrtJDnF/Mobile-Dark.jpg)
-
-Mobile Light:
-
-![Mobile Light](https://i.postimg.cc/3rm14fcS/Mobile-Light.jpg)
