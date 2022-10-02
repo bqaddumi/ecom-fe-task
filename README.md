@@ -27,7 +27,4 @@ Mobile Dark:
 
 ![Mobile Dark](https://i.postimg.cc/vTrtJDnF/Mobile-Dark.jpg)
 
-Mobile Light:
-
-![Mobile Light](https://i.postimg.cc/3rm14fcS/Mobile-Light.jpg)
 
