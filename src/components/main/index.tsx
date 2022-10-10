@@ -28,8 +28,8 @@ const Main: React.FC = () => {
         <Stack>
           <ListItem sx={listItem}>
             <Routes>
-              <Route path="/" element={<CartPage />} />
-              <Route path="*" element={<CartPage />} />
+              <Route path="/" element={<ShopPage />} />
+              <Route path="*" element={<ShopPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/shop" element={<ShopPage />} />
               <Route
