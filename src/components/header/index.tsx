@@ -9,17 +9,15 @@ import {
 } from './header-style';
 import { HEADER_TITLE, DARK, LIGHT } from '../../consts';
 import { useDarkTheme } from '../../shared/darkThemeContext';
-import { useCookies } from 'react-cookie';
 
 const Header: React.FC = () => {
-  const [, setCookie] = useCookies();
   const {
     state: { isDark },
     dispatch,
   } = useDarkTheme();
 
   const onDarkThemeClicked = () => {
-    setCookie('dark', !isDark, { path: '/' });
+    localStorage.setItem('isDark', !isDark + '');
     dispatch({ type: 'toggle' });
   };
 
